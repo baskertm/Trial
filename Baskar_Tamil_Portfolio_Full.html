@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <title>பாஸ்கர் | தமிழ் பேஜ்</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Tamil&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Serif Tamil', serif;
+      background: linear-gradient(270deg, #a3e7f0, #b1ffc8);
+      background-size: 400% 400%;
+      animation: gradientWave 15s ease infinite;
+      overflow-x: hidden;
+    }
+
+    @keyframes gradientWave {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .floating-letters span {
+      position: absolute;
+      font-size: 24px;
+      font-weight: bold;
+      color: #ffffffaa;
+      animation: float 10s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    .header, .quote-box, .kural-box, .meaning-box, .contact-tab {
+      background: rgba(255, 255, 255, 0.9);
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 90%;
+      border-radius: 25px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      text-align: center;
+      animation: bubbleFloat 6s ease-in-out infinite;
+    }
+
+    .profile img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+    }
+
+    .social-icons {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .social-icons a {
+      width: 30px;
+      height: 30px;
+      background: #0077cc;
+      border-radius: 50%;
+      display: inline-block;
+      animation: wiggle 3s ease-in-out infinite;
+    }
+
+    .resume-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #00c2ff;
+      color: #fff;
+      border-radius: 25px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 0 10px rgba(0, 194, 255, 0.7);
+    }
+
+    @keyframes bubbleFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(3deg); }
+      75% { transform: rotate(-3deg); }
+    }
+
+    .quote-box, .kural-box, .meaning-box {
+      text-align: center;
+    }
+
+    .contact-tab {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      border-radius: 25px;
+      box-shadow: 0 0 10px #00c2ff;
+      width: 280px;
+    }
+
+    .contact-tab input, .contact-tab textarea {
+      width: 100%;
+      margin: 10px 0;
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    .lang-switch {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .lang-switch a {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #00e0a8, #00c2ff);
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 40px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+
+<div class="floating-letters" id="bubbleSky"></div>
+
+<div class="profile">
+  <img src="profile.jpg" alt="Profile Photo">
+  <div class="social-icons">
+    <a href="#"></a>
+    <a href="#"></a>
+    <a href="#"></a>
+  </div>
+  <a class="resume-btn" href="resume-request.html">ரெஸ்யூமே</a>
+</div>
+
+<div class="header">
+  பாஸ்கர் - டிஜிட்டல் மார்க்கெட்டிங் மற்றும் அனோட்டேஷன் நிபுணர்
+</div>
+
+<div class="quote-box">இன்றைய குறள்:</div>
+<div class="kural-box">
+  அகற முதல எழுத்தெல்லாம் ஆதி<br>பகவன் முதற்றே உலகு.
+</div>
+<div class="meaning-box">
+  அனைத்து எழுத்துகளுக்கும் முதன்மையானது 'அ' எனும் எழுத்து போல, உலகிற்கும் முதன்மையானது இறைவன் ஆகும்.
+</div>
+
+<div class="contact-tab">
+  <form action="https://formspree.io/f/yourformid" method="POST">
+    <input type="text" name="name" placeholder="பெயர்" required>
+    <input type="email" name="email" placeholder="மின்னஞ்சல்" required>
+    <input type="tel" name="phone" placeholder="தொலைபேசி எண்">
+    <textarea name="message" placeholder="தங்களது கருத்து" rows="3" required></textarea>
+    <button type="submit" class="resume-btn">அனுப்பு</button>
+  </form>
+</div>
+
+<div class="lang-switch">
+  <a href="#">Ta</a>
+  <a href="index.html">En</a>
+</div>
+
+<script>
+  const letters = "அஆஇஈஉஊஎஏஐஒஓஔஃகஙசஞடணதநனபமயரலவழளறனஜஷஸஹக்ஷ".split('');
+  const sky = document.getElementById("bubbleSky");
+  for (let i = 0; i < 150; i++) {
+    const span = document.createElement("span");
+    span.innerText = letters[Math.floor(Math.random() * letters.length)];
+    span.style.left = Math.random() * 100 + "%";
+    span.style.top = Math.random() * 100 + "%";
+    span.style.fontSize = (Math.random() * 20 + 15) + "px";
+    span.style.animationDuration = (Math.random() * 10 + 10) + "s";
+    sky.appendChild(span);
+  }
+</script>
+
+</body>
+</html>
