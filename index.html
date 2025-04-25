@@ -1,7 +1,8 @@
-<!DOCTYPE html><html lang="ta">
+<!DOCTYPE html>
+<html lang="ta">
 <head>
   <meta charset="UTF-8">
-  <title>பாஸ்கர் ઇநியன் - தமிழ் பிள்ளை காலங்கள்</title>
+  <title>பாஸ்கர் ઇநியன் - தமிழ் போர்ட்டஃ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Tamil&display=swap" rel="stylesheet">
   <style>
@@ -9,95 +10,97 @@
       margin: 0;
       padding: 0;
       font-family: 'Noto Serif Tamil', serif;
-      background: linear-gradient(to bottom, #d3f4ff, #a3c9f9);
+      background: linear-gradient(135deg, #a8f0d4, #72e0cb);
       overflow-x: hidden;
     }
-    .floating-letters span {
-      position: absolute;
-      font-size: 24px;
-      font-weight: bold;
-      color: #ffffffaa;
-      animation: float 10s infinite ease-in-out;
-    }
-    @keyframes float {
-      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-      50% { opacity: 1; }
-      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-    }
-    .header, .quote-box, .kural-box, .meaning-box, .contact-tab {
-      background: rgba(255, 255, 255, 0.9);
-      margin: 20px auto;
-      padding: 20px;
-      max-width: 90%;
-      border-radius: 25px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    }
+
     .header {
+      padding: 20px;
       text-align: center;
       font-weight: bold;
-      font-size: 1.1em;
+      font-size: 1.2em;
     }
+
     .profile {
       text-align: center;
       margin-top: 10px;
-      animation: bubbleFloat 6s ease-in-out infinite;
+      position: relative;
     }
+
     .profile img {
       width: 100px;
       height: 100px;
       border-radius: 50%;
       border: 4px solid #fff;
     }
+
+    .social-icons {
+      position: absolute;
+      top: 0;
+      right: 20%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .social-icons a {
+      width: 30px;
+      height: 30px;
+      background: #000;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
     .resume-btn {
       display: inline-block;
       margin-top: 15px;
       padding: 10px 20px;
-      background: #00c2ff;
-      color: #fff;
+      background: #fff;
+      color: #00b489;
+      border: 2px solid #00b489;
       border-radius: 25px;
       font-weight: bold;
       text-decoration: none;
-      box-shadow: 0 0 10px rgba(0, 194, 255, 0.7);
-      animation: bubbleFloat 5s ease-in-out infinite;
     }
-    .social-icons {
-      margin-top: 15px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      animation: bubbleFloat 7s ease-in-out infinite;
-    }
-    .social-icons a {
-      width: 35px;
-      height: 35px;
-      background: #0077cc;
-      border-radius: 50%;
-      display: inline-block;
-      animation: wiggle 3s ease-in-out infinite;
-    }
-    @keyframes bubbleFloat {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-    @keyframes wiggle {
-      0%, 100% { transform: rotate(0deg); }
-      25% { transform: rotate(3deg); }
-      75% { transform: rotate(-3deg); }
-    }
-    .kural-box {
-      font-size: 1.2em;
-      font-weight: bold;
-      color: #333;
+
+    .quote-box, .kural-box, .meaning-box {
+      background: #fff;
+      margin: 20px auto;
+      max-width: 90%;
+      padding: 15px;
+      border-radius: 30px;
+      border: 3px solid gold;
       text-align: center;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
     }
+
+    .quote-box {
+      font-size: 1em;
+      color: #007f67;
+    }
+
+    .kural-box {
+      font-weight: bold;
+      font-size: 1.1em;
+      line-height: 2;
+    }
+
     .meaning-box {
       font-size: 1em;
-      color: #444;
-      text-align: center;
+      color: #333;
     }
+
     .contact-tab {
-      text-align: center;
+      position: fixed;
+      left: 10px;
+      top: 50%;
+      background: #fff;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      font-size: 0.9em;
     }
+
     .lang-switch {
       position: fixed;
       bottom: 20px;
@@ -114,40 +117,39 @@
     }
   </style>
 </head>
-<body><div class="floating-letters" id="bubbleSky"></div><div class="header">
-  பாஸ்கர் - டிஜிட்டல் மார்க்கெட்டிங் மற்றும் அனோட்டேஷன் நிபுணர்
-</div><div class="profile">
+<body>
+
+<div class="header">
+  Bhaskar good at digital marketing, annotation, and customer support
+</div>
+
+<div class="profile">
   <img src="profile.jpg" alt="Profile Photo">
-  <br>
   <div class="social-icons">
     <a href="#"></a>
     <a href="#"></a>
     <a href="#"></a>
   </div>
-  <a class="resume-btn" href="resume-request.html">என் ரெஸ்யூமே</a>
-</div><div class="quote-box">
-  இன்றைய குறள்:
-</div><div class="kural-box">
-  அகற முதல எழுத்தெல்லாம் ஆதி<br>பகவன் முதற்றே உலகு.
+  <a class="resume-btn" href="resume-request.html">Resume</a>
 </div>
+
+<div class="quote-box">
+  இன்றைய குறள்:
+</div>
+
+<div class="kural-box">
+  அகர முதல எழுத்தெல்லாம் ஆதி<br>பகவன் முதற்றே உலகு.
+</div>
+
 <div class="meaning-box">
   அனைத்து எழுத்துகளுக்கும் முதன்மையானது 'அ' எனும் எழுத்து போல, உலகிற்கும் முதன்மையானது இறைவன் ஆகும்.
-</div><div class="contact-tab">
-  தொடர்புக்கு: <br>
-  formspree அல்லது இணையவழி மூலம்.
-</div><a class="lang-switch" href="index.html">En</a>
+</div>
 
-<script>
-  const letters = "அஆஇஈஉஊஎஏஐஒஓஔஃகஙசஞடணதநனபமயரலவழளறனஜஷஸஹக்ஷ".split('');
-  const sky = document.getElementById("bubbleSky");
-  for (let i = 0; i < 150; i++) {
-    const span = document.createElement("span");
-    span.innerText = letters[Math.floor(Math.random() * letters.length)];
-    span.style.left = Math.random() * 100 + "%";
-    span.style.top = Math.random() * 100 + "%";
-    span.style.fontSize = (Math.random() * 20 + 15) + "px";
-    span.style.animationDuration = (Math.random() * 10 + 10) + "s";
-    sky.appendChild(span);
-  }
-</script></body>
+<div class="contact-tab">
+  தொடர்புக்கு<br>---<br>form/contact
+</div>
+
+<a class="lang-switch" href="index.html">En</a>
+
+</body>
 </html>
