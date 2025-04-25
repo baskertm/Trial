@@ -40,6 +40,7 @@
     .profile {
       text-align: center;
       margin-top: 10px;
+      animation: bubbleFloat 6s ease-in-out infinite;
     }
     .profile img {
       width: 100px;
@@ -57,6 +58,31 @@
       font-weight: bold;
       text-decoration: none;
       box-shadow: 0 0 10px rgba(0, 194, 255, 0.7);
+      animation: bubbleFloat 5s ease-in-out infinite;
+    }
+    .social-icons {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      animation: bubbleFloat 7s ease-in-out infinite;
+    }
+    .social-icons a {
+      width: 35px;
+      height: 35px;
+      background: #0077cc;
+      border-radius: 50%;
+      display: inline-block;
+      animation: wiggle 3s ease-in-out infinite;
+    }
+    @keyframes bubbleFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(3deg); }
+      75% { transform: rotate(-3deg); }
     }
     .kural-box {
       font-size: 1.2em;
@@ -93,6 +119,11 @@
 </div><div class="profile">
   <img src="profile.jpg" alt="Profile Photo">
   <br>
+  <div class="social-icons">
+    <a href="#"></a>
+    <a href="#"></a>
+    <a href="#"></a>
+  </div>
   <a class="resume-btn" href="resume-request.html">என் ரெஸ்யூமே</a>
 </div><div class="quote-box">
   இன்றைய குறள்:
