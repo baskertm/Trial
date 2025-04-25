@@ -1,130 +1,116 @@
-
 <!DOCTYPE html>
-<html lang="ta">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>பாஸ்கர் | தமிழ்</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Tamil&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Noto Serif Tamil', serif;
-      background: linear-gradient(270deg, #a3e7f0, #b1ffc8);
-      background-size: 400% 400%;
-      animation: gradientWave 15s ease infinite;
-      overflow-x: hidden;
-    }
-
-    @keyframes gradientWave {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    #intro {
-      position: fixed;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 2em;
-      font-weight: bold;
-      color: white;
-      text-shadow: 0 0 10px gold;
-      opacity: 0;
-      animation: introFade 4s forwards;
-      z-index: 10;
-    }
-
-    @keyframes introFade {
-      0% { opacity: 0; }
-      20% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { opacity: 0; }
-    }
-
-    #plates, #kuralScrollContainer, #contactForm, #languageSwitch {
-      opacity: 0;
-      animation: showElements 1s 4s forwards;
-    }
-
-    @keyframes showElements {
-      to { opacity: 1; }
-    }
-
-    #kuralScrollContainer {
-      max-height: 500px;
-      overflow-y: auto;
-      margin: 60px auto;
-      width: 90%;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    .kural-bubble {
-      background: #e0f7e9;
-      margin: 10px;
-      padding: 12px;
-      border-radius: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s ease;
-    }
-
-    .kural-bubble.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vasquez Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+        .header, .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px;
+            position: relative;
+        }
+        .designation {
+            flex: 1;
+            font-size: 1.5em;
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+        .circle {
+            width: 150px;
+            height: 150px;
+            background-color: #007bff;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            opacity: 0;
+        }
+        .profile {
+            flex: 1;
+            text-align: right;
+            position: relative;
+        }
+        .profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-right: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        .kural {
+            text-align: center;
+            font-size: 1.2em;
+            margin: 50px 0;
+            opacity: 0;
+        }
+    </style>
 </head>
 <body>
-
-  <div id="intro">Baskar’s Portfolio</div>
-
-  <div id="plates">
-    <div style="padding: 20px;">
-      <h2>Designer | Annotator | Customer Support</h2>
-      <a href="https://baskertm.github.io/re" style="display: inline-block; margin-top: 10px; padding: 10px 20px; background: #00c2ff; color: #fff; border-radius: 25px; text-decoration: none;">Download Resume</a>
+    <div class="header">
+        <h1>Vasquez Portfolio</h1>
     </div>
-  </div>
+    <div class="content">
+        <div class="designation">
+            <p>Software Engineer & Developer</p>
+        </div>
+        <div class="circle"></div>
+        <div class="profile">
+            <img src="profile.jpg" alt="Profile Image">
+            <div class="social-icons">
+                <a href="#">FB</a>
+                <a href="#">TW</a>
+                <a href="#">IN</a>
+            </div>
+        </div>
+    </div>
+    <div class="kural">
+        <p>Thirukkural couplets with meanings...</p>
+    </div>
+    <div class="footer">
+        <p>© 2025 Vasquez Portfolio</p>
+    </div>
 
-  <div id="kuralScrollContainer">
-    <div class="kural-bubble">இன்றைய குறள்</div>
-    <div class="kural-bubble">அகர முதல எழுத்தெல்லாம் ஆதி<br>பகவன் முதற்றே உலகு.<br>– திருவள்ளுவர் (1)</div>
-    <div class="kural-bubble">அனைத்து எழுத்துகளுக்கும் முதன்மையானது 'அ' எனும் எழுத்து போல, உலகிற்கும் முதன்மையானது இறைவன் ஆகும்.</div>
-  </div>
+    <script>
+        window.onload = function() {
+            // Animate the designation
+            setTimeout(() => {
+                document.querySelector('.designation').style.opacity = 1;
+                document.querySelector('.designation').style.transform = 'translateX(0)';
+            }, 2000); // 2 seconds delay
 
-  <div id="contactForm">
-    <form action="https://formspree.io/f/yourformid" method="POST" style="padding: 20px; background: rgba(255,255,255,0.9); border-radius: 20px; margin: 20px;">
-      <input type="text" name="name" placeholder="Name" required style="width:100%;padding:10px;margin:10px 0;border-radius:10px;">
-      <input type="email" name="email" placeholder="Email" required style="width:100%;padding:10px;margin:10px 0;border-radius:10px;">
-      <input type="tel" name="phone" placeholder="Phone" style="width:100%;padding:10px;margin:10px 0;border-radius:10px;">
-      <textarea name="message" placeholder="Your Message" rows="4" required style="width:100%;padding:10px;margin:10px 0;border-radius:10px;"></textarea>
-      <button type="submit" style="padding:10px 20px;border:none;border-radius:20px;background:#00c2ff;color:#fff;">Send</button>
-    </form>
-  </div>
-
-  <div id="languageSwitch" style="position: fixed; bottom: 20px; left: 20px;">
-    <a href="https://baskertm.github.io/cv" style="display:inline-block; width: 40px; height: 40px; background: linear-gradient(135deg, #00e0a8, #00c2ff); color: #fff; border-radius: 50%; text-align: center; line-height: 40px; text-decoration: none; font-weight: bold; box-shadow: 0 0 10px rgba(0,0,0,0.2);">En</a>
-  </div>
-
-  <script>
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    });
-
-    document.querySelectorAll('.kural-bubble').forEach(bubble => {
-      observer.observe(bubble);
-    });
-  </script>
-
+            // Animate the circle
+            setTimeout(() => {
+                document.querySelector('.circle').style.opacity = 1;
+            }, 2500); // 2.5 seconds delay
+        };
+    </script>
 </body>
 </html>
