@@ -1,58 +1,63 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Digital Marketing Tree</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f9fafb;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f4f8;
       margin: 0;
       padding: 20px;
     }
     .container {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
-      background-color: #fff;
-      border-radius: 20px;
+      background: #fff;
       padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
     }
     h1 {
       text-align: center;
-      color: #3b3b3b;
-      font-size: 2rem;
+      color: #1f2937;
       margin-bottom: 10px;
     }
     .node {
-      margin-left: 20px;
-      margin-top: 10px;
+      margin-top: 20px;
     }
     .node-button {
-      background-color: white;
-      border: 1px solid #e5e7eb;
-      padding: 10px 16px;
       width: 100%;
+      background-color: #e5efff;
+      color: #1f2937;
+      border: none;
+      padding: 15px 20px;
       text-align: left;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: background 0.3s;
+      font-size: 16px;
       font-weight: 600;
-      color: #374151;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
     }
     .node-button:hover {
-      background-color: #f3f4f6;
+      background-color: #d0e7ff;
     }
     .content {
       display: none;
-      margin-top: 10px;
-      color: #4b5563;
-      font-size: 0.9rem;
-      border-left: 2px solid #e5e7eb;
-      padding-left: 16px;
+      padding: 15px 20px;
+      background: #f9fafb;
+      margin-top: 8px;
+      border-left: 4px solid #3b82f6;
+      border-radius: 0 10px 10px 10px;
+    }
+    .content p {
+      margin: 10px 0;
+      color: #374151;
+      font-size: 15px;
     }
     .content a {
-      color: #1a73e8;
+      color: #2563eb;
       text-decoration: none;
     }
     .content a:hover {
@@ -62,45 +67,99 @@
 </head>
 <body>
   <div class="container">
-    <h1>🌿 Digital Marketing Tree</h1>
+    <h1>🌳 Digital Marketing Tree</h1>
+
     <div class="node">
-      <button class="node-button" onclick="toggleContent(this)">Introduction to Digital Marketing</button>
+      <button class="node-button" onclick="toggleContent(this)">📘 Introduction to Digital Marketing</button>
       <div class="content">
-        <p>Digital marketing encompasses all marketing efforts that use the internet or electronic devices. Businesses leverage digital channels such as search engines, social media, email, and websites to connect with current and prospective customers.</p>
-        <p><strong>YouTube:</strong> <a href="https://www.youtube.com/watch?v=nU-IIXBWlS4" target="_blank">Digital Marketing Explained</a></p>
-        <p><strong>Course:</strong> <a href="https://skillshop.exceedlms.com/student/collection/1384851-fundamentals-of-digital-marketing" target="_blank">Google's Fundamentals of Digital Marketing</a></p>
+        <p>Digital marketing involves using the internet and digital technologies to promote products or services. It includes SEO, social media, content marketing, email, analytics, and more.</p>
+        <p><a href="https://www.youtube.com/watch?v=nU-IIXBWlS4" target="_blank">🎥 Watch: What is Digital Marketing?</a></p>
+        <p><a href="https://skillshop.exceedlms.com/student/collection/1384851-fundamentals-of-digital-marketing" target="_blank">📚 Google Skillshop Course</a></p>
       </div>
-    </div><div class="node">
-  <button class="node-button" onclick="toggleContent(this)">Search Engine Optimization (SEO)</button>
-  <div class="content">
-    <p>SEO involves optimizing your website to rank higher in search engine results pages (SERPs), thereby increasing organic (non-paid) traffic.</p>
-    <p><strong>YouTube:</strong> <a href="https://www.youtube.com/watch?v=E1u3sG1j4vQ" target="_blank">SEO Tutorial for Beginners</a></p>
-    <p><strong>Course:</strong> <a href="https://digitalmarketinginstitute.com/resources/lessons" target="_blank">DMI SEO Module</a></p>
-  </div>
-</div>
+    </div>
 
-<div class="node">
-  <button class="node-button" onclick="toggleContent(this)">Content Marketing</button>
-  <div class="content">
-    <p>Content marketing focuses on creating and distributing valuable, relevant, and consistent content to attract and retain a clearly defined audience.</p>
-    <p><strong>YouTube:</strong> <a href="https://www.youtube.com/watch?v=U9FzgsF2T-s" target="_blank">Content Marketing Strategy</a></p>
-    <p><strong>Course:</strong> <a href="https://www.hubspot.com/resources/courses" target="_blank">HubSpot Content Marketing Certification</a></p>
-  </div>
-</div>
+    <div class="node">
+      <button class="node-button" onclick="toggleContent(this)">🔍 Search Engine Optimization (SEO)</button>
+      <div class="content">
+        <p>SEO is the process of optimizing content to be discovered through a search engine’s organic search results.</p>
+        <p><a href="https://www.youtube.com/watch?v=E1u3sG1j4vQ" target="_blank">🎥 SEO Tutorial for Beginners</a></p>
+        <p><a href="https://moz.com/learn/seo/what-is-seo" target="_blank">📖 MOZ SEO Guide</a></p>
+      </div>
+    </div>
 
-<div class="node">
-  <button class="node-button" onclick="toggleContent(this)">Social Media Marketing</button>
-  <div class="content">
-    <p>Utilizing social media platforms to promote products or services. Platforms include Facebook, Instagram, LinkedIn, and more.</p>
-    <p><strong>YouTube:</strong> <a href="https://www.youtube.com/watch?v=8z9zM1L9aWg" target="_blank">Social Media Marketing Tutorial</a></p>
-    <p><strong>Course:</strong> <a href="https://www.facebook.com/business/learn" target="_blank">Facebook Blueprint</a></p>
-  </div>
-</div>
+    <div class="node">
+      <button class="node-button" onclick="toggleContent(this)">✍️ Content Marketing</button>
+      <div class="content">
+        <p>Content marketing focuses on creating, publishing, and distributing valuable content to attract and retain customers.</p>
+        <p><a href="https://www.youtube.com/watch?v=U9FzgsF2T-s" target="_blank">🎥 Content Marketing Strategy</a></p>
+        <p><a href="https://www.hubspot.com/resources/courses" target="_blank">📚 HubSpot Academy</a></p>
+      </div>
+    </div>
 
-  </div>  <script>
+    <div class="node">
+      <button class="node-button" onclick="toggleContent(this)">📱 Social Media Marketing</button>
+      <div class="content">
+        <p>Social media marketing uses platforms like Facebook, Instagram, Twitter, and LinkedIn to reach and engage audiences.</p>
+        <p><a href="https://www.youtube.com/watch?v=8z9zM1L9aWg" target="_blank">🎥 Social Media Marketing Explained</a></p>
+        <p><a href="https://www.facebook.com/business/learn" target="_blank">📘 Meta Blueprint</a></p>
+      </div>
+    </div>
+
+    <div class="node">
+      <button class="node-button" onclick="toggleContent(this)">📧 Email Marketing</button>
+      <div class="content">
+        <p>Email marketing is the act of sending a commercial message to a group of people via email to promote a product or service.</p>
+        <p><a href="https://www.youtube.com/watch?v=79gU51g7tsE" target="_blank">🎥 Email Marketing Explained</a></p>
+        <p><a href="https://mailchimp.com/resources/email-marketing-field-guide/" target="_blank">📖 Mailchimp Guide</a></p>
+      </div>
+    </div>
+
+    <div class="node">
+      <button class="node-button" onclick="toggleContent(this)">📊 Web Analytics</button>
+      <div class="content">
+        <p>Web analytics is the measurement, collection, analysis, and reporting of web data to understand and optimize web usage.</p>
+        <p><a href="https://www.youtube.com/watch?v=HNbXEQdXlF4" target="_blank">🎥 Web Analytics Basics</a></p>
+        <p><a href="https://analytics.google.com/analytics/academy/" target="_blank">📚 Google Analytics Academy</a></p>
+      </div>
+    </div>
+
+    <div class="node">
+      <button class="node-button" onclick="toggleContent(this)">💼 Affiliate Marketing</button>
+      <div class="content">
+        <p>Affiliate marketing is a performance-based marketing strategy where businesses reward affiliates for each customer brought by their marketing efforts.</p>
+        <p><a href="https://www.youtube.com/watch?v=0OS2NAdzqoo" target="_blank">🎥 Affiliate Marketing for Beginners</a></p>
+        <p><a href="https://blog.hubspot.com/marketing/affiliate-marketing" target="_blank">📖 HubSpot Affiliate Guide</a></p>
+      </div>
+    </div>
+
+    <div class="node">
+      <button class="node-button" onclick="toggleContent(this)">💰 Paid Advertising (PPC)</button>
+      <div class="content">
+        <p>PPC (Pay-Per-Click) is a model of internet marketing where advertisers pay a fee each time one of their ads is clicked. Platforms: Google Ads, Bing Ads, etc.</p>
+        <p><a href="https://www.youtube.com/watch?v=UXeUeDPjGTg" target="_blank">🎥 Google Ads Basics</a></p>
+        <p><a href="https://ads.google.com/home/" target="_blank">📚 Google Ads Official Site</a></p>
+      </div>
+    </div>
+
+    <div class="node">
+      <button class="node-button" onclick="toggleContent(this)">📦 E-commerce Marketing</button>
+      <div class="content">
+        <p>E-commerce marketing is the practice of using promotional tactics to drive traffic to an online store, converting that traffic into paying customers.</p>
+        <p><a href="https://www.youtube.com/watch?v=HEe5sMp3YHg" target="_blank">🎥 Shopify Marketing Tips</a></p>
+        <p><a href="https://www.shopify.com/learn" target="_blank">📚 Shopify Learn</a></p>
+      </div>
+    </div>
+
+    <!-- Add more topics as needed -->
+
+  </div>
+
+  <script>
     function toggleContent(button) {
       const content = button.nextElementSibling;
-      content.style.display = content.style.display === 'block' ? 'none' : 'block';
+      const isVisible = content.style.display === 'block';
+      content.style.display = isVisible ? 'none' : 'block';
     }
-  </script></body>
+  </script>
+</body>
 </html>
