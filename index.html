@@ -1,95 +1,23 @@
-<!DOCTYPE html><html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>30-Day Digital Marketing + Gen AI Learning Portal</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body class="bg-gray-100 text-gray-800">
-  <!-- Login Section -->
-  <div id="login-section" class="min-h-screen flex items-center justify-center">
-    <div class="bg-white p-6 rounded shadow-md w-full max-w-sm">
-      <h2 class="text-2xl font-bold mb-4 text-blue-700 text-center">Login</h2>
-      <form id="login-form" class="space-y-4">
-        <input type="text" id="username" placeholder="Username" class="w-full px-3 py-2 border rounded" required>
-        <input type="password" id="password" placeholder="Password" class="w-full px-3 py-2 border rounded" required>
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded w-full hover:bg-blue-700">Login</button>
-      </form>
-      <p id="login-error" class="text-red-500 text-sm mt-2 hidden text-center">Invalid credentials.</p>
-    </div>
-  </div>  <!-- Dashboard Section -->  <div id="dashboard" class="hidden">
-    <!-- Header -->
-    <header class="bg-blue-800 text-white py-4 px-6">
-      <h1 class="text-xl font-bold">Welcome, Baskar</h1>
-    </header><!-- Daily Content -->
-<main class="p-6 space-y-8">
-  <section>
-    <h2 class="text-2xl font-semibold text-blue-700 mb-4">📆 Day 1: Introduction to Digital Marketing</h2>
-    <div class="bg-white p-4 rounded shadow">
-      <p class="mb-2">Start learning with Google’s official course on fundamentals of digital marketing.</p>
-      <a href="https://learndigital.withgoogle.com/digitalgarage/course/digital-marketing" target="_blank" class="text-blue-600 underline">Google Digital Garage Course</a>
-      <div class="mt-4 aspect-w-16 aspect-h-9">
-        <iframe class="w-full rounded" src="https://www.youtube.com/embed/7x3rsWnGz2A" title="Intro to Digital Marketing" frameborder="0" allowfullscreen></iframe>
-      </div>
-    </div>
-  </section>
+import { useState, useEffect } from "react"; import { Card, CardContent } from "@/components/ui/card"; import { Button } from "@/components/ui/button"; import { Input } from "@/components/ui/input"; import { Checkbox } from "@/components/ui/checkbox"; import { GoogleSpreadsheet } from "google-spreadsheet";
 
-  <section>
-    <h2 class="text-xl font-semibold text-blue-700 mb-4">📊 Learning Progress</h2>
-    <canvas id="progressChart" class="bg-white p-4 rounded shadow"></canvas>
-  </section>
+const SHEET_ID = "YOUR_SHEET_ID"; // Replace with actual Google Sheet ID const CLIENT_EMAIL = "YOUR_SERVICE_ACCOUNT_EMAIL"; // Replace with actual service account email const PRIVATE_KEY = "YOUR_PRIVATE_KEY"; // Replace with private key const SHEET_NAME = "DM";
 
-  <section>
-    <h2 class="text-xl font-semibold text-blue-700 mb-4">🔗 Useful Resources</h2>
-    <ul class="list-disc list-inside bg-white p-4 rounded shadow space-y-1">
-      <li><a href="https://academy.hubspot.com/courses/seo-training" class="text-blue-600 underline" target="_blank">HubSpot SEO Course</a></li>
-      <li><a href="https://www.canva.com/" class="text-blue-600 underline" target="_blank">Canva for Design</a></li>
-      <li><a href="https://www.youtube.com/watch?v=3iS4jda3vls" class="text-blue-600 underline" target="_blank">HubSpot SEO Crash Course - YouTube</a></li>
-      <li><a href="https://openai.com" class="text-blue-600 underline" target="_blank">OpenAI - Gen AI Tools</a></li>
-      <li><a href="https://fiverr.com" class="text-blue-600 underline" target="_blank">Fiverr - Freelancing Platform</a></li>
-    </ul>
-  </section>
-</main>
+const resources = [ { day: 1, date: "2025-06-01", items: [ { title: "Intro to Digital Marketing (Google Skillshop)", url: "https://skillshop.exceedlms.com/student/path/2907226-intro-to-digital-marketing", }, { title: "What is SEO? (YouTube)", url: "https://www.youtube.com/watch?v=bpVblgFmv74", }, { title: "Google AI for Marketers", url: "https://www.google.com/intl/en_us/ai/marketing/", }, ], }, // Add up to 30 days of resources here in similar format ];
 
-<!-- Footer -->
-<footer class="text-center text-sm text-gray-500 py-6">
-  &copy; 2025 Baskar's AI Learning Portal
-</footer>
+function App() { const [loggedIn, setLoggedIn] = useState(false); const [username, setUsername] = useState(""); const [password, setPassword] = useState(""); const [progress, setProgress] = useState({});
 
-  </div>  <!-- Script for Login and Chart -->  <script>
-    document.getElementById('login-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      if (username === 'baskar' && password === 'bas123') {
-        document.getElementById('login-section').classList.add('hidden');
-        document.getElementById('dashboard').classList.remove('hidden');
-      } else {
-        document.getElementById('login-error').classList.remove('hidden');
-      }
-    });
+const handleLogin = () => { if (username === "baskar" && password === "bas123") { setLoggedIn(true); loadProgress(); } };
 
-    const ctx = document.getElementById('progressChart');
-    const chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: Array.from({length: 30}, (_, i) => `Day ${i + 1}`),
-        datasets: [{
-          label: 'Progress (%)',
-          data: Array.from({length: 30}, (_, i) => i === 0 ? 5 : null), // Day 1 = 5%, rest null
-          borderColor: 'rgb(59, 130, 246)',
-          tension: 0.4
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 100
-          }
-        }
-      }
-    });
-  </script></body>
-</html>
+const loadProgress = async () => { // Load progress from Google Sheets (you must set up a Google Cloud Service Account and share the sheet) // Simulated loading for now: const saved = localStorage.getItem("dm-progress"); if (saved) setProgress(JSON.parse(saved)); };
+
+const markCompleted = (day, index) => { const key = day-${day}-item-${index}; const updated = { ...progress, [key]: true }; setProgress(updated); localStorage.setItem("dm-progress", JSON.stringify(updated)); };
+
+if (!loggedIn) { return ( <div className="flex flex-col items-center justify-center min-h-screen"> <h1 className="text-2xl mb-4">Login</h1> <Input placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} className="mb-2" /> <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="mb-4" /> <Button onClick={handleLogin}>Login</Button> </div> ); }
+
+return ( <div className="p-6"> <h1 className="text-3xl mb-6">30-Day Digital Marketing Course</h1> {resources.map((dayResource) => ( <Card key={dayResource.day} className="mb-6"> <CardContent> <h2 className="text-xl font-semibold mb-2"> Day {dayResource.day} - {dayResource.date} </h2> <ul> {dayResource.items.map((item, index) => { const key = day-${dayResource.day}-item-${index}; return ( <li
+key={key}
+className="flex items-center justify-between mb-2"
+> <a href={item.url} target="_blank" rel="noopener noreferrer" onClick={() => markCompleted(dayResource.day, index)} className="text-blue-600 hover:underline" > {item.title} </a> <Checkbox checked={!!progress[key]} onCheckedChange={() => markCompleted(dayResource.day, index)} /> </li> ); })} </ul> </CardContent> </Card> ))} </div> ); }
+
+export default App;
+
