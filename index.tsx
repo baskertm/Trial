@@ -1,99 +1,225 @@
-// pages/index.tsx
-import { useState } from "react";
-import { ChevronDown, ChevronRight, Folder } from "lucide-react";
+// pages/[...slug].tsx
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 
-const topics = [
-  {
-    label: "Search Engine Marketing (SEM)",
-    children: [
-      {
-        label: "SEO",
-        children: [
-          { label: "On-Page SEO", content: "On-Page SEO involves optimizing elements on your website..." },
-          { label: "Off-Page SEO", content: "Off-Page SEO involves building backlinks..." },
-          { label: "Technical SEO", content: "Technical SEO ensures your website is crawlable and indexable..." },
-        ],
-      },
-      {
-        label: "Paid Search",
-        children: [
-          { label: "Google Ads", content: "Google Ads allows you to run paid campaigns..." },
-        ],
-      },
-    ],
+const treeMap = {
+  "/sem/seo/on-page": {
+    title: "On-Page SEO",
+    content: "On-Page SEO focuses on optimizing individual web pages to rank higher and earn more relevant traffic in search engines. It includes optimizing title tags, content, internal links, and URLs.",
+    media: {
+      type: "image",
+      src: "/images/on-page-seo.png",
+      alt: "On-Page SEO Diagram"
+    }
   },
-  {
-    label: "Content Marketing",
-    children: [
-      { label: "Blogs", content: "Blogging drives traffic and builds authority..." },
-      { label: "Videos", content: "Video marketing is engaging and highly shareable..." },
-    ],
+  "/sem/seo/off-page": {
+    title: "Off-Page SEO",
+    content: "Off-Page SEO refers to actions taken outside your own website to impact your rankings. This primarily involves backlinks, social media marketing, and influencer outreach.",
+    media: {
+      type: "video",
+      src: "https://www.youtube.com/embed/0eKVizvYSUQ"
+    }
   },
-  {
-    label: "Social Media Marketing",
-    children: [
-      { label: "Facebook", content: "Use Facebook Pages and Ads for audience targeting..." },
-      { label: "Instagram", content: "Instagram marketing uses visuals, reels, and influencers..." },
-      { label: "Twitter", content: "Engage through trending topics, threads, and mentions..." },
-      { label: "LinkedIn", content: "LinkedIn is powerful for B2B networking and ads..." },
-    ],
+  "/sem/seo/technical": {
+    title: "Technical SEO",
+    content: "Technical SEO ensures that a website meets the technical requirements of modern search engines with the goal of improved organic rankings. Examples include website speed, mobile friendliness, indexing, and structured data.",
+    media: {
+      type: "image",
+      src: "/images/technical-seo.png",
+      alt: "Technical SEO Factors"
+    }
   },
-  {
-    label: "Other Channels",
-    children: [
-      { label: "Email Marketing", content: "Send personalized emails for retention..." },
-      { label: "Affiliate Marketing", content: "Earn commissions by promoting others' products..." },
-      { label: "Influencer Marketing", content: "Leverage creators with reach and trust..." },
-      { label: "Mobile Marketing", content: "Reach users via SMS, push notifications, in-app ads..." },
-      { label: "Video Marketing", content: "YouTube, TikTok and more for rich engagement..." },
-      { label: "Display Advertising", content: "Use banner ads on networks and retargeting..." },
-      { label: "Remarketing", content: "Re-engage visitors who didn't convert..." },
-      { label: "Analytics", content: "Measure and optimize with data from tools like GA4..." },
-      { label: "Conversion Optimization", content: "Improve UI, messaging and funnel performance..." },
-      { label: "CRM & Retention", content: "Keep customers loyal via automation, segmentation..." },
-    ],
+  "/sem/paid-search/google-ads": {
+    title: "Google Ads",
+    content: "Google Ads allows businesses to display ads on Google's search engine and other platforms. It operates on a pay-per-click model.",
+    media: {
+      type: "video",
+      src: "https://www.youtube.com/embed/HJkzs8yTjYQ"
+    }
   },
-];
+  "/content-marketing/blogs": {
+    title: "Blogs",
+    content: "Blogs are a key content marketing tool used to educate, inform, or entertain readers while improving search visibility and driving traffic.",
+    media: {
+      type: "video",
+      src: "https://www.youtube.com/embed/v4U_ly3VI6s"
+    }
+  },
+  "/content-marketing/videos": {
+    title: "Video Marketing",
+    content: "Video marketing involves creating video content to promote products, educate audiences, or build brand awareness.",
+    media: {
+      type: "video",
+      src: "https://www.youtube.com/embed/1J6AVaXzLSM"
+    }
+  },
+  "/social-media/facebook": {
+    title: "Facebook Marketing",
+    content: "Facebook marketing involves using Facebook’s platform and ad tools to reach and engage audiences.",
+    media: {
+      type: "image",
+      src: "/images/facebook-marketing.png",
+      alt: "Facebook Ads"
+    }
+  },
+  "/social-media/instagram": {
+    title: "Instagram Marketing",
+    content: "Instagram marketing leverages visuals to promote brands through posts, reels, stories, and influencer collaborations.",
+    media: {
+      type: "video",
+      src: "https://www.youtube.com/embed/nLjxw1VDsnc"
+    }
+  },
+  "/social-media/twitter": {
+    title: "Twitter Marketing",
+    content: "Twitter marketing uses short, timely tweets to connect with followers, join trending conversations, and build authority.",
+    media: {
+      type: "image",
+      src: "/images/twitter-marketing.png",
+      alt: "Twitter Campaign"
+    }
+  },
+  "/social-media/linkedin": {
+    title: "LinkedIn Marketing",
+    content: "LinkedIn marketing targets professionals through company pages, sponsored posts, and networking.",
+    media: {
+      type: "video",
+      src: "https://www.youtube.com/embed/oRSzLQKyb4I"
+    }
+  },
+  "/email-marketing": {
+    title: "Email Marketing",
+    content: "Email marketing sends commercial messages to an audience via email. It helps nurture leads and convert them into customers.",
+    media: {
+      type: "video",
+      src: "https://www.youtube.com/embed/VYMjSULEU4M"
+    }
+  },
+  "/affiliate-marketing": {
+    title: "Affiliate Marketing",
+    content: "Affiliate marketing is a performance-based model where affiliates earn a commission for marketing another company’s products.",
+    media: {
+      type: "video",
+      src: "https://www.youtube.com/embed/VQfjSzB_rPY"
+    }
+  },
+  "/influencer-marketing": {
+    title: "Influencer Marketing",
+    content: "Influencer marketing uses endorsements and mentions from influencers to promote products to a larger audience.",
+    media: {
+      type: "image",
+      src: "/images/influencer-marketing.png",
+      alt: "Influencer Post"
+    }
+  },
+  "/mobile-marketing": {
+    title: "Mobile Marketing",
+    content: "Mobile marketing targets users through mobile devices, using SMS, apps, and mobile-optimized websites.",
+    media: {
+      type: "image",
+      src: "/images/mobile-marketing.png",
+      alt: "Mobile Engagement"
+    }
+  },
+  "/video-marketing": {
+    title: "Video Marketing",
+    content: "Video marketing is an effective digital strategy that uses engaging video content to connect with audiences.",
+    media: {
+      type: "video",
+      src: "https://www.youtube.com/embed/bzSTpdcs-EI"
+    }
+  },
+  "/display-advertising": {
+    title: "Display Advertising",
+    content: "Display ads are banner, image, or video ads shown on websites, apps, or social media platforms.",
+    media: {
+      type: "image",
+      src: "/images/display-ads.png",
+      alt: "Display Ad Examples"
+    }
+  },
+  "/remarketing": {
+    title: "Remarketing",
+    content: "Remarketing targets users who previously visited your website with tailored ads to bring them back.",
+    media: {
+      type: "video",
+      src: "https://www.youtube.com/embed/Q1Y03QdBQjY"
+    }
+  },
+  "/analytics": {
+    title: "Marketing Analytics",
+    content: "Analytics involves tracking, analyzing, and reporting data to measure marketing performance and guide decisions.",
+    media: {
+      type: "image",
+      src: "/images/marketing-analytics.png",
+      alt: "Analytics Dashboard"
+    }
+  },
+  "/conversion-optimization": {
+    title: "Conversion Rate Optimization (CRO)",
+    content: "CRO increases the percentage of visitors who complete desired actions on a website.",
+    media: {
+      type: "video",
+      src: "https://www.youtube.com/embed/H4j1Y50Qz3o"
+    }
+  },
+  "/crm": {
+    title: "CRM & Customer Retention",
+    content: "CRM systems manage customer relationships and help retain users through data, segmentation, and personalized campaigns.",
+    media: {
+      type: "image",
+      src: "/images/crm-retention.png",
+      alt: "CRM Workflow"
+    }
+  }
+};
 
-function TreeItem({ node }: { node: any }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className="ml-4 mt-2">
-      <div
-        className="cursor-pointer flex items-center gap-2 text-blue-700 hover:underline"
-        onClick={() => setOpen(!open)}
-      >
-        {node.children ? (
-          open ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />
-        ) : null}
-        <Folder className="w-4 h-4" />
-        <span className="font-medium">{node.label}</span>
+export default function MarketingPage() {
+  const router = useRouter();
+  const { slug } = router.query;
+  const [pageData, setPageData] = useState(null);
+
+  useEffect(() => {
+    if (slug) {
+      const path = "/" + slug.join("/");
+      setPageData(treeMap[path] || null);
+    }
+  }, [slug]);
+
+  if (!pageData) {
+    return (
+      <div className="p-8 text-center">
+        <h1 className="text-xl font-bold text-gray-700">Page Not Found</h1>
+        <Link href="/" className="text-blue-500 underline">Go Back</Link>
       </div>
-      {open && (
-        <div className="ml-4 mt-2 border-l border-gray-200 pl-4">
-          {node.children ? (
-            node.children.map((child: any, i: number) => <TreeItem key={i} node={child} />)
-          ) : (
-            <div className="text-gray-600 text-sm mt-1">{node.content}</div>
-          )}
+    );
+  }
+
+  return (
+    <div className="max-w-3xl mx-auto p-6">
+      <h1 className="text-2xl font-bold text-blue-700 mb-4">{pageData.title}</h1>
+      <p className="text-gray-700 text-base mb-4">{pageData.content}</p>
+
+      {pageData.media?.type === "image" && (
+        <img src={pageData.media.src} alt={pageData.media.alt} className="rounded shadow-md mb-6" />
+      )}
+
+      {pageData.media?.type === "video" && (
+        <div className="aspect-video w-full mb-6">
+          <iframe
+            width="100%"
+            height="100%"
+            src={pageData.media.src}
+            title="Video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
         </div>
       )}
-    </div>
-  );
-}
 
-export default function Home() {
-  return (
-    <div className="min-h-screen bg-gray-50 py-10 px-6">
-      <div className="max-w-5xl mx-auto bg-white p-8 rounded-2xl shadow">
-        <h1 className="text-3xl font-bold text-center text-blue-700 mb-6">Digital Marketing Family Tree 🌐</h1>
-        <p className="text-center text-gray-600 mb-8">Click through the threads below to reveal each branch and its detailed insights.</p>
-        <div>
-          {topics.map((node, index) => (
-            <TreeItem key={index} node={node} />
-          ))}
-        </div>
-      </div>
+      <Link href="/" className="text-sm text-blue-500 underline">← Back to Digital Marketing Tree</Link>
     </div>
   );
 }
