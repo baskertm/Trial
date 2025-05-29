@@ -1,59 +1,80 @@
+// pages/index.tsx
 import { useState } from "react";
+import { ChevronDown, ChevronRight, Folder } from "lucide-react";
 
-const treeData = [
+const topics = [
   {
-    title: "Search Engine Marketing (SEM)",
+    label: "Search Engine Marketing (SEM)",
     children: [
       {
-        title: "SEO",
+        label: "SEO",
         children: [
-          { title: "On-Page SEO", content: "Optimize individual pages for keywords, tags, and structure." },
-          { title: "Off-Page SEO", content: "Earn backlinks, improve authority, and build trust externally." },
-          { title: "Technical SEO", content: "Ensure site is crawlable, fast, and indexed correctly." },
+          { label: "On-Page SEO", content: "On-Page SEO involves optimizing elements on your website..." },
+          { label: "Off-Page SEO", content: "Off-Page SEO involves building backlinks..." },
+          { label: "Technical SEO", content: "Technical SEO ensures your website is crawlable and indexable..." },
         ],
       },
       {
-        title: "Paid Search",
+        label: "Paid Search",
         children: [
-          { title: "Google Ads", content: "Run PPC campaigns to appear in top search results." },
+          { label: "Google Ads", content: "Google Ads allows you to run paid campaigns..." },
         ],
       },
     ],
   },
   {
-    title: "Content Marketing",
+    label: "Content Marketing",
     children: [
-      { title: "Blogs", content: "Write helpful articles that solve user problems." },
-      { title: "Videos", content: "Educate, entertain, and convert with visual content." },
+      { label: "Blogs", content: "Blogging drives traffic and builds authority..." },
+      { label: "Videos", content: "Video marketing is engaging and highly shareable..." },
     ],
   },
   {
-    title: "Social Media Marketing",
+    label: "Social Media Marketing",
     children: [
-      { title: "Instagram", content: "Visual platform for stories, reels, and influencer partnerships." },
-      { title: "LinkedIn", content: "Perfect for B2B audience and recruiting." },
+      { label: "Facebook", content: "Use Facebook Pages and Ads for audience targeting..." },
+      { label: "Instagram", content: "Instagram marketing uses visuals, reels, and influencers..." },
+      { label: "Twitter", content: "Engage through trending topics, threads, and mentions..." },
+      { label: "LinkedIn", content: "LinkedIn is powerful for B2B networking and ads..." },
+    ],
+  },
+  {
+    label: "Other Channels",
+    children: [
+      { label: "Email Marketing", content: "Send personalized emails for retention..." },
+      { label: "Affiliate Marketing", content: "Earn commissions by promoting others' products..." },
+      { label: "Influencer Marketing", content: "Leverage creators with reach and trust..." },
+      { label: "Mobile Marketing", content: "Reach users via SMS, push notifications, in-app ads..." },
+      { label: "Video Marketing", content: "YouTube, TikTok and more for rich engagement..." },
+      { label: "Display Advertising", content: "Use banner ads on networks and retargeting..." },
+      { label: "Remarketing", content: "Re-engage visitors who didn't convert..." },
+      { label: "Analytics", content: "Measure and optimize with data from tools like GA4..." },
+      { label: "Conversion Optimization", content: "Improve UI, messaging and funnel performance..." },
+      { label: "CRM & Retention", content: "Keep customers loyal via automation, segmentation..." },
     ],
   },
 ];
 
-function ZenNode({ node }: { node: any }) {
+function TreeItem({ node }: { node: any }) {
   const [open, setOpen] = useState(false);
-
   return (
-    <div className="ml-4 mt-3">
-      <button
+    <div className="ml-4 mt-2">
+      <div
+        className="cursor-pointer flex items-center gap-2 text-blue-700 hover:underline"
         onClick={() => setOpen(!open)}
-        className="text-left w-full bg-white hover:bg-gray-50 px-4 py-2 rounded-xl border border-gray-200 shadow-sm transition-all"
       >
-        <div className="font-medium text-gray-800">{node.title}</div>
-      </button>
-
+        {node.children ? (
+          open ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />
+        ) : null}
+        <Folder className="w-4 h-4" />
+        <span className="font-medium">{node.label}</span>
+      </div>
       {open && (
-        <div className="ml-4 mt-2 border-l pl-4 border-gray-200">
+        <div className="ml-4 mt-2 border-l border-gray-200 pl-4">
           {node.children ? (
-            node.children.map((child: any, idx: number) => <ZenNode key={idx} node={child} />)
+            node.children.map((child: any, i: number) => <TreeItem key={i} node={child} />)
           ) : (
-            <p className="text-gray-600 text-sm mt-2">{node.content}</p>
+            <div className="text-gray-600 text-sm mt-1">{node.content}</div>
           )}
         </div>
       )}
@@ -61,16 +82,18 @@ function ZenNode({ node }: { node: any }) {
   );
 }
 
-export default function ZenTree() {
+export default function Home() {
   return (
-    <main className="min-h-screen bg-[#f9fafb] p-6">
-      <div className="max-w-4xl mx-auto bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
-        <h1 className="text-3xl font-bold text-center text-[#3b3b3b] mb-6">🌿 Digital Marketing Zen Tree</h1>
-        <p className="text-center text-gray-500 mb-6">Click on any thread to calmly explore its depth.</p>
-        {treeData.map((node, i) => (
-          <ZenNode key={i} node={node} />
-        ))}
+    <div className="min-h-screen bg-gray-50 py-10 px-6">
+      <div className="max-w-5xl mx-auto bg-white p-8 rounded-2xl shadow">
+        <h1 className="text-3xl font-bold text-center text-blue-700 mb-6">Digital Marketing Family Tree 🌐</h1>
+        <p className="text-center text-gray-600 mb-8">Click through the threads below to reveal each branch and its detailed insights.</p>
+        <div>
+          {topics.map((node, index) => (
+            <TreeItem key={index} node={node} />
+          ))}
+        </div>
       </div>
-    </main>
+    </div>
   );
 }
