@@ -1,120 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>30-Day Digital Marketing + Gen AI Learning Path</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>30-Day Digital Marketing + Gen AI Learning Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="bg-gray-50 font-sans text-gray-800">
-
-  <header class="bg-blue-800 text-white py-6 shadow">
-    <div class="container mx-auto px-4">
-      <h1 class="text-3xl font-bold">🚀 30-Day Digital Marketing + Gen AI Learning Path</h1>
-      <p class="text-lg">Curated Free Resources, Tools, and Visual Progress</p>
+<body class="bg-gray-100 text-gray-800">
+  <!-- Login Section -->
+  <div id="login-section" class="min-h-screen flex items-center justify-center">
+    <div class="bg-white p-6 rounded shadow-md w-full max-w-sm">
+      <h2 class="text-2xl font-bold mb-4 text-blue-700 text-center">Login</h2>
+      <form id="login-form" class="space-y-4">
+        <input type="text" id="username" placeholder="Username" class="w-full px-3 py-2 border rounded" required>
+        <input type="password" id="password" placeholder="Password" class="w-full px-3 py-2 border rounded" required>
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded w-full hover:bg-blue-700">Login</button>
+      </form>
+      <p id="login-error" class="text-red-500 text-sm mt-2 hidden text-center">Invalid credentials.</p>
     </div>
-  </header>
-
-  <main class="container mx-auto px-4 py-10">
-
-    <!-- Overview Section -->
-    <section class="mb-10">
-      <h2 class="text-2xl font-bold text-blue-700 mb-4">📘 Course Overview</h2>
-      <p>This 30-day plan helps you master the fundamentals of digital marketing and how to apply Generative AI (Gen AI) tools to enhance your skills. Everything is <strong>free</strong> and beginner-friendly.</p>
-    </section>
-
-    <!-- Embedded Video Section -->
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold mb-4">🎥 Getting Started with Digital Marketing</h2>
-      <div class="aspect-w-16 aspect-h-9 mb-4">
-        <iframe class="w-full h-80" src="https://www.youtube.com/embed/7CyQv0fZKsE" frameborder="0" allowfullscreen></iframe>
+  </div>  <!-- Dashboard Section -->  <div id="dashboard" class="hidden">
+    <!-- Header -->
+    <header class="bg-blue-800 text-white py-4 px-6">
+      <h1 class="text-xl font-bold">Welcome, Baskar</h1>
+    </header><!-- Daily Content -->
+<main class="p-6 space-y-8">
+  <section>
+    <h2 class="text-2xl font-semibold text-blue-700 mb-4">📆 Day 1: Introduction to Digital Marketing</h2>
+    <div class="bg-white p-4 rounded shadow">
+      <p class="mb-2">Start learning with Google’s official course on fundamentals of digital marketing.</p>
+      <a href="https://learndigital.withgoogle.com/digitalgarage/course/digital-marketing" target="_blank" class="text-blue-600 underline">Google Digital Garage Course</a>
+      <div class="mt-4 aspect-w-16 aspect-h-9">
+        <iframe class="w-full rounded" src="https://www.youtube.com/embed/7x3rsWnGz2A" title="Intro to Digital Marketing" frameborder="0" allowfullscreen></iframe>
       </div>
-      <p class="text-sm text-gray-600">From Google Digital Garage - What is Digital Marketing?</p>
-    </section>
+    </div>
+  </section>
 
-    <!-- 30-Day Schedule Table -->
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold text-blue-700 mb-4">📅 30-Day Schedule</h2>
-      <table class="table-auto w-full text-left border border-gray-300">
-        <thead class="bg-gray-100">
-          <tr>
-            <th class="px-4 py-2 border">Day</th>
-            <th class="px-4 py-2 border">Topic</th>
-            <th class="px-4 py-2 border">Resources</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="border px-4 py-2">Day 1</td>
-            <td class="border px-4 py-2">Intro to Digital Marketing</td>
-            <td class="border px-4 py-2"><a class="text-blue-600 underline" href="https://learndigital.withgoogle.com/digitalgarage" target="_blank">Google Digital Garage</a></td>
-          </tr>
-          <tr>
-            <td class="border px-4 py-2">Day 2</td>
-            <td class="border px-4 py-2">What is SEO?</td>
-            <td class="border px-4 py-2"><a class="text-blue-600 underline" href="https://academy.hubspot.com/courses/seo-training" target="_blank">HubSpot SEO Course</a></td>
-          </tr>
-          <tr>
-            <td class="border px-4 py-2">Day 3</td>
-            <td class="border px-4 py-2">Using Gen AI for Content Writing</td>
-            <td class="border px-4 py-2"><a class="text-blue-600 underline" href="https://chat.openai.com/" target="_blank">ChatGPT</a> + <a class="text-blue-600 underline" href="https://www.copy.ai/" target="_blank">Copy.ai</a></td>
-          </tr>
-          <!-- Add remaining 27 days similarly -->
-        </tbody>
-      </table>
-    </section>
+  <section>
+    <h2 class="text-xl font-semibold text-blue-700 mb-4">📊 Learning Progress</h2>
+    <canvas id="progressChart" class="bg-white p-4 rounded shadow"></canvas>
+  </section>
 
-    <!-- Gen AI Tools -->
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold text-blue-700 mb-4">🤖 Top Gen AI Tools for Marketers</h2>
-      <ul class="list-disc list-inside">
-        <li><a href="https://chat.openai.com/" target="_blank" class="text-blue-600 underline">ChatGPT</a> – Copywriting, SEO prompts, blog outlines</li>
-        <li><a href="https://www.copy.ai/" target="_blank" class="text-blue-600 underline">Copy.ai</a> – Generate social media ads and email templates</li>
-        <li><a href="https://www.canva.com/ai-image-generator/" target="_blank" class="text-blue-600 underline">Canva AI</a> – Auto-generate designs</li>
-        <li><a href="https://www.jasper.ai/" target="_blank" class="text-blue-600 underline">Jasper</a> – Blog writing + product descriptions</li>
-      </ul>
-    </section>
+  <section>
+    <h2 class="text-xl font-semibold text-blue-700 mb-4">🔗 Useful Resources</h2>
+    <ul class="list-disc list-inside bg-white p-4 rounded shadow space-y-1">
+      <li><a href="https://academy.hubspot.com/courses/seo-training" class="text-blue-600 underline" target="_blank">HubSpot SEO Course</a></li>
+      <li><a href="https://www.canva.com/" class="text-blue-600 underline" target="_blank">Canva for Design</a></li>
+      <li><a href="https://www.youtube.com/watch?v=3iS4jda3vls" class="text-blue-600 underline" target="_blank">HubSpot SEO Crash Course - YouTube</a></li>
+      <li><a href="https://openai.com" class="text-blue-600 underline" target="_blank">OpenAI - Gen AI Tools</a></li>
+      <li><a href="https://fiverr.com" class="text-blue-600 underline" target="_blank">Fiverr - Freelancing Platform</a></li>
+    </ul>
+  </section>
+</main>
 
-    <!-- Learning Graph -->
-    <section class="mb-10">
-      <h2 class="text-xl font-semibold text-blue-700 mb-4">📈 Learning Progress Graph</h2>
-      <canvas id="learningChart" width="400" height="200"></canvas>
-      <script>
-        const ctx = document.getElementById('learningChart').getContext('2d');
-        const chart = new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels: [...Array(30).keys()].map(i => `Day ${i + 1}`),
-            datasets: [{
-              label: 'Hours Studied',
-              data: Array.from({ length: 30 }, () => Math.floor(Math.random() * 3) + 1),
-              fill: false,
-              borderColor: 'rgb(37, 99, 235)',
-              tension: 0.2
-            }]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true
-              }
-            }
+<!-- Footer -->
+<footer class="text-center text-sm text-gray-500 py-6">
+  &copy; 2025 Baskar's AI Learning Portal
+</footer>
+
+  </div>  <!-- Script for Login and Chart -->  <script>
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      if (username === 'baskar' && password === 'bas123') {
+        document.getElementById('login-section').classList.add('hidden');
+        document.getElementById('dashboard').classList.remove('hidden');
+      } else {
+        document.getElementById('login-error').classList.remove('hidden');
+      }
+    });
+
+    const ctx = document.getElementById('progressChart');
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: Array.from({length: 30}, (_, i) => `Day ${i + 1}`),
+        datasets: [{
+          label: 'Progress (%)',
+          data: Array.from({length: 30}, (_, i) => i === 0 ? 5 : null), // Day 1 = 5%, rest null
+          borderColor: 'rgb(59, 130, 246)',
+          tension: 0.4
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100
           }
-        });
-      </script>
-    </section>
-
-    <!-- Final CTA -->
-    <section class="bg-blue-100 p-6 rounded">
-      <h2 class="text-xl font-semibold mb-2">🎯 Final Goal</h2>
-      <p>By Day 30, you should have a blog, a few SEO articles, a Canva portfolio, and be confident using Gen AI tools. Start freelancing or apply for internships confidently!</p>
-    </section>
-  </main>
-
-  <footer class="text-center py-6 text-sm text-gray-600">
-    &copy; 2025 YourLearningPath.com | All resources are publicly available.
-  </footer>
-
-</body>
+        }
+      }
+    });
+  </script></body>
 </html>
