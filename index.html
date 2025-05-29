@@ -1,8 +1,8 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Complete Digital Marketing Tree</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Marketing Tree</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -24,11 +24,6 @@
       font-size: 2rem;
       margin-bottom: 10px;
     }
-    p.description {
-      text-align: center;
-      color: #6b7280;
-      margin-bottom: 30px;
-    }
     .node {
       margin-left: 20px;
       margin-top: 10px;
@@ -49,123 +44,63 @@
       background-color: #f3f4f6;
     }
     .content {
+      display: none;
       margin-top: 10px;
       color: #4b5563;
       font-size: 0.9rem;
       border-left: 2px solid #e5e7eb;
       padding-left: 16px;
     }
+    .content a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+    .content a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>🌿 Complete Digital Marketing Tree</h1>
-    <p class="description">Click on each thread to explore detailed explanations of all digital marketing domains.</p>
-    <div id="tree"></div>
+    <h1>🌿 Digital Marketing Tree</h1>
+    <div class="node">
+      <button class="node-button" onclick="toggleContent(this)">Introduction to Digital Marketing</button>
+      <div class="content">
+        <p>Digital marketing encompasses all marketing efforts that use the internet or electronic devices. Businesses leverage digital channels such as search engines, social media, email, and websites to connect with current and prospective customers.</p>
+        <p><strong>YouTube:</strong> <a href="https://www.youtube.com/watch?v=nU-IIXBWlS4" target="_blank">Digital Marketing Explained</a></p>
+        <p><strong>Course:</strong> <a href="https://skillshop.exceedlms.com/student/collection/1384851-fundamentals-of-digital-marketing" target="_blank">Google's Fundamentals of Digital Marketing</a></p>
+      </div>
+    </div><div class="node">
+  <button class="node-button" onclick="toggleContent(this)">Search Engine Optimization (SEO)</button>
+  <div class="content">
+    <p>SEO involves optimizing your website to rank higher in search engine results pages (SERPs), thereby increasing organic (non-paid) traffic.</p>
+    <p><strong>YouTube:</strong> <a href="https://www.youtube.com/watch?v=E1u3sG1j4vQ" target="_blank">SEO Tutorial for Beginners</a></p>
+    <p><strong>Course:</strong> <a href="https://digitalmarketinginstitute.com/resources/lessons" target="_blank">DMI SEO Module</a></p>
+  </div>
+</div>
+
+<div class="node">
+  <button class="node-button" onclick="toggleContent(this)">Content Marketing</button>
+  <div class="content">
+    <p>Content marketing focuses on creating and distributing valuable, relevant, and consistent content to attract and retain a clearly defined audience.</p>
+    <p><strong>YouTube:</strong> <a href="https://www.youtube.com/watch?v=U9FzgsF2T-s" target="_blank">Content Marketing Strategy</a></p>
+    <p><strong>Course:</strong> <a href="https://www.hubspot.com/resources/courses" target="_blank">HubSpot Content Marketing Certification</a></p>
+  </div>
+</div>
+
+<div class="node">
+  <button class="node-button" onclick="toggleContent(this)">Social Media Marketing</button>
+  <div class="content">
+    <p>Utilizing social media platforms to promote products or services. Platforms include Facebook, Instagram, LinkedIn, and more.</p>
+    <p><strong>YouTube:</strong> <a href="https://www.youtube.com/watch?v=8z9zM1L9aWg" target="_blank">Social Media Marketing Tutorial</a></p>
+    <p><strong>Course:</strong> <a href="https://www.facebook.com/business/learn" target="_blank">Facebook Blueprint</a></p>
+  </div>
+</div>
+
   </div>  <script>
-    const treeData = [
-      {
-        title: "Digital Marketing Overview",
-        content: "Digital marketing is the use of online channels to promote or market products and services to consumers and businesses."
-      },
-      {
-        title: "Search Engine Optimization (SEO)",
-        children: [
-          { title: "On-Page SEO", content: "Focuses on optimizing parts of your website you can control (content, title tags, URLs)." },
-          { title: "Off-Page SEO", content: "Involves external efforts like backlinks and social media presence." },
-          { title: "Technical SEO", content: "Improves site structure and performance for better crawling and indexing." }
-        ]
-      },
-      {
-        title: "Search Engine Marketing (SEM)",
-        children: [
-          { title: "Google Ads", content: "Pay-per-click (PPC) advertising on Google's search network." },
-          { title: "Bing Ads", content: "Advertising on Microsoft's Bing search engine." }
-        ]
-      },
-      {
-        title: "Content Marketing",
-        children: [
-          { title: "Blogging", content: "Creating informative articles to attract and retain users." },
-          { title: "Video Marketing", content: "Using videos to inform and convert users." },
-          { title: "Infographics", content: "Visually engaging representations of data or processes." },
-          { title: "Case Studies", content: "In-depth look at how products/services help customers." }
-        ]
-      },
-      {
-        title: "Social Media Marketing",
-        children: [
-          { title: "Facebook", content: "Advertising, pages, and groups for engagement." },
-          { title: "Instagram", content: "Reels, stories, and influencer campaigns." },
-          { title: "LinkedIn", content: "Professional networking and B2B marketing." },
-          { title: "Twitter/X", content: "Real-time marketing and communication." }
-        ]
-      },
-      {
-        title: "Email Marketing",
-        children: [
-          { title: "Newsletters", content: "Regular updates to engage subscribers." },
-          { title: "Promotional Emails", content: "Targeted offers and discounts to drive sales." },
-          { title: "Transactional Emails", content: "Order confirmations and service notifications." }
-        ]
-      },
-      {
-        title: "Affiliate Marketing",
-        content: "Commission-based promotion of other companies' products/services through affiliate links."
-      },
-      {
-        title: "Influencer Marketing",
-        content: "Partnering with influencers to reach their audience with trust and authenticity."
-      },
-      {
-        title: "Mobile Marketing",
-        children: [
-          { title: "App-Based Marketing", content: "Engaging users through mobile apps and notifications." },
-          { title: "SMS Marketing", content: "Sending timely messages to mobile devices." }
-        ]
-      },
-      {
-        title: "Web Analytics",
-        content: "Using tools like Google Analytics to track user behavior and optimize strategies."
-      }
-    ];
-
-    function renderNode(node) {
-      const container = document.createElement("div");
-      container.className = "node";
-
-      const button = document.createElement("button");
-      button.className = "node-button";
-      button.textContent = node.title;
-
-      const childContainer = document.createElement("div");
-      childContainer.style.display = "none";
-
-      button.addEventListener("click", () => {
-        childContainer.style.display =
-          childContainer.style.display === "none" ? "block" : "none";
-      });
-
-      container.appendChild(button);
-
-      if (node.children) {
-        node.children.forEach((child) => {
-          childContainer.appendChild(renderNode(child));
-        });
-      } else if (node.content) {
-        const content = document.createElement("div");
-        content.className = "content";
-        content.textContent = node.content;
-        childContainer.appendChild(content);
-      }
-
-      container.appendChild(childContainer);
-      return container;
+    function toggleContent(button) {
+      const content = button.nextElementSibling;
+      content.style.display = content.style.display === 'block' ? 'none' : 'block';
     }
-
-    const treeRoot = document.getElementById("tree");
-    treeData.forEach((node) => {
-      treeRoot.appendChild(renderNode(node));
-    });
   </script></body>
 </html>
