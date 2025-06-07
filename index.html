@@ -1,112 +1,355 @@
 <!DOCTYPE html>
 <html lang="ta">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Digital Marketing Guide - Baskar_TM</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Complete Digital Marketing Guide | Baskar_TM</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin:0; padding:0; background:#f4f4f9; color:#222;
+  }
+  header {
+    background:#5c2a9d; color:#fff; padding:1rem; text-align:center;
+  }
+  header h1 {
+    margin:0 0 0.3rem 0; font-weight:700;
+  }
+  header p {
+    margin:0; font-size:0.9rem; font-style:italic;
+  }
+  #darkToggle {
+    margin-top:0.8rem; padding:0.5rem 1rem; border:none; border-radius:20px;
+    background:#7c4dff; color:#fff; cursor:pointer;
+    font-weight:600;
+  }
+  .container {
+    max-width: 960px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+  }
+  .card {
+    background: #fff;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgb(0 0 0 / 0.1);
+  }
+  .card-header {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.2rem;
+    background: #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select:none;
+    border-radius: 12px 12px 0 0;
+  }
+  .toggle-icon {
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+  .card-body {
+    display: none;
+    padding: 1rem 1.5rem 1.5rem 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #333;
+  }
+  .desc-bilingual {
+    margin-bottom: 1rem;
+  }
+  .desc-bilingual b {
+    color: #5c2a9d;
+  }
+  a.source-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: #5c2a9d;
+    text-decoration: none;
+  }
+  a.source-link:hover {
+    text-decoration: underline;
+  }
+  .quiz {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+  }
+  .quiz h4 {
+    margin: 0 0 0.6rem 0;
+    font-weight: 700;
+    color: #3c1361;
+  }
+  .quiz label {
+    display: block;
+    margin-bottom: 0.4rem;
+    cursor: pointer;
+  }
+  .quiz button {
+    margin-top: 0.5rem;
+    background: #5c2a9d;
+    color: white;
+    border: none;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .quiz-result {
+    margin-top: 0.5rem;
+    font-weight: 700;
+  }
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background: #eee;
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    color: #555;
+  }
+  /* Dark mode */
+  body.dark-mode {
+    background: #121212;
+    color: #eee;
+  }
+  body.dark-mode header {
+    background: #311b92;
+  }
+  body.dark-mode .card {
+    background: #1f1f1f;
+    box-shadow: 0 3px 8px rgb(255 255 255 / 0.1);
+  }
+  body.dark-mode .card-header {
+    background: #2c2c2c;
+  }
+  body.dark-mode a.source-link {
+    color: #bb86fc;
+  }
+  body.dark-mode .quiz {
+    background: #292929;
+    border-color: #444;
+  }
+  body.dark-mode footer {
+    background: #222;
+    color: #aaa;
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1><i data-lucide="book-open-text"></i> Digital Marketing Guide</h1>
-    <p>டிஜிட்டல் மார்க்கெட்டிங் கையேடு - Baskar_TM</p>
-    <button id="darkToggle">🌙 Toggle Dark Mode</button>
-  </header>
+<header>
+  <h1>Complete Digital Marketing Guide</h1>
+  <p>டிஜிட்டல் மார்க்கெட்டிங் முழுமையான கையேடு | Baskar_TM</p>
+  <button id="darkToggle">🌙 Toggle Dark Mode</button>
+</header>
 
-  <main class="container">
-    <section class="card">
-      <div class="card-header" onclick="toggleCard(this)">
-        <h2><i data-lucide="search"></i> SEO (தேடல் இயந்திர மேம்பாடு)</h2>
-        <span class="toggle-icon">+</span>
+<div class="container" id="modules">
+
+  <!-- Template for a module card: -->
+  <!-- Repeat for each module -->
+  
+  <!-- SEO Module -->
+  <section class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      SEO (Search Engine Optimization) - தேடுபொறி சிறப்பு செயல்
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="card-body">
+      <div class="desc-bilingual">
+        <b>English:</b> SEO is the practice of improving website visibility in search engines.<br/>
+        <b>Tamil:</b> SEO என்பது இணையதளத்தை தேடுபொறிகளில் உயர்வதற்கான செயல்முறை.
       </div>
-      <div class="card-body">
-        <p><b>EN:</b> Optimize websites to rank higher in search engine results.<br>
-        <b>TA:</b> தேடல் முடிவுகளில் உயர் தரவரிசையைப் பெற வலைத்தளங்களை மேம்படுத்துவது.</p>
-        <ul>
-          <li><a href="https://moz.com/beginners-guide-to-seo" target="_blank">Moz Beginner's Guide</a></li>
-          <li><a href="https://developers.google.com/search/docs/beginner/seo-starter-guide" target="_blank">Google SEO Starter</a></li>
-        </ul>
-        <div class="quiz">
-          <p><strong>Quiz:</strong> What does SEO stand for?</p>
-          <label><input type="radio" name="q1" value="a"> Search Engine Optimization ✅</label><br>
-          <label><input type="radio" name="q1" value="b"> Social Engagement Objective</label><br>
-          <label><input type="radio" name="q1" value="c"> Search Event Order</label><br>
-          <button onclick="checkAnswer('q1', 'a', this)">Submit</button>
-          <p class="quiz-result"></p>
-        </div>
+      <a href="https://moz.com/beginners-guide-to-seo" target="_blank" class="source-link">Source: Moz Beginner's Guide to SEO</a>
+
+      <div class="quiz">
+        <h4>Quiz: What does SEO stand for?</h4>
+        <label><input type="radio" name="seo-quiz" value="wrong" /> Search Engine Operation</label>
+        <label><input type="radio" name="seo-quiz" value="correct" /> Search Engine Optimization</label>
+        <label><input type="radio" name="seo-quiz" value="wrong" /> Social Engagement Optimization</label>
+        <button onclick="checkAnswer('seo-quiz', 'correct', this)">Check Answer</button>
+        <div class="quiz-result"></div>
       </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Baskar_TM. All rights reserved.</p>
-  </footer>
-
-  <div id="chat-btn" onclick="toggleChat()">💬 Ask Tutor</div>
-  <div id="chat-box">
-    <div class="chat-header">
-      📘 DM Assistant
-      <span onclick="toggleChat()">✖</span>
     </div>
-    <div class="chat-content" id="chat-content">
-      <p><strong>AI:</strong> Hello! Ask me about SEO, content, or quiz tips.</p>
-    </div>
-    <div class="chat-input">
-      <input type="text" id="chat-input-box" placeholder="Type your question..."/>
-      <button onclick="sendChat()">➤</button>
-    </div>
-  </div>
+  </section>
 
-  <script>
-    lucide.createIcons();
-    function toggleCard(header) {
-      const card = header.parentElement;
-      const body = card.querySelector('.card-body');
-      const icon = header.querySelector('.toggle-icon');
-      body.classList.toggle('show');
-      icon.textContent = body.classList.contains('show') ? '−' : '+';
-    }
-    function checkAnswer(qname, correct, btn) {
-      const selected = document.querySelector(`input[name="${qname}"]:checked`);
-      const result = btn.nextElementSibling;
-      if (!selected) {
-        result.textContent = "Please select an option.";
-        result.style.color = "orange";
-      } else if (selected.value === correct) {
-        result.textContent = "Correct! ✅";
-        result.style.color = "green";
-      } else {
-        result.textContent = "Incorrect. ❌";
-        result.style.color = "red";
-      }
-    }
-    document.getElementById('darkToggle').onclick = () => {
-      document.body.classList.toggle('dark');
-    };
-    function toggleChat() {
-      const chatBox = document.getElementById('chat-box');
-      chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex';
-    }
-    function sendChat() {
-      const input = document.getElementById('chat-input-box');
-      const content = document.getElementById('chat-content');
-      const question = input.value.trim();
-      if (!question) return;
-      const userMsg = `<p><strong>You:</strong> ${question}</p>`;
-      content.innerHTML += userMsg;
-      let response = "🤖 I'm still learning. Try: 'What is SEO?' or 'Tip for quiz'.";
-      if (question.toLowerCase().includes("seo")) {
-        response = "SEO means Search Engine Optimization. It helps websites rank higher.";
-      } else if (question.toLowerCase().includes("content")) {
-        response = "Content marketing focuses on creating helpful content to attract visitors.";
-      } else if (question.toLowerCase().includes("quiz")) {
-        response = "Read the topic fully before attempting the quiz. Take notes!";
-      }
-      content.innerHTML += `<p><strong>AI:</strong> ${response}</p>`;
-      content.scrollTop = content.scrollHeight;
-      input.value = "";
-    }
-  </script>
-</body>
-</html>
+  <!-- Social Media Marketing -->
+  <section class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      Social Media Marketing (சோஷியல் மீடியா மார்க்கெட்டிங்)
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="card-body">
+      <div class="desc-bilingual">
+        <b>English:</b> Using social media platforms to promote products or brands.<br/>
+        <b>Tamil:</b> தயாரிப்புகள் அல்லது பிராண்டுகளை சமூக ஊடகங்களில் விளம்பரம் செய்தல்.
+      </div>
+      <a href="https://www.facebook.com/business/learn/social-media-marketing" target="_blank" class="source-link">Source: Facebook Social Media Marketing Guide</a>
+      <div class="quiz">
+        <h4>Quiz: Which platform is primarily used for social media marketing?</h4>
+        <label><input type="radio" name="smm-quiz" value="correct" /> Facebook</label>
+        <label><input type="radio" name="smm-quiz" value="wrong" /> LinkedIn Learning</label>
+        <label><input type="radio" name="smm-quiz" value="wrong" /> Google Ads</label>
+        <button onclick="checkAnswer('smm-quiz', 'correct', this)">Check Answer</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Google Ads -->
+  <section class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      Google Ads (கூகுள் விளம்பரங்கள்)
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="card-body">
+      <div class="desc-bilingual">
+        <b>English:</b> Paid online advertising platform to show ads on Google search and partner sites.<br/>
+        <b>Tamil:</b> கூகுள் தேடல் மற்றும் பங்குதாரர் தளங்களில் விளம்பரங்களை காட்டும் பணியிட விளம்பர தளம்.
+      </div>
+      <a href="https://ads.google.com/home/" target="_blank" class="source-link">Source: Google Ads Official</a>
+      <div class="quiz">
+        <h4>Quiz: What type of ads does Google Ads primarily show?</h4>
+        <label><input type="radio" name="googleads-quiz" value="correct" /> Search and display ads</label>
+        <label><input type="radio" name="googleads-quiz" value="wrong" /> Radio ads</label>
+        <label><input type="radio" name="googleads-quiz" value="wrong" /> Print ads</label>
+        <button onclick="checkAnswer('googleads-quiz', 'correct', this)">Check Answer</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Email Marketing -->
+  <section class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      Email Marketing (மின்னஞ்சல் மார்க்கெட்டிங்)
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="card-body">
+      <div class="desc-bilingual">
+        <b>English:</b> Sending promotional emails to a list of subscribers.<br/>
+        <b>Tamil:</b> சந்தாதாரர்களுக்கு விளம்பர மின்னஞ்சல்கள் அனுப்புதல்.
+      </div>
+      <a href="https://mailchimp.com/email-marketing/" target="_blank" class="source-link">Source: Mailchimp Email Marketing</a>
+      <div class="quiz">
+        <h4>Quiz: What is a common platform for Email Marketing?</h4>
+        <label><input type="radio" name="email-quiz" value="correct" /> Mailchimp</label>
+        <label><input type="radio" name="email-quiz" value="wrong" /> Twitter</label>
+        <label><input type="radio" name="email-quiz" value="wrong" /> YouTube</label>
+        <button onclick="checkAnswer('email-quiz', 'correct', this)">Check Answer</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Affiliate Marketing -->
+  <section class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      Affiliate Marketing (அஃபிலியேட் மார்க்கெட்டிங்)
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="card-body">
+      <div class="desc-bilingual">
+        <b>English:</b> Earning commission by promoting other company’s products.<br/>
+        <b>Tamil:</b> மற்ற நிறுவனங்களின் தயாரிப்புகளை விளம்பரம் செய்து கமிஷன் பெறுதல்.
+      </div>
+      <a href="https://www.affiliateprograms.com/" target="_blank" class="source-link">Source: AffiliatePrograms.com</a>
+      <div class="quiz">
+        <h4>Quiz: What does an affiliate marketer earn?</h4>
+        <label><input type="radio" name="affiliate-quiz" value="correct" /> Commission</label>
+        <label><input type="radio" name="affiliate-quiz" value="wrong" /> Salary</label>
+        <label><input type="radio" name="affiliate-quiz" value="wrong" /> Bonus points</label>
+        <button onclick="checkAnswer('affiliate-quiz', 'correct', this)">Check Answer</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Analytics -->
+  <section class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      Analytics (ஆனலிடிக்ஸ்)
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="card-body">
+      <div class="desc-bilingual">
+        <b>English:</b> Measuring and analyzing website and campaign data.<br/>
+        <b>Tamil:</b> இணையதளம் மற்றும் விளம்பரத் திட்ட தரவுகளை அளவிடுதல் மற்றும் பகுப்பாய்வு செய்தல்.
+      </div>
+      <a href="https://analytics.google.com/" target="_blank" class="source-link">Source: Google Analytics</a>
+      <div class="quiz">
+        <h4>Quiz: What is Google Analytics used for?</h4>
+        <label><input type="radio" name="analytics-quiz" value="correct" /> Tracking website traffic</label>
+        <label><input type="radio" name="analytics-quiz" value="wrong" /> Creating ads</label>
+        <label><input type="radio" name="analytics-quiz" value="wrong" /> Sending emails</label>
+        <button onclick="checkAnswer('analytics-quiz', 'correct', this)">Check Answer</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- E-Commerce Marketing -->
+  <section class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      E-Commerce Marketing (மின்னணு வணிகம் மார்க்கெட்டிங்)
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="card-body">
+      <div class="desc-bilingual">
+        <b>English:</b> Marketing products through online stores and marketplaces.<br/>
+        <b>Tamil:</b> ஆன்லைன் கடைகள் மற்றும் சந்தைகளில் தயாரிப்புகளை விளம்பரம் செய்தல்.
+      </div>
+      <a href="https://www.shopify.com/marketing" target="_blank" class="source-link">Source: Shopify Marketing Guide</a>
+      <div class="quiz">
+        <h4>Quiz: Which platform is popular for e-commerce marketing?</h4>
+        <label><input type="radio" name="ecom-quiz" value="correct" /> Shopify</label>
+        <label><input type="radio" name="ecom-quiz" value="wrong" /> Twitter</label>
+        <label><input type="radio" name="ecom-quiz" value="wrong" /> Instagram</label>
+        <button onclick="checkAnswer('ecom-quiz', 'correct', this)">Check Answer</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile Marketing -->
+  <section class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      Mobile Marketing (மொபைல் மார்க்கெட்டிங்)
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="card-body">
+      <div class="desc-bilingual">
+        <b>English:</b> Marketing through mobile devices and apps.<br/>
+        <b>Tamil:</b> மொபைல் சாதனங்கள் மற்றும் செயலிகளின் மூலம் விளம்பரம் செய்தல்.
+      </div>
+      <a href="https://www.wordstream.com/mobile-marketing" target="_blank" class="source-link">Source: WordStream Mobile Marketing</a>
+      <div class="quiz">
+        <h4>Quiz: What is a common mobile marketing channel?</h4>
+        <label><input type="radio" name="mobile-quiz" value="correct" /> SMS Marketing</label>
+        <label><input type="radio" name="mobile-quiz" value="wrong" /> Radio Ads</label>
+        <label><input type="radio" name="mobile-quiz" value="wrong" /> Billboards</label>
+        <button onclick="checkAnswer('mobile-quiz', 'correct', this)">Check Answer</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Influencer Marketing -->
+  <section class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      Influencer Marketing (இன்ஃப்ளூயென்சர் மார்க்கெட்டிங்)
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="card-body">
+      <div class="desc-bilingual">
+        <b>English:</b> Collaborating with influential people to promote products.<br/>
+        <b>Tamil:</b> புகழ்பெற்ற நபர்களுடன் இணைந்து தயாரிப்புகளை விளம்பரம் செய்தல்.
+      </div>
+      <a href="https://influencermarketinghub.com/what-is-influencer-marketing/" target="_blank" class="source-link">Source: Influencer Marketing Hub</a>
+      <div class="quiz">
+        <h4>Quiz: What do influencers usually have?</h4>
+        <label><input type="radio" name="influencer-quiz" value="correct" /> Large audience</label>
+        <label><input type="radio" name="influencer-quiz" value="wrong" /> Small store</label>
+        <label><input type="radio" name="influencer-quiz" value="wrong" /> TV
