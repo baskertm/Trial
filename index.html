@@ -3,94 +3,148 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Digital Marketing Study Portal</title>
-<meta name="description" content="Learn digital marketing topics in English and Tamil with interactive quizzes and chatbot support." />
+<meta name="description" content="Comprehensive Digital Marketing Study with Interactive Modules, Quizzes, and AI-powered Chatbot. Learn Digital Marketing in English & Tamil." />
+<title>Digital Marketing Study Hub</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto&display=swap" rel="stylesheet" />
+
 <style>
+  /* Root colors for light and dark modes */
   :root {
-    --color-bg-light: #fafafa;
-    --color-text-light: #121212;
-    --color-bg-dark: #121212;
-    --color-text-dark: #e0e0e0;
-    --color-primary-light: #007acc;
-    --color-primary-dark: #80cbc4;
-    --color-card-bg-light: #fff;
-    --color-card-bg-dark: #1e1e1e;
-    --color-border-light: #ccc;
-    --color-border-dark: #444;
-    --transition-speed: 0.3s;
+    --clr-primary: #5a67d8;
+    --clr-secondary: #9f7aea;
+    --clr-accent: #38b2ac;
+    --clr-bg-light: #fdf6ff;
+    --clr-bg-dark: #1a202c;
+    --clr-text-light: #2d3748;
+    --clr-text-dark: #e2e8f0;
+    --clr-card-bg-light: #ffffff;
+    --clr-card-bg-dark: #2d3748;
+    --clr-border-light: #d6bcfa;
+    --clr-border-dark: #4c51bf;
+    --transition-fast: 0.25s ease-in-out;
   }
+
+  /* Base styles */
   body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    background-color: var(--color-bg-light);
-    color: var(--color-text-light);
-    transition: background-color var(--transition-speed), color var(--transition-speed);
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--clr-bg-light);
+    color: var(--clr-text-light);
+    transition: background-color var(--transition-fast), color var(--transition-fast);
   }
   body.dark {
-    background-color: var(--color-bg-dark);
-    color: var(--color-text-dark);
+    background-color: var(--clr-bg-dark);
+    color: var(--clr-text-dark);
   }
+  h1, h2, h3 {
+    font-family: 'Poppins', sans-serif;
+  }
+  h1 {
+    font-size: 2.4rem;
+    margin: 0;
+    color: var(--clr-primary);
+  }
+  h2 {
+    font-size: 1.6rem;
+    margin-bottom: 0.3rem;
+  }
+  p {
+    line-height: 1.5;
+    margin: 0.5rem 0 1rem 0;
+  }
+
+  /* Container */
+  main {
+    max-width: 900px;
+    margin: 1.5rem auto 6rem auto;
+    padding: 0 1rem 4rem 1rem;
+  }
+
+  /* Header */
   header {
-    padding: 1rem 1rem;
-    background-color: var(--color-card-bg-light);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background: var(--clr-card-bg-light);
+    padding: 1rem 1.5rem;
+    box-shadow: 0 3px 8px rgba(90, 103, 216, 0.3);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background-color var(--transition-speed);
+    transition: background-color var(--transition-fast);
+    position: sticky;
+    top: 0;
+    z-index: 99;
   }
   body.dark header {
-    background-color: var(--color-card-bg-dark);
-    box-shadow: 0 2px 10px rgba(255,255,255,0.1);
+    background: var(--clr-card-bg-dark);
+    box-shadow: 0 3px 8px rgba(159, 122, 234, 0.5);
   }
-  h1 {
-    margin: 0;
-    font-size: 1.5rem;
+
+  /* Toggle Button */
+  #darkModeToggle {
+    background: var(--clr-primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
   }
+  #darkModeToggle:hover {
+    background: var(--clr-secondary);
+  }
+
+  /* Navigation Modules */
   nav {
     display: flex;
-    gap: 1rem;
+    gap: 0.8rem;
     flex-wrap: wrap;
   }
   nav button {
-    background: none;
+    background: var(--clr-accent);
     border: none;
-    color: var(--color-primary-light);
-    font-weight: 600;
-    cursor: pointer;
-    padding: 0.3rem 0.5rem;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
-  }
-  body.dark nav button {
-    color: var(--color-primary-dark);
-  }
-  nav button:hover, nav button.active {
-    background-color: var(--color-primary-light);
     color: white;
-  }
-  body.dark nav button:hover, body.dark nav button.active {
-    background-color: var(--color-primary-dark);
-    color: #121212;
-  }
-  main {
-    max-width: 800px;
-    margin: 1rem auto 5rem auto;
-    padding: 0 1rem;
-  }
-  .module-card {
-    background-color: var(--color-card-bg-light);
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    margin-bottom: 1.5rem;
-    padding: 1rem;
+    padding: 0.45rem 1rem;
+    font-weight: 600;
+    border-radius: 18px;
     cursor: pointer;
-    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+    box-shadow: 0 2px 8px rgba(56, 178, 172, 0.5);
+    transition: background-color var(--transition-fast);
+  }
+  nav button:hover,
+  nav button.active {
+    background: var(--clr-primary);
+    box-shadow: 0 4px 12px rgba(90, 103, 216, 0.8);
+  }
+
+  /* Module Cards */
+  .module-card {
+    background: var(--clr-card-bg-light);
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(90, 103, 216, 0.15);
+    margin-bottom: 1.5rem;
+    padding: 1.3rem 1.5rem;
+    cursor: pointer;
+    transition:
+      background-color var(--transition-fast),
+      box-shadow var(--transition-fast),
+      transform 0.3s ease;
+    overflow: hidden;
+  }
+  .module-card:hover {
+    box-shadow: 0 6px 25px rgba(90, 103, 216, 0.4);
+    transform: translateY(-4px);
   }
   body.dark .module-card {
-    background-color: var(--color-card-bg-dark);
-    box-shadow: 0 0 10px rgba(255,255,255,0.1);
+    background: var(--clr-card-bg-dark);
+    box-shadow: 0 4px 15px rgba(159, 122, 234, 0.25);
   }
+  body.dark .module-card:hover {
+    box-shadow: 0 6px 25px rgba(159, 122, 234, 0.6);
+  }
+
+  /* Module Header */
   .module-header {
     display: flex;
     justify-content: space-between;
@@ -99,37 +153,49 @@
   }
   .module-header h2 {
     margin: 0;
-    font-size: 1.25rem;
   }
   .expand-icon {
-    font-weight: bold;
-    font-size: 1.5rem;
-    transition: transform var(--transition-speed);
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--clr-primary);
+    transition: transform 0.3s ease;
   }
   .expand-icon.expanded {
     transform: rotate(45deg);
   }
+
+  /* Module Content */
   .module-content {
-    margin-top: 1rem;
-    line-height: 1.5;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
   }
+  .module-content.expanded {
+    max-height: 1000px; /* large enough for content */
+    opacity: 1;
+    margin-top: 1rem;
+  }
+
+  /* Source Link */
   .source-link {
-    display: inline-block;
-    margin-top: 0.8rem;
-    color: var(--color-primary-light);
+    color: var(--clr-accent);
     text-decoration: none;
     font-weight: 600;
   }
   body.dark .source-link {
-    color: var(--color-primary-dark);
+    color: var(--clr-secondary);
   }
+
+  /* Quiz Styles */
   .quiz-section {
     margin-top: 1rem;
-    border-top: 1px solid var(--color-border-light);
     padding-top: 1rem;
+    border-top: 2px solid var(--clr-border-light);
+    font-size: 0.95rem;
   }
   body.dark .quiz-section {
-    border-color: var(--color-border-dark);
+    border-color: var(--clr-border-dark);
   }
   .quiz-options {
     list-style: none;
@@ -137,132 +203,161 @@
     margin: 0.5rem 0 1rem 0;
   }
   .quiz-options li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
   }
   label {
     cursor: pointer;
   }
   input[type="radio"] {
-    margin-right: 0.6rem;
+    margin-right: 0.5rem;
     cursor: pointer;
   }
   button.submit-btn {
-    background-color: var(--color-primary-light);
-    border: none;
+    background: var(--clr-primary);
     color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
+    border: none;
+    padding: 0.45rem 1.2rem;
     font-weight: 600;
-    transition: background-color 0.2s ease;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
   }
-  body.dark button.submit-btn {
-    background-color: var(--color-primary-dark);
-    color: #121212;
+  button.submit-btn:hover:not(:disabled) {
+    background: var(--clr-secondary);
   }
   button.submit-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
   .quiz-result {
-    font-weight: bold;
-    margin-top: 0.5rem;
+    font-weight: 700;
+    margin-top: 0.6rem;
   }
   .quiz-result.correct {
-    color: #4caf50;
+    color: #38a169; /* green */
   }
   .quiz-result.incorrect {
-    color: #e53935;
+    color: #e53e3e; /* red */
   }
-  /* Chatbot styles */
+
+  /* Chatbot Styles */
   #chatbot {
     position: fixed;
-    bottom: 15px;
-    right: 15px;
-    width: 320px;
-    max-height: 400px;
-    background-color: var(--color-card-bg-light);
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.15);
+    bottom: 20px;
+    right: 20px;
+    width: 360px;
+    max-height: 420px;
+    background: var(--clr-card-bg-light);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(90, 103, 216, 0.3);
     display: flex;
     flex-direction: column;
     font-size: 14px;
-    color: var(--color-text-light);
-    transition: background-color var(--transition-speed), color var(--transition-speed);
+    color: var(--clr-text-light);
+    transition: background-color var(--transition-fast), color var(--transition-fast);
     overflow: hidden;
+    user-select: none;
   }
   body.dark #chatbot {
-    background-color: var(--color-card-bg-dark);
-    box-shadow: 0 0 15px rgba(255,255,255,0.2);
-    color: var(--color-text-dark);
+    background: var(--clr-card-bg-dark);
+    box-shadow: 0 10px 25px rgba(159, 122, 234, 0.45);
+    color: var(--clr-text-dark);
   }
-  #chatbot .messages {
+  #chatbot-header {
+    background: var(--clr-primary);
+    color: white;
+    padding: 0.8rem 1rem;
+    font-weight: 700;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    user-select: none;
+  }
+  #chatbot-messages {
     flex-grow: 1;
     overflow-y: auto;
-    padding: 10px;
+    padding: 12px 16px;
+    background: transparent;
   }
-  #chatbot .message {
-    margin-bottom: 8px;
+  .chat-message {
     max-width: 80%;
+    margin-bottom: 10px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    line-height: 1.3;
     word-wrap: break-word;
-    padding: 6px 12px;
-    border-radius: 12px;
-    display: inline-block;
   }
-  #chatbot .message.user {
-    background-color: var(--color-primary-light);
+  .chat-message.user {
+    background: var(--clr-accent);
     color: white;
-    margin-left: auto;
+    align-self: flex-end;
+    box-shadow: 0 4px 8px rgba(56, 178, 172, 0.6);
   }
-  body.dark #chatbot .message.user {
-    background-color: var(--color-primary-dark);
-    color: #121212;
+  body.dark .chat-message.user {
+    background: var(--clr-secondary);
+    color: #1a202c;
   }
-  #chatbot .message.bot {
-    background-color: var(--color-border-light);
-    color: var(--color-text-light);
+  .chat-message.bot {
+    background: var(--clr-border-light);
+    color: var(--clr-text-light);
+    align-self: flex-start;
   }
-  body.dark #chatbot .message.bot {
-    background-color: var(--color-border-dark);
-    color: var(--color-text-dark);
+  body.dark .chat-message.bot {
+    background: var(--clr-border-dark);
+    color: var(--clr-text-dark);
   }
-  #chatbot .input-area {
+  #chatbot-input-area {
     display: flex;
-    border-top: 1px solid var(--color-border-light);
+    border-top: 1px solid var(--clr-border-light);
+    padding: 8px 12px;
+    background: transparent;
   }
-  body.dark #chatbot .input-area {
-    border-color: var(--color-border-dark);
+  body.dark #chatbot-input-area {
+    border-color: var(--clr-border-dark);
   }
-  #chatbot input[type="text"] {
+  #chatbot-input {
     flex-grow: 1;
-    padding: 8px;
-    border: none;
+    padding: 10px 14px;
+    border-radius: 30px;
+    border: 1px solid var(--clr-border-light);
     outline: none;
     font-size: 14px;
-    background-color: transparent;
+    transition: border-color var(--transition-fast);
+    background: transparent;
     color: inherit;
   }
-  #chatbot button.send-btn {
-    background-color: var(--color-primary-light);
+  #chatbot-input:focus {
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 8px var(--clr-primary);
+  }
+  #chatbot-send-btn {
+    background: var(--clr-primary);
     border: none;
     color: white;
-    padding: 0 15px;
+    margin-left: 8px;
+    border-radius: 30px;
+    padding: 0 16px;
+    font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color var(--transition-fast);
   }
-  body.dark #chatbot button.send-btn {
-    background-color: var(--color-primary-dark);
-    color: #121212;
+  #chatbot-send-btn:hover:not(:disabled) {
+    background: var(--clr-secondary);
   }
-  #chatbot button.send-btn:disabled {
+  #chatbot-send-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
+
   /* Responsive */
   @media (max-width: 480px) {
     #chatbot {
       width: 90vw;
       right: 5vw;
+      bottom: 15px;
+      max-height: 350px;
+    }
+    main {
+      max-width: 100%;
     }
     nav {
       justify-content: center;
@@ -271,268 +366,172 @@
 </style>
 </head>
 <body>
+
 <header>
-  <h1>Digital Marketing Study Portal</h1>
-  <button id="darkModeToggle" aria-label="Toggle dark mode">Switch to Dark Mode</button>
+  <h1>Digital Marketing Study Hub</h1>
+  <button id="darkModeToggle" aria-label="Toggle dark mode">Dark Mode</button>
 </header>
-<nav aria-label="Main navigation" id="navButtons">
-  <!-- Buttons added by JS -->
+
+<nav aria-label="Module navigation">
+  <!-- Will be populated dynamically -->
 </nav>
-<main id="mainContent" tabindex="-1">
-  <section id="homePage">
-    <h2>Welcome to Digital Marketing Study Portal</h2>
-    <p>Select a topic above to start learning with bilingual content, quizzes, and AI assistance.</p>
-  </section>
-  <section id="modulePage" hidden>
-    <!-- Module content rendered here -->
-  </section>
+
+<main>
+  <!-- Modules inserted dynamically here -->
 </main>
 
 <!-- Chatbot -->
-<div id="chatbot" aria-label="Chatbot Support" role="region" aria-live="polite">
-  <div class="messages" id="chatMessages" aria-live="polite" aria-relevant="additions"></div>
-  <div class="input-area">
-    <input
-      type="text"
-      id="chatInput"
-      aria-label="Chat input"
-      placeholder="Ask a question..."
-      autocomplete="off"
-    />
-    <button id="sendChat" class="send-btn" aria-label="Send chat message" disabled>Send</button>
-  </div>
+<div id="chatbot" aria-label="Digital Marketing Study Chatbot" role="region" aria-live="polite">
+  <div id="chatbot-header">AI Tutor Chatbot 🤖</div>
+  <div id="chatbot-messages" role="log" aria-atomic="false" aria-relevant="additions"></div>
+  <form id="chatbot-form" autocomplete="off" aria-label="Chat input form">
+    <div id="chatbot-input-area">
+      <input id="chatbot-input" type="text" placeholder="Ask me anything..." aria-label="Chat input" required />
+      <button type="submit" id="chatbot-send-btn" disabled>Send</button>
+    </div>
+  </form>
 </div>
 
 <script>
-  // Data for modules (add more modules as needed)
-  const modulesData = [
+(() => {
+  // Modules Data
+  const modules = [
     {
-      id: "seo",
-      title: "Search Engine Optimization (SEO) / தேடுபொறி மேம்பாடு",
-      description_en:
-        "SEO involves optimizing your website to rank higher on search engines like Google, improving organic traffic.",
-      description_ta:
-        "SEO என்பது உங்கள் வலைத்தளத்தை கூகுள் போன்ற தேடுபொறிகளில் மேலிட அதிகரிக்க சிறந்த முறையில் மேம்படுத்துவது ஆகும்.",
-      source: "https://moz.com/learn/seo/what-is-seo",
+      id: 'seo',
+      title: 'Search Engine Optimization (SEO)',
+      description: {
+        en: `SEO is the practice of optimizing your website to rank higher in search engine results, increasing organic traffic.`,
+        ta: `SEO என்பது உங்கள் வலைத்தளத்தை தேடுபொறி முடிவுகளில் மேல்நிலை பெறச் செய்யும் முறையாகும், இது இயல்புநிலைப் போக்குவரத்தை அதிகரிக்கிறது.`,
+      },
+      source: 'https://moz.com/beginners-guide-to-seo',
       quiz: {
-        question: "What does SEO primarily aim to improve?",
+        question: 'Which of these is NOT a common SEO practice?',
         options: [
-          "Paid advertising reach",
-          "Organic search ranking",
-          "Email open rates",
-          "Social media followers",
+          'Keyword research',
+          'Backlink building',
+          'Buying fake followers',
+          'On-page optimization'
         ],
-        answer: 1,
-      },
-    },
-    {
-      id: "social-media",
-      title: "Social Media Marketing / சமூக ஊடக சந்தைப்படுத்தல்",
-      description_en:
-        "Using platforms like Facebook, Instagram, and Twitter to promote brands and engage customers.",
-      description_ta:
-        "பேஸ்புக், இன்ஸ்டாகிராம், ட்விட்டர் போன்ற தளங்களை பயன்படுத்தி பிராண்டுகளை விளம்பரப்படுத்துதல் மற்றும் வாடிக்கையாளர்களை ஈர்த்தல்.",
-      source: "https://sproutsocial.com/insights/social-media-marketing/",
-      quiz: {
-        question: "Which platform is best known for professional networking?",
-        options: ["Instagram", "LinkedIn", "Snapchat", "Pinterest"],
-        answer: 1,
-      },
-    },
-    {
-      id: "google-ads",
-      title: "Google Ads / கூகுள் விளம்பரங்கள்",
-      description_en:
-        "Google Ads allows you to create online ads to reach audiences interested in your products and services.",
-      description_ta:
-        "கூகுள் விளம்பரங்கள் உங்கள் தயாரிப்புகள் மற்றும் சேவைகளில் ஆர்வமுள்ள மக்களை அடைய இணைய விளம்பரங்களை உருவாக்க உதவுகிறது.",
-      source: "https://ads.google.com/home/",
-      quiz: {
-        question: "What type of advertising platform is Google Ads?",
-        options: [
-          "Organic search platform",
-          "Pay-per-click advertising",
-          "Social media network",
-          "Email marketing tool",
-        ],
-        answer: 1,
-      },
-    },
-    // You can add more modules here
-  ];
-
-  // References to DOM elements
-  const navButtonsContainer = document.getElementById("navButtons");
-  const mainContent = document.getElementById("mainContent");
-  const homePage = document.getElementById("homePage");
-  const modulePage = document.getElementById("modulePage");
-  const darkModeToggle = document.getElementById("darkModeToggle");
-
-  // Chatbot references
-  const chatMessages = document.getElementById("chatMessages");
-  const chatInput = document.getElementById("chatInput");
-  const sendChatBtn = document.getElementById("sendChat");
-
-  // State
-  let currentModuleId = null;
-  let darkMode = false;
-
-  // Initialize nav buttons
-  function initNav() {
-    // Clear any existing buttons
-    navButtonsContainer.innerHTML = "";
-
-    // Home button
-    const homeBtn = document.createElement("button");
-    homeBtn.textContent = "Home";
-    homeBtn.classList.add("active");
-    homeBtn.addEventListener("click", () => loadHome());
-    navButtonsContainer.appendChild(homeBtn);
-
-    // Module buttons
-    modulesData.forEach((mod) => {
-      const btn = document.createElement("button");
-      btn.textContent = mod.title.split("/")[0].trim();
-      btn.setAttribute("data-id", mod.id);
-      btn.addEventListener("click", () => loadModule(mod.id));
-      navButtonsContainer.appendChild(btn);
-    });
-  }
-
-  // Highlight active nav button
-  function highlightNavButton(id) {
-    [...navButtonsContainer.children].forEach((btn) => {
-      if ((btn.getAttribute("data-id") || "home") === id) {
-        btn.classList.add("active");
-      } else {
-        btn.classList.remove("active");
+        answerIndex: 2
       }
-    });
-  }
-
-  // Load home page
-  function loadHome() {
-    currentModuleId = null;
-    homePage.hidden = false;
-    modulePage.hidden = true;
-    highlightNavButton("home");
-    document.title = "Digital Marketing Study Portal";
-    mainContent.focus();
-    history.pushState({ page: "home" }, "", "#");
-  }
-
-  // Create module card HTML
-  function createModuleCard(mod) {
-    const card = document.createElement("article");
-    card.className = "module-card";
-    card.setAttribute("tabindex", "0");
-    card.setAttribute("aria-expanded", "false");
-    card.setAttribute("role", "region");
-    card.setAttribute("aria-label", mod.title);
-
-    // Header
-    const header = document.createElement("div");
-    header.className = "module-header";
-
-    const title = document.createElement("h2");
-    title.textContent = mod.title;
-    header.appendChild(title);
-
-    const expandIcon = document.createElement("span");
-    expandIcon.className = "expand-icon";
-    expandIcon.textContent = "+";
-    header.appendChild(expandIcon);
-
-    card.appendChild(header);
-
-    // Content
-    const content = document.createElement("div");
-    content.className = "module-content";
-    content.style.display = "none";
-
-    const descEn = document.createElement("p");
-    descEn.innerHTML = `<strong>English:</strong> ${mod.description_en}`;
-    content.appendChild(descEn);
-
-    const descTa = document.createElement("p");
-    descTa.innerHTML = `<strong>தமிழ்:</strong> ${mod.description_ta}`;
-    content.appendChild(descTa);
-
-    if (mod.source) {
-      const sourceLink = document.createElement("a");
-      sourceLink.href = mod.source;
-      sourceLink.target = "_blank";
-      sourceLink.rel = "noopener noreferrer";
-      sourceLink.className = "source-link";
-      sourceLink.textContent = "Source »";
-      content.appendChild(sourceLink);
-    }
-
-    // Quiz
-    if (mod.quiz) {
-      const quizSection = document.createElement("section");
-      quizSection.className = "quiz-section";
-      quizSection.setAttribute("aria-label", "Quiz Section");
-
-      const q = document.createElement("p");
-      q.innerHTML = `<strong>Quiz:</strong> ${mod.quiz.question}`;
-      quizSection.appendChild(q);
-
-      const ul = document.createElement("ul");
-      ul.className = "quiz-options";
-
-      mod.quiz.options.forEach((opt, i) => {
-        const li = document.createElement("li");
-        const label = document.createElement("label");
-
-        const input = document.createElement("input");
-        input.type = "radio";
-        input.name = `quiz-${mod.id}`;
-        input.value = i;
-        input.setAttribute("aria-checked", "false");
-
-        label.appendChild(input);
-        label.appendChild(document.createTextNode(opt));
-
-        li.appendChild(label);
-        ul.appendChild(li);
-      });
-
-      quizSection.appendChild(ul);
-
-      const submitBtn = document.createElement("button");
-      submitBtn.className = "submit-btn";
-      submitBtn.textContent = "Submit Answer";
-      submitBtn.disabled = true;
-
-      quizSection.appendChild(submitBtn);
-
-      const resultMsg = document.createElement("p");
-      resultMsg.className = "quiz-result";
-      quizSection.appendChild(resultMsg);
-
-      // Quiz logic
-      let selectedAnswer = null;
-
-      ul.addEventListener("change", (e) => {
-        if (e.target && e.target.name === `quiz-${mod.id}`) {
-          selectedAnswer = Number(e.target.value);
-          submitBtn.disabled = false;
-          resultMsg.textContent = "";
-          resultMsg.className = "quiz-result";
-        }
-      });
-
-      submitBtn.addEventListener("click", () => {
-        if (selectedAnswer === null) return;
-
-        if (selectedAnswer === mod.quiz.answer) {
-          resultMsg.textContent = "Correct! Well done.";
-          resultMsg.classList.add("correct");
-        } else {
-          resultMsg.textContent = `Incorrect. Correct answer: "${mod.quiz.options[mod.quiz.answer]}".`;
-          resultMsg.classList.add("incorrect");
-        }
-        submitBtn.disabled = true;
-
-        // Disable all options
+    },
+    {
+      id: 'social-media',
+      title: 'Social Media Marketing',
+      description: {
+        en: `Marketing using platforms like Facebook, Instagram, Twitter to engage and grow your audience.`,
+        ta: `Facebook, Instagram, Twitter போன்ற தளங்களைப் பயன்படுத்தி மக்கள் தொடர்பை வளர்ப்பது.`,
+      },
+      source: 'https://sproutsocial.com/insights/social-media-marketing-strategy/',
+      quiz: {
+        question: 'Which platform is best known for professional networking?',
+        options: [
+          'Facebook',
+          'Instagram',
+          'LinkedIn',
+          'Snapchat'
+        ],
+        answerIndex: 2
+      }
+    },
+    {
+      id: 'google-ads',
+      title: 'Google Ads',
+      description: {
+        en: `Paid advertising on Google to reach customers instantly with targeted ads.`,
+        ta: `கூகுளில் பணம் செலுத்தி விளம்பரங்களை நடாத்தி குறிக்கோள் வாடிக்கையாளர்களை அடையலாம்.`,
+      },
+      source: 'https://ads.google.com/home/',
+      quiz: {
+        question: 'What does CPC stand for in Google Ads?',
+        options: [
+          'Cost Per Click',
+          'Cost Per Customer',
+          'Click Per Cost',
+          'Customer Paid Cost'
+        ],
+        answerIndex: 0
+      }
+    },
+    {
+      id: 'email-marketing',
+      title: 'Email Marketing',
+      description: {
+        en: `Sending targeted emails to nurture leads and convert customers.`,
+        ta: `இணைப்புக் கடிதங்கள் அனுப்பி வாடிக்கையாளர்களை மாற்றுதல்.`,
+      },
+      source: 'https://mailchimp.com/email-marketing/',
+      quiz: {
+        question: 'Which is a good practice in email marketing?',
+        options: [
+          'Sending spam emails',
+          'Personalizing emails',
+          'Ignoring unsubscribe requests',
+          'Buying email lists'
+        ],
+        answerIndex: 1
+      }
+    },
+    {
+      id: 'affiliate-marketing',
+      title: 'Affiliate Marketing',
+      description: {
+        en: `Promoting other companies’ products to earn commissions.`,
+        ta: `பிற நிறுவனங்களின் தயாரிப்புகளை விளம்பரம் செய்து கமிஷன் பெறுதல்.`,
+      },
+      source: 'https://www.bigcommerce.com/articles/affiliate-marketing/',
+      quiz: {
+        question: 'Affiliate marketers earn money based on:',
+        options: [
+          'Product views',
+          'Clicks on ads',
+          'Sales or leads generated',
+          'Social media followers'
+        ],
+        answerIndex: 2
+      }
+    },
+    {
+      id: 'analytics',
+      title: 'Web Analytics',
+      description: {
+        en: `Tracking and analyzing website data to improve marketing efforts.`,
+        ta: `இணையத்தள தரவை கண்காணித்து சந்தைப்படுத்தல் மேம்படுத்தல்.`,
+      },
+      source: 'https://analytics.google.com/',
+      quiz: {
+        question: 'Which metric measures website visitor count?',
+        options: [
+          'Bounce Rate',
+          'Sessions',
+          'CTR',
+          'Impressions'
+        ],
+        answerIndex: 1
+      }
+    },
+    {
+      id: 'content-marketing',
+      title: 'Content Marketing',
+      description: {
+        en: `Creating valuable content to attract and engage your audience.`,
+        ta: `மதிப்புமிக்க உள்ளடக்கம் உருவாக்கி பார்வையாளர்களை ஈர்க்குதல்.`,
+      },
+      source: 'https://contentmarketinginstitute.com/what-is-content-marketing/',
+      quiz: {
+        question: 'Content marketing primarily aims to:',
+        options: [
+          'Sell products directly',
+          'Build brand awareness',
+          'Spam users',
+          'Decrease website traffic'
+        ],
+        answerIndex: 1
+      }
+    },
+    {
+      id: 'local-seo',
+      title: 'Local SEO',
+      description: {
+        en: `Optimizing for location-based search results to attract nearby customers.`,
+        ta
