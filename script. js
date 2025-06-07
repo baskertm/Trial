@@ -1,5 +1,5 @@
 (() => {
-  // Get references to DOM elements
+  // DOM Elements
   const nav = document.querySelector('nav');
   const main = document.querySelector('main');
   const darkToggle = document.getElementById('darkModeToggle');
@@ -8,7 +8,7 @@
   const chatbotSendBtn = document.getElementById('chatbot-send-btn');
   const chatbotMessages = document.getElementById('chatbot-messages');
 
-  // Module data copied from earlier HTML inline data
+  // Modules Data
   const modules = [
     {
       id: 'seo',
@@ -145,10 +145,9 @@
     }
   ];
 
-  // Set current language (for demo, English)
-  let lang = 'en';
+  let lang = 'en'; // language selector
 
-  // Build navigation buttons dynamically
+  // Build navigation buttons
   function buildNavigation() {
     modules.forEach((mod, i) => {
       const btn = document.createElement('button');
@@ -175,172 +174,225 @@
   // Create module cards with expandable content and quizzes
   function buildModules() {
     modules.forEach(mod => {
-      const card = document.createElement('section');
+      const card = document.createElement('article');
       card.className = 'module-card';
       card.id = `module-${mod.id}`;
-      card.setAttribute('tabindex', '0');
-      if (mod !== modules[0]) card.style.display = 'none';
+      card.style.display = 'none'; // hide initially
 
-      // Header with title and toggle icon
+      // Header (click to toggle content)
       const header = document.createElement('div');
       header.className = 'module-header';
-      header.innerHTML = `
-        <h2>${mod.title}</h2>
-        <span class="expand-icon" role="button" aria-expanded="false" tabindex="0" aria-label="Expand module details">+</span>
-      `;
+      header.tabIndex = 0;
+      header.setAttribute('role', 'button');
+      header.setAttribute('aria-expanded', 'false');
+      header.setAttribute('aria-controls', `content-${mod.id}`);
+
+      const title = document.createElement('h2');
+      title.textContent = mod.title;
+      header.appendChild(title);
+
+      const icon = document.createElement('span');
+      icon.className = 'expand-icon';
+      icon.textContent = '+';
+      header.appendChild(icon);
+
       card.appendChild(header);
 
-      // Content container (collapsed by default)
+      // Content
       const content = document.createElement('div');
       content.className = 'module-content';
-      content.innerHTML = `
-        <p>${mod.description[lang]}</p>
-        <p><a href="${mod.source}" class="source-link" target="_blank" rel="noopener noreferrer">Source</a></p>
+      content.id = `content-${mod.id}`;
+      content.setAttribute('aria-hidden', 'true');
 
-        <div class="quiz-section" aria-label="Quiz section">
-          <p><strong>Quiz:</strong> ${mod.quiz.question}</p>
-          <ul class="quiz-options" role="radiogroup" aria-labelledby="quiz-question-${mod.id}">
-            ${mod.quiz.options.map((opt, i) => `<li><label><input type="radio" name="quiz-${mod.id}" value="${i}" /> ${opt}</label></li>`).join('')}
-          </ul>
-          <button class="submit-btn" disabled>Submit Answer</button>
-          <p class="quiz-result" aria-live="polite"></p>
-        </div>
-      `;
+      // Description paragraph
+      const pDesc = document.createElement('p');
+      pDesc.textContent = mod.description[lang];
+      content.appendChild(pDesc);
+
+      // Source link
+      const sourceLink = document.createElement('a');
+      sourceLink.href = mod.source;
+      sourceLink.target = '_blank';
+      sourceLink.rel = 'noopener noreferrer';
+      sourceLink.className = 'source-link';
+      sourceLink.textContent = 'Learn more here';
+      content.appendChild(sourceLink);
+
+      // Quiz Section
+      const quizSection = document.createElement('section');
+      quizSection.className = 'quiz-section';
+      quizSection.setAttribute('aria-label', `Quiz for ${mod.title}`);
+
+      const quizQ = document.createElement('p');
+      quizQ.textContent = mod.quiz.question;
+      quizSection.appendChild(quizQ);
+
+      const quizOptions = document.createElement('ul');
+      quizOptions.className = 'quiz-options';
+
+      mod.quiz.options.forEach((opt, idx) => {
+        const li = document.createElement('li');
+
+        const label = document.createElement('label');
+        label.htmlFor = `quiz-${mod.id}-${idx}`;
+
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = `quiz-${mod.id}`;
+        input.id = `quiz-${mod.id}-${idx}`;
+        input.value = idx;
+        label.appendChild(input);
+
+        label.appendChild(document.createTextNode(opt));
+        li.appendChild(label);
+        quizOptions.appendChild(li);
+      });
+
+      quizSection.appendChild(quizOptions);
+
+      const submitBtn = document.createElement('button');
+      submitBtn.type = 'button';
+      submitBtn.className = 'submit-btn';
+      submitBtn.textContent = 'Submit';
+      submitBtn.disabled = true;
+      quizSection.appendChild(submitBtn);
+
+      const resultText = document.createElement('p');
+      resultText.className = 'quiz-result';
+      quizSection.appendChild(resultText);
+
+      content.appendChild(quizSection);
       card.appendChild(content);
 
-      // Append to main container
-      main.appendChild(card);
+      // Add event listeners
 
-      // Event listeners for expand toggle
-      const expandIcon = header.querySelector('.expand-icon');
-      expandIcon.addEventListener('click', () => toggleExpand(content, expandIcon));
-      expandIcon.addEventListener('keydown', e => {
+      // Toggle expand/collapse content
+      header.addEventListener('click', () => {
+        const expanded = header.getAttribute('aria-expanded') === 'true';
+        header.setAttribute('aria-expanded', String(!expanded));
+        content.classList.toggle('expanded');
+        icon.textContent = expanded ? '+' : '−';
+        content.setAttribute('aria-hidden', String(expanded));
+      });
+      header.addEventListener('keydown', e => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          toggleExpand(content, expandIcon);
+          header.click();
         }
       });
 
-      // Quiz interaction logic
-      const quizOptions = content.querySelectorAll('input[type=radio]');
-      const submitBtn = content.querySelector('.submit-btn');
-      const resultEl = content.querySelector('.quiz-result');
-
-      quizOptions.forEach(opt => {
-        opt.addEventListener('change', () => {
-          submitBtn.disabled = false;
-          resultEl.textContent = '';
-          resultEl.className = 'quiz-result';
-        });
+      // Enable submit button only if an option selected
+      quizOptions.addEventListener('change', () => {
+        submitBtn.disabled = false;
+        resultText.textContent = '';
+        resultText.className = 'quiz-result';
       });
 
+      // Submit quiz
       submitBtn.addEventListener('click', () => {
-        const selected = [...quizOptions].find(r => r.checked);
+        const selected = quizSection.querySelector('input[type="radio"]:checked');
         if (!selected) return;
-        const selectedVal = Number(selected.value);
-        if (selectedVal === mod.quiz.answerIndex) {
-          resultEl.textContent = 'Correct! 🎉';
-          resultEl.className = 'quiz-result correct';
+        const selectedIndex = Number(selected.value);
+        if (selectedIndex === mod.quiz.answerIndex) {
+          resultText.textContent = 'Correct! 🎉';
+          resultText.className = 'quiz-result correct';
         } else {
-          resultEl.textContent = `Incorrect. Try again! ❌`;
-          resultEl.className = 'quiz-result incorrect';
+          resultText.textContent = `Incorrect. Correct answer: "${mod.quiz.options[mod.quiz.answerIndex]}".`;
+          resultText.className = 'quiz-result incorrect';
         }
         submitBtn.disabled = true;
       });
+
+      main.appendChild(card);
     });
+
+    // Show first module by default
+    if (modules.length > 0) showModule(modules[0].id);
   }
 
-  // Expand/collapse module content with animation
-  function toggleExpand(content, icon) {
-    const expanded = content.classList.toggle('expanded');
-    icon.classList.toggle('expanded', expanded);
-    icon.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-  }
-
-  // Dark Mode Toggle
+  // Dark Mode toggle with localStorage
   function initDarkMode() {
-    // Load saved preference
-    const saved = localStorage.getItem('dm-darkmode');
-    if (saved === 'true') document.body.classList.add('dark');
-    updateDarkModeButton();
+    const savedMode = localStorage.getItem('dm-dark-mode');
+    if (savedMode === 'true') document.body.classList.add('dark');
 
     darkToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark');
-      localStorage.setItem('dm-darkmode', document.body.classList.contains('dark'));
-      updateDarkModeButton();
+      const isDark = document.body.classList.contains('dark');
+      localStorage.setItem('dm-dark-mode', isDark);
+      darkToggle.textContent = isDark ? 'Light Mode' : 'Dark Mode';
     });
-  }
-  function updateDarkModeButton() {
+
+    // Initialize button label
     darkToggle.textContent = document.body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
   }
 
-  // Simple chatbot logic with keyword responses
-  function chatbotReply(message) {
-    const msg = message.toLowerCase();
+  // Simple Chatbot logic (basic, expand as needed)
+  function initChatbot() {
+    chatbotInput.addEventListener('input', () => {
+      chatbotSendBtn.disabled = chatbotInput.value.trim().length === 0;
+    });
 
-    const responses = [
-      { keywords: ['seo'], reply: 'SEO helps improve your site ranking. Need tips on keyword research or backlinks?' },
-      { keywords: ['social media', 'facebook', 'instagram', 'twitter'], reply: 'Social media marketing is great for audience engagement. Ask me about platforms!' },
-      { keywords: ['google ads', 'ads', 'cpc'], reply: 'Google Ads allows you to run paid campaigns. I can explain CPC or ad formats.' },
-      { keywords: ['email'], reply: 'Email marketing is powerful for nurturing leads. Want to know about personalization or tools?' },
-      { keywords: ['affiliate'], reply: 'Affiliate marketing earns commissions by promoting products. Interested in affiliate networks?' },
-      { keywords: ['analytics', 'data'], reply: 'Web analytics helps track your visitors and conversions. Ask me about Google Analytics metrics.' },
-      { keywords: ['content'], reply: 'Content marketing attracts audiences with valuable content. Need ideas for blog or video content?' },
-      { keywords: ['quiz'], reply: 'Try the quizzes in each module to test your knowledge! I can help explain answers too.' },
-      { keywords: ['hello', 'hi', 'hey'], reply: 'Hello! How can I assist your digital marketing learning today?' },
-      { keywords: ['help', 'support'], reply: 'I\'m here to help! Ask me any digital marketing related questions.' },
-    ];
+    chatbotForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const userText = chatbotInput.value.trim();
+      if (!userText) return;
+      appendChatMessage(userText, 'user');
+      chatbotInput.value = '';
+      chatbotSendBtn.disabled = true;
 
-    for (const resp of responses) {
-      if (resp.keywords.some(k => msg.includes(k))) {
-        return resp.reply;
-      }
+      // Bot reply with a simple smart response (simulate AI)
+      setTimeout(() => {
+        const botReply = generateBotReply(userText);
+        appendChatMessage(botReply, 'bot');
+      }, 1200);
+    });
+
+    function appendChatMessage(text, sender) {
+      const msg = document.createElement('div');
+      msg.className = `chat-message ${sender}`;
+      msg.textContent = text;
+      chatbotMessages.appendChild(msg);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
     }
-    // Default fallback
-    return "Sorry, I didn't get that. Try asking about SEO, Social Media, Google Ads, or type 'help'.";
+
+    function generateBotReply(input) {
+      const lower = input.toLowerCase();
+
+      if (lower.includes('seo')) {
+        return 'SEO stands for Search Engine Optimization — it helps your website rank higher on Google.';
+      }
+      if (lower.includes('social media')) {
+        return 'Social Media Marketing uses platforms like Facebook and Instagram to engage audiences.';
+      }
+      if (lower.includes('google ads')) {
+        return 'Google Ads is paid advertising on Google — you can target specific customers quickly.';
+      }
+      if (lower.includes('email')) {
+        return 'Email Marketing involves sending targeted emails to nurture and convert leads.';
+      }
+      if (lower.includes('affiliate')) {
+        return 'Affiliate Marketing means promoting others’ products and earning commissions.';
+      }
+      if (lower.includes('analytics')) {
+        return 'Web Analytics tracks your website visitors and measures marketing performance.';
+      }
+      if (lower.includes('content')) {
+        return 'Content Marketing is creating valuable content to attract and engage customers.';
+      }
+
+      // Default fallback response
+      return "Sorry, I don't have an answer for that right now. Try asking about SEO, Social Media, Google Ads, or other digital marketing topics!";
+    }
   }
-
-  // Chatbot message render
-  function addChatMessage(text, sender = 'bot') {
-    const div = document.createElement('div');
-    div.className = `chat-message ${sender}`;
-    div.textContent = text;
-    chatbotMessages.appendChild(div);
-    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-  }
-
-  // Enable/disable send button depending on input
-  chatbotInput.addEventListener('input', () => {
-    chatbotSendBtn.disabled = chatbotInput.value.trim() === '';
-  });
-
-  // Chatbot form submit handler
-  chatbotForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const userMsg = chatbotInput.value.trim();
-    if (!userMsg) return;
-    addChatMessage(userMsg, 'user');
-    chatbotInput.value = '';
-    chatbotSendBtn.disabled = true;
-
-    // Simulate bot thinking delay
-    setTimeout(() => {
-      const botReply = chatbotReply(userMsg);
-      addChatMessage(botReply, 'bot');
-    }, 600);
-  });
 
   // Initialize everything
   function init() {
     buildNavigation();
     buildModules();
     initDarkMode();
+    initChatbot();
   }
 
-  // Run init on DOM ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  // Run init on DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', init);
 })();
