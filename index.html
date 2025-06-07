@@ -1,17 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ta">
 <head>
-  <meta charset="UTF-8">
-  <title>Chat Box Example</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Digital Marketing Guide - Baskar_TM</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-  <button onclick="toggleChat()">Open Chat</button>
-  <div id="chat-box" class="chat-box">
-    <div id="chat-content" class="chat-content"></div>
-    <input type="text" id="chat-input-box" placeholder="Ask a question..." />
-    <button onclick="sendChat()">Send</button>
+  <header>
+    <h1><i data-lucide="book-open-text"></i> Digital Marketing Guide</h1>
+    <p>டிஜிட்டல் மார்க்கெட்டிங் கையேடு - Baskar_TM</p>
+    <button id="darkToggle">🌙 Toggle Dark Mode</button>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <h2><i data-lucide="search"></i> SEO (தேடல் இயந்திர மேம்பாடு)</h2>
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="card-body">
+        <p><b>EN:</b> Optimize websites to rank higher in search engine results.<br>
+        <b>TA:</b> தேடல் முடிவுகளில் உயர் தரவரிசையைப் பெற வலைத்தளங்களை மேம்படுத்துவது.</p>
+        <ul>
+          <li><a href="https://moz.com/beginners-guide-to-seo" target="_blank">Moz Beginner's Guide</a></li>
+          <li><a href="https://developers.google.com/search/docs/beginner/seo-starter-guide" target="_blank">Google SEO Starter</a></li>
+        </ul>
+        <div class="quiz">
+          <p><strong>Quiz:</strong> What does SEO stand for?</p>
+          <label><input type="radio" name="q1" value="a"> Search Engine Optimization ✅</label><br>
+          <label><input type="radio" name="q1" value="b"> Social Engagement Objective</label><br>
+          <label><input type="radio" name="q1" value="c"> Search Event Order</label><br>
+          <button onclick="checkAnswer('q1', 'a', this)">Submit</button>
+          <p class="quiz-result"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Baskar_TM. All rights reserved.</p>
+  </footer>
+
+  <div id="chat-btn" onclick="toggleChat()">💬 Ask Tutor</div>
+  <div id="chat-box">
+    <div class="chat-header">
+      📘 DM Assistant
+      <span onclick="toggleChat()">✖</span>
+    </div>
+    <div class="chat-content" id="chat-content">
+      <p><strong>AI:</strong> Hello! Ask me about SEO, content, or quiz tips.</p>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="chat-input-box" placeholder="Type your question..."/>
+      <button onclick="sendChat()">➤</button>
+    </div>
   </div>
-  <script src="chat.js"></script>
+
+  <script>
+    lucide.createIcons();
+    function toggleCard(header) {
+      const card = header.parentElement;
+      const body = card.querySelector('.card-body');
+      const icon = header.querySelector('.toggle-icon');
+      body.classList.toggle('show');
+      icon.textContent = body.classList.contains('show') ? '−' : '+';
+    }
+    function checkAnswer(qname, correct, btn) {
+      const selected = document.querySelector(`input[name="${qname}"]:checked`);
+      const result = btn.nextElementSibling;
+      if (!selected) {
+        result.textContent = "Please select an option.";
+        result.style.color = "orange";
+      } else if (selected.value === correct) {
+        result.textContent = "Correct! ✅";
+        result.style.color = "green";
+      } else {
+        result.textContent = "Incorrect. ❌";
+        result.style.color = "red";
+      }
+    }
+    document.getElementById('darkToggle').onclick = () => {
+      document.body.classList.toggle('dark');
+    };
+    function toggleChat() {
+      const chatBox = document.getElementById('chat-box');
+      chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex';
+    }
+    function sendChat() {
+      const input = document.getElementById('chat-input-box');
+      const content = document.getElementById('chat-content');
+      const question = input.value.trim();
+      if (!question) return;
+      const userMsg = `<p><strong>You:</strong> ${question}</p>`;
+      content.innerHTML += userMsg;
+      let response = "🤖 I'm still learning. Try: 'What is SEO?' or 'Tip for quiz'.";
+      if (question.toLowerCase().includes("seo")) {
+        response = "SEO means Search Engine Optimization. It helps websites rank higher.";
+      } else if (question.toLowerCase().includes("content")) {
+        response = "Content marketing focuses on creating helpful content to attract visitors.";
+      } else if (question.toLowerCase().includes("quiz")) {
+        response = "Read the topic fully before attempting the quiz. Take notes!";
+      }
+      content.innerHTML += `<p><strong>AI:</strong> ${response}</p>`;
+      content.scrollTop = content.scrollHeight;
+      input.value = "";
+    }
+  </script>
 </body>
 </html>
