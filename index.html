@@ -1,107 +1,17 @@
 <!DOCTYPE html>
-<html lang="ta">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Digital Marketing Guide - Baskar_TM</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <meta charset="UTF-8">
+  <title>Chat Box Example</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1><i data-lucide="book-open-text"></i> Digital Marketing Guide</h1>
-    <p>டிஜிட்டல் மார்க்கெட்டிங் கையேடு - Baskar_TM</p>
-    <button id="darkToggle">🌙 Toggle Dark Mode</button>
-  </header>
-
-  <main class="container">
-
-    <!-- SEO Section -->
-    <section class="card">
-      <div class="card-header" onclick="toggleCard(this)">
-        <h2><i data-lucide="search"></i> SEO (தேடல் இயந்திர மேம்பாடு)</h2>
-        <span class="toggle-icon">+</span>
-      </div>
-      <div class="card-body">
-        <p><b>EN:</b> Optimize websites to rank higher in search engine results.<br>
-           <b>TA:</b> தேடல் முடிவுகளில் உயர் தரவரிசையைப் பெற வலைத்தளங்களை மேம்படுத்துவது.</p>
-        <ul>
-          <li><a href="https://moz.com/beginners-guide-to-seo" target="_blank">Moz Beginner's Guide</a></li>
-          <li><a href="https://developers.google.com/search/docs/beginner/seo-starter-guide" target="_blank">Google SEO Starter</a></li>
-        </ul>
-
-        <div class="quiz">
-          <p><strong>Quiz:</strong> What does SEO stand for?</p>
-          <label><input type="radio" name="q1" value="a"> Search Engine Optimization ✅</label><br>
-          <label><input type="radio" name="q1" value="b"> Social Engagement Objective</label><br>
-          <label><input type="radio" name="q1" value="c"> Search Event Order</label><br>
-          <button onclick="checkAnswer('q1', 'a', this)">Submit</button>
-          <p class="quiz-result"></p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Content Marketing Section -->
-    <section class="card">
-      <div class="card-header" onclick="toggleCard(this)">
-        <h2><i data-lucide="pen-line"></i> Content Marketing (உள்ளடக்க விளம்பரம்)</h2>
-        <span class="toggle-icon">+</span>
-      </div>
-      <div class="card-body">
-        <p><b>EN:</b> Creating and sharing valuable content to attract audience.<br>
-           <b>TA:</b> பயனுள்ள உள்ளடக்கங்களை உருவாக்கி பகிர்வதன் மூலம் பார்வையாளர்களை ஈர்ப்பது.</p>
-        <ul>
-          <li><a href="https://contentmarketinginstitute.com/" target="_blank">CMI Official Guide</a></li>
-          <li><a href="https://blog.hubspot.com/marketing/content-marketing" target="_blank">Hubspot's Article</a></li>
-        </ul>
-
-        <div class="quiz">
-          <p><strong>Quiz:</strong> What is the main goal of content marketing?</p>
-          <label><input type="radio" name="q2" value="a"> Make memes</label><br>
-          <label><input type="radio" name="q2" value="b"> Attract and retain an audience ✅</label><br>
-          <label><input type="radio" name="q2" value="c"> Improve app speed</label><br>
-          <button onclick="checkAnswer('q2', 'b', this)">Submit</button>
-          <p class="quiz-result"></p>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Baskar_TM. All rights reserved.</p>
-  </footer>
-
-  <script>
-    lucide.createIcons();
-
-    function toggleCard(header) {
-      const card = header.parentElement;
-      const body = card.querySelector('.card-body');
-      const icon = header.querySelector('.toggle-icon');
-      body.classList.toggle('show');
-      icon.textContent = body.classList.contains('show') ? '−' : '+';
-    }
-
-    function checkAnswer(qname, correct, btn) {
-      const selected = document.querySelector(`input[name="${qname}"]:checked`);
-      const result = btn.nextElementSibling;
-      if (!selected) {
-        result.textContent = "Please select an option.";
-        result.style.color = "orange";
-      } else if (selected.value === correct) {
-        result.textContent = "Correct! ✅";
-        result.style.color = "green";
-      } else {
-        result.textContent = "Incorrect. ❌";
-        result.style.color = "red";
-      }
-    }
-
-    // Dark Mode Toggle
-    document.getElementById('darkToggle').onclick = () => {
-      document.body.classList.toggle('dark');
-    };
-  </script>
+  <button onclick="toggleChat()">Open Chat</button>
+  <div id="chat-box" class="chat-box">
+    <div id="chat-content" class="chat-content"></div>
+    <input type="text" id="chat-input-box" placeholder="Ask a question..." />
+    <button onclick="sendChat()">Send</button>
+  </div>
+  <script src="chat.js"></script>
 </body>
 </html>
