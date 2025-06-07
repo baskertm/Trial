@@ -1,196 +1,107 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="ta">
+<head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Digital Marketing Tree</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-      color: #333;
-      margin: 0;
-      padding: 20px;
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Digital Marketing Guide - Baskar_TM</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <header>
+    <h1><i data-lucide="book-open-text"></i> Digital Marketing Guide</h1>
+    <p>டிஜிட்டல் மார்க்கெட்டிங் கையேடு - Baskar_TM</p>
+    <button id="darkToggle">🌙 Toggle Dark Mode</button>
+  </header>
+
+  <main class="container">
+
+    <!-- SEO Section -->
+    <section class="card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <h2><i data-lucide="search"></i> SEO (தேடல் இயந்திர மேம்பாடு)</h2>
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="card-body">
+        <p><b>EN:</b> Optimize websites to rank higher in search engine results.<br>
+           <b>TA:</b> தேடல் முடிவுகளில் உயர் தரவரிசையைப் பெற வலைத்தளங்களை மேம்படுத்துவது.</p>
+        <ul>
+          <li><a href="https://moz.com/beginners-guide-to-seo" target="_blank">Moz Beginner's Guide</a></li>
+          <li><a href="https://developers.google.com/search/docs/beginner/seo-starter-guide" target="_blank">Google SEO Starter</a></li>
+        </ul>
+
+        <div class="quiz">
+          <p><strong>Quiz:</strong> What does SEO stand for?</p>
+          <label><input type="radio" name="q1" value="a"> Search Engine Optimization ✅</label><br>
+          <label><input type="radio" name="q1" value="b"> Social Engagement Objective</label><br>
+          <label><input type="radio" name="q1" value="c"> Search Event Order</label><br>
+          <button onclick="checkAnswer('q1', 'a', this)">Submit</button>
+          <p class="quiz-result"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Marketing Section -->
+    <section class="card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <h2><i data-lucide="pen-line"></i> Content Marketing (உள்ளடக்க விளம்பரம்)</h2>
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="card-body">
+        <p><b>EN:</b> Creating and sharing valuable content to attract audience.<br>
+           <b>TA:</b> பயனுள்ள உள்ளடக்கங்களை உருவாக்கி பகிர்வதன் மூலம் பார்வையாளர்களை ஈர்ப்பது.</p>
+        <ul>
+          <li><a href="https://contentmarketinginstitute.com/" target="_blank">CMI Official Guide</a></li>
+          <li><a href="https://blog.hubspot.com/marketing/content-marketing" target="_blank">Hubspot's Article</a></li>
+        </ul>
+
+        <div class="quiz">
+          <p><strong>Quiz:</strong> What is the main goal of content marketing?</p>
+          <label><input type="radio" name="q2" value="a"> Make memes</label><br>
+          <label><input type="radio" name="q2" value="b"> Attract and retain an audience ✅</label><br>
+          <label><input type="radio" name="q2" value="c"> Improve app speed</label><br>
+          <button onclick="checkAnswer('q2', 'b', this)">Submit</button>
+          <p class="quiz-result"></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Baskar_TM. All rights reserved.</p>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    function toggleCard(header) {
+      const card = header.parentElement;
+      const body = card.querySelector('.card-body');
+      const icon = header.querySelector('.toggle-icon');
+      body.classList.toggle('show');
+      icon.textContent = body.classList.contains('show') ? '−' : '+';
     }
-    h1 {
-      text-align: center;
-      color: #0056b3;
+
+    function checkAnswer(qname, correct, btn) {
+      const selected = document.querySelector(`input[name="${qname}"]:checked`);
+      const result = btn.nextElementSibling;
+      if (!selected) {
+        result.textContent = "Please select an option.";
+        result.style.color = "orange";
+      } else if (selected.value === correct) {
+        result.textContent = "Correct! ✅";
+        result.style.color = "green";
+      } else {
+        result.textContent = "Incorrect. ❌";
+        result.style.color = "red";
+      }
     }
-    details {
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 10px;
-      background-color: #fff;
-    }
-    summary {
-      font-weight: bold;
-      font-size: 1.2em;
-      cursor: pointer;
-    }
-    .content {
-      margin-top: 10px;
-    }
-    iframe {
-      width: 100%;
-      max-width: 560px;
-      height: 315px;
-    }
-    a {
-      color: #0066cc;
-    }
-  </style>
-</head><body>
-  <h1>Digital Marketing Explorer Tree</h1>  <details open>
-    <summary>1. Search Engine Optimization (SEO)</summary>
-    <div class="content">
-      <p>SEO is the practice of optimizing websites to make them rank higher in search engine results.</p>
-      <ul>
-        <li><a href="https://moz.com/learn/seo" target="_blank">Moz Beginner's Guide to SEO</a></li>
-        <li><a href="https://ahrefs.com/seo-basics" target="_blank">Ahrefs SEO Basics</a></li>
-        <li><a href="https://developers.google.com/search/docs" target="_blank">Google SEO Starter Guide</a></li>
-      </ul>
-      <p><strong>Gen AI Tools:</strong></p>
-      <ul>
-        <li><a href="https://surferseo.com" target="_blank">Surfer SEO</a></li>
-        <li><a href="https://neuronwriter.com" target="_blank">NeuronWriter</a></li>
-      </ul>
-      <iframe src="https://www.youtube.com/embed/hF515-0Tduk" allowfullscreen></iframe>
-      <p><strong>Quiz:</strong> <a href="https://www.classmarker.com/seo-quiz" target="_blank">Take the SEO Basics Quiz</a></p>
-    </div>
-  </details>  <details>
-    <summary>2. Content Marketing</summary>
-    <div class="content">
-      <p>Content marketing focuses on creating valuable content to attract and engage an audience.</p>
-      <ul>
-        <li><a href="https://contentmarketinginstitute.com" target="_blank">Content Marketing Institute</a></li>
-        <li><a href="https://www.hubspot.com/content-marketing" target="_blank">HubSpot Academy</a></li>
-      </ul>
-      <p><strong>Gen AI Tools:</strong></p>
-      <ul>
-        <li><a href="https://www.copy.ai" target="_blank">Copy.ai</a></li>
-        <li><a href="https://www.jasper.ai" target="_blank">Jasper</a></li>
-      </ul>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/0R_3iarc8IA" frameborder="0" allowfullscreen></iframe>
-      <p><strong>Quiz:</strong> <a href="https://www.classmarker.com/content-marketing-quiz" target="_blank">Test Your Content Strategy Knowledge</a></p>
-    </div>
-  </details>  <details>
-    <summary>3. Social Media Marketing (SMM)</summary>
-    <div class="content">
-      <p>SMM involves using social platforms to promote products or services and engage customers.</p>
-      <ul>
-        <li><a href="https://www.facebookblueprint.com" target="_blank">Meta Blueprint</a></li>
-        <li><a href="https://www.linkedin.com/learning" target="_blank">LinkedIn Learning</a></li>
-      </ul>
-      <p><strong>Gen AI Tools:</strong></p>
-      <ul>
-        <li><a href="https://lately.ai" target="_blank">Lately.ai</a></li>
-        <li><a href="https://publer.io" target="_blank">Publer</a></li>
-      </ul>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/ZYWv5max694" frameborder="0" allowfullscreen></iframe>
-      <p><strong>Quiz:</strong> <a href="https://www.classmarker.com/smm-quiz" target="_blank">SMM Knowledge Test</a></p>
-    </div>
-  </details>  <details>
-    <summary>4. Email Marketing</summary>
-    <div class="content">
-      <p>Email marketing uses emails to promote products or services and nurture customer relationships.</p>
-      <ul>
-        <li><a href="https://mailchimp.com/email-marketing/" target="_blank">Mailchimp Email Marketing Guide</a></li>
-        <li><a href="https://www.hubspot.com/email-marketing" target="_blank">HubSpot Email Marketing Certification</a></li>
-      </ul>
-      <p><strong>Gen AI Tools:</strong></p>
-      <ul>
-        <li><a href="https://flowrite.com" target="_blank">Flowrite</a></li>
-        <li><a href="https://www.getresponse.com" target="_blank">GetResponse AI Email Tools</a></li>
-      </ul>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/qYzmG_7nx3Y" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </details>  <details>
-    <summary>5. Affiliate Marketing</summary>
-    <div class="content">
-      <p>Affiliate marketing rewards partners for generating traffic or sales through their marketing efforts.</p>
-      <ul>
-        <li><a href="https://www.bigcommerce.com/articles/affiliate-marketing/" target="_blank">BigCommerce Affiliate Marketing Guide</a></li>
-        <li><a href="https://www.udemy.com/course/affiliate-marketing-for-beginners/" target="_blank">Udemy Affiliate Marketing Course</a></li>
-      </ul>
-      <p><strong>Gen AI Tools:</strong></p>
-      <ul>
-        <li><a href="https://affpilot.com" target="_blank">AffPilot</a></li>
-        <li><a href="https://postaga.com" target="_blank">Postaga Outreach Tool</a></li>
-      </ul>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/itgmO78eK5I" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </details>  <details>
-    <summary>6. Influencer Marketing</summary>
-    <div class="content">
-      <p>Influencer marketing collaborates with influential people to promote products to their followers.</p>
-      <ul>
-        <li><a href="https://influencermarketinghub.com" target="_blank">Influencer Marketing Hub</a></li>
-        <li><a href="https://www.neoreach.com" target="_blank">NeoReach Strategy Resources</a></li>
-      </ul>
-      <p><strong>Gen AI Tools:</strong></p>
-      <ul>
-        <li><a href="https://influence.co" target="_blank">Influence.co</a></li>
-        <li><a href="https://heepsy.com" target="_blank">Heepsy</a></li>
-      </ul>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/qLsiF8qep9s" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </details>  <details>
-    <summary>7. Mobile Marketing</summary>
-    <div class="content">
-      <p>Mobile marketing reaches users on smartphones through SMS, apps, and responsive web content.</p>
-      <ul>
-        <li><a href="https://learn.g2.com/mobile-marketing" target="_blank">G2 Guide to Mobile Marketing</a></li>
-        <li><a href="https://www.mobideaacademy.com" target="_blank">Mobidea Academy</a></li>
-      </ul>
-      <p><strong>Gen AI Tools:</strong></p>
-      <ul>
-        <li><a href="https://onesignal.com" target="_blank">OneSignal</a></li>
-        <li><a href="https://braze.com" target="_blank">Braze</a></li>
-      </ul>
-     <iframe width="560" height="315" src="https://www.youtube.com/embed/I6M4jrgeMxg" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </details>  <details>
-    <summary>8. Video Marketing</summary>
-    <div class="content">
-      <p>Video marketing leverages video content to educate, entertain, and convert customers.</p>
-      <ul>
-        <li><a href="https://wistia.com/learn" target="_blank">Wistia Video Marketing Guides</a></li>
-        <li><a href="https://www.vidyard.com/blog/video-marketing-strategy/" target="_blank">Vidyard Strategy</a></li>
-      </ul>
-      <p><strong>Gen AI Tools:</strong></p>
-      <ul>
-        <li><a href="https://pictory.ai" target="_blank">Pictory</a></li>
-        <li><a href="https://invideo.io" target="_blank">InVideo</a></li>
-      </ul>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/cjDdDbAUD5U" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </details>  <details>
-    <summary>9. Analytics and Data</summary>
-    <div class="content">
-      <p>Analytics measures and interprets data to optimize marketing strategies and ROI.</p>
-      <ul>
-        <li><a href="https://analytics.google.com/analytics/academy/" target="_blank">Google Analytics Academy</a></li>
-        <li><a href="https://datastudio.google.com" target="_blank">Google Looker Studio</a></li>
-      </ul>
-      <p><strong>Gen AI Tools:</strong></p>
-      <ul>
-        <li><a href="https://clarity.microsoft.com" target="_blank">Microsoft Clarity</a></li>
-        <li><a href="https://mixpanel.com" target="_blank">Mixpanel</a></li>
-      </ul>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/eg4I-RU_vKU" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </details>  <details>
-    <summary>10. Marketing Automation & CRM</summary>
-    <div class="content">
-      <p>Automation and CRM tools streamline marketing processes and customer relationship management.</p>
-      <ul>
-        <li><a href="https://www.salesforce.com/products/marketing-cloud/overview/" target="_blank">Salesforce Marketing Cloud</a></li>
-        <li><a href="https://zapier.com/blog/marketing-automation-guide/" target="_blank">Zapier Automation Guide</a></li>
-      </ul>
-      <p><strong>Gen AI Tools:</strong></p>
-      <ul>
-        <li><a href="https://marketo.com" target="_blank">Marketo</a></li>
-        <li><a href="https://hubspot.com" target="_blank">HubSpot CRM & AI</a></li>
-      </ul>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/6l1zwp1Volk" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </details></body></html>
+
+    // Dark Mode Toggle
+    document.getElementById('darkToggle').onclick = () => {
+      document.body.classList.toggle('dark');
+    };
+  </script>
+</body>
+</html>
