@@ -1,398 +1,66 @@
-(() => {
-  // DOM Elements
-  const nav = document.querySelector('nav');
-  const main = document.querySelector('main');
-  const darkToggle = document.getElementById('darkModeToggle');
-  const chatbotForm = document.getElementById('chatbot-form');
-  const chatbotInput = document.getElementById('chatbot-input');
-  const chatbotSendBtn = document.getElementById('chatbot-send-btn');
-  const chatbotMessages = document.getElementById('chatbot-messages');
+// Dark Mode Toggle
+document.getElementById('dark-toggle').onclick = () => document.body.classList.toggle('dark');
 
-  // Modules Data
-  const modules = [
-    {
-      id: 'seo',
-      title: 'Search Engine Optimization (SEO)',
-      description: {
-        en: `SEO is the practice of optimizing your website to rank higher in search engine results, increasing organic traffic.`,
-        ta: `SEO என்பது உங்கள் வலைத்தளத்தை தேடுபொறி முடிவுகளில் மேல்நிலை பெறச் செய்யும் முறையாகும், இது இயல்புநிலைப் போக்குவரத்தை அதிகரிக்கிறது.`,
-      },
-      source: 'https://moz.com/beginners-guide-to-seo',
-      quiz: {
-        question: 'Which of these is NOT a common SEO practice?',
-        options: [
-          'Keyword research',
-          'Backlink building',
-          'Buying fake followers',
-          'On-page optimization'
-        ],
-        answerIndex: 2
-      }
-    },
-    {
-      id: 'social-media',
-      title: 'Social Media Marketing',
-      description: {
-        en: `Marketing using platforms like Facebook, Instagram, Twitter to engage and grow your audience.`,
-        ta: `Facebook, Instagram, Twitter போன்ற தளங்களைப் பயன்படுத்தி மக்கள் தொடர்பை வளர்ப்பது.`,
-      },
-      source: 'https://sproutsocial.com/insights/social-media-marketing-strategy/',
-      quiz: {
-        question: 'Which platform is best known for professional networking?',
-        options: [
-          'Facebook',
-          'Instagram',
-          'LinkedIn',
-          'Snapchat'
-        ],
-        answerIndex: 2
-      }
-    },
-    {
-      id: 'google-ads',
-      title: 'Google Ads',
-      description: {
-        en: `Paid advertising on Google to reach customers instantly with targeted ads.`,
-        ta: `கூகுளில் பணம் செலுத்தி விளம்பரங்களை நடாத்தி குறிக்கோள் வாடிக்கையாளர்களை அடையலாம்.`,
-      },
-      source: 'https://ads.google.com/home/',
-      quiz: {
-        question: 'What does CPC stand for in Google Ads?',
-        options: [
-          'Cost Per Click',
-          'Cost Per Customer',
-          'Click Per Cost',
-          'Customer Paid Cost'
-        ],
-        answerIndex: 0
-      }
-    },
-    {
-      id: 'email-marketing',
-      title: 'Email Marketing',
-      description: {
-        en: `Sending targeted emails to nurture leads and convert customers.`,
-        ta: `இணைப்புக் கடிதங்கள் அனுப்பி வாடிக்கையாளர்களை மாற்றுதல்.`,
-      },
-      source: 'https://mailchimp.com/email-marketing/',
-      quiz: {
-        question: 'Which is a good practice in email marketing?',
-        options: [
-          'Sending spam emails',
-          'Personalizing emails',
-          'Ignoring unsubscribe requests',
-          'Buying email lists'
-        ],
-        answerIndex: 1
-      }
-    },
-    {
-      id: 'affiliate-marketing',
-      title: 'Affiliate Marketing',
-      description: {
-        en: `Promoting other companies’ products to earn commissions.`,
-        ta: `பிற நிறுவனங்களின் தயாரிப்புகளை விளம்பரம் செய்து கமிஷன் பெறுதல்.`,
-      },
-      source: 'https://www.bigcommerce.com/articles/affiliate-marketing/',
-      quiz: {
-        question: 'Affiliate marketers earn money based on:',
-        options: [
-          'Product views',
-          'Clicks on ads',
-          'Sales or leads generated',
-          'Social media followers'
-        ],
-        answerIndex: 2
-      }
-    },
-    {
-      id: 'analytics',
-      title: 'Web Analytics',
-      description: {
-        en: `Tracking and analyzing website data to improve marketing efforts.`,
-        ta: `இணையத்தள தரவை கண்காணித்து சந்தைப்படுத்தல் மேம்படுத்தல்.`,
-      },
-      source: 'https://analytics.google.com/',
-      quiz: {
-        question: 'Which metric measures website visitor count?',
-        options: [
-          'Bounce Rate',
-          'Sessions',
-          'CTR',
-          'Impressions'
-        ],
-        answerIndex: 1
-      }
-    },
-    {
-      id: 'content-marketing',
-      title: 'Content Marketing',
-      description: {
-        en: `Creating valuable content to attract and engage your audience.`,
-        ta: `மதிப்புமிக்க உள்ளடக்கம் உருவாக்கி பார்வையாளர்களை ஈர்க்குதல்.`,
-      },
-      source: 'https://contentmarketinginstitute.com/what-is-content-marketing/',
-      quiz: {
-        question: 'Content marketing primarily aims to:',
-        options: [
-          'Sell products directly',
-          'Build brand awareness',
-          'Spam users',
-          'Decrease website traffic'
-        ],
-        answerIndex: 1
-      }
-    }
-  ];
+// Expand modules
+document.querySelectorAll('.expand-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const body = btn.closest('.module-card').querySelector('.module-body');
+    const show = body.classList.toggle('show');
+    btn.style.transform = show ? 'rotate(180deg)' : 'rotate(0)';
+  });
+});
 
-  let lang = 'en'; // language selector
+// Quiz Logic
+document.querySelectorAll('.module-card').forEach(card => {
+  const submit = card.querySelector('.submit-quiz');
+  const radios = card.querySelectorAll('input[type=radio]');
+  const result = card.querySelector('.quiz-result');
+  radios.forEach(r => r.addEventListener('change', () => submit.disabled = false));
+  submit.addEventListener('click', () => {
+    const correctIdx = 0; // adjust per module
+    const selected = [...radios].find(r => r.checked);
+    if (!selected) return;
+    result.textContent = selected.value == correctIdx ? '✅ Correct!' : '❌ Incorrect.';
+    submit.disabled = true;
+  });
+});
 
-  // Build navigation buttons
-  function buildNavigation() {
-    modules.forEach((mod, i) => {
-      const btn = document.createElement('button');
-      btn.textContent = mod.title;
-      btn.setAttribute('aria-controls', `module-${mod.id}`);
-      btn.dataset.moduleId = mod.id;
-      if (i === 0) btn.classList.add('active');
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        showModule(mod.id);
-      });
-      nav.appendChild(btn);
-    });
-  }
+// Chat Assistant
+const chatBtn = document.getElementById('chat-float');
+const chatPanel = document.getElementById('chat-panel');
+const chatClose = document.getElementById('chat-close');
+const chatForm = document.getElementById('chat-form');
+const chatLog = document.getElementById('chat-log');
 
-  // Show module by id, hide others
-  function showModule(id) {
-    document.querySelectorAll('.module-card').forEach(card => {
-      card.style.display = card.id === `module-${id}` ? 'block' : 'none';
-    });
-  }
+chatBtn.addEventListener('click', () => chatPanel.style.display = 'flex');
+chatClose?.addEventListener('click', () => chatPanel.style.display = 'none');
 
-  // Create module cards with expandable content and quizzes
-  function buildModules() {
-    modules.forEach(mod => {
-      const card = document.createElement('article');
-      card.className = 'module-card';
-      card.id = `module-${mod.id}`;
-      card.style.display = 'none'; // hide initially
+chatForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const msg = e.target[0].value.trim();
+  if (!msg) return;
 
-      // Header (click to toggle content)
-      const header = document.createElement('div');
-      header.className = 'module-header';
-      header.tabIndex = 0;
-      header.setAttribute('role', 'button');
-      header.setAttribute('aria-expanded', 'false');
-      header.setAttribute('aria-controls', `content-${mod.id}`);
+  const line = document.createElement('div');
+  line.textContent = 'You: ' + msg;
+  chatLog.appendChild(line);
 
-      const title = document.createElement('h2');
-      title.textContent = mod.title;
-      header.appendChild(title);
+  setTimeout(() => {
+    const reply = aiReply(msg);
+    const botLine = document.createElement('div');
+    botLine.textContent = 'Bot: ' + reply;
+    chatLog.appendChild(botLine);
+    chatLog.scrollTop = chatLog.scrollHeight;
+  }, 700);
 
-      const icon = document.createElement('span');
-      icon.className = 'expand-icon';
-      icon.textContent = '+';
-      header.appendChild(icon);
+  e.target.reset();
+});
 
-      card.appendChild(header);
-
-      // Content
-      const content = document.createElement('div');
-      content.className = 'module-content';
-      content.id = `content-${mod.id}`;
-      content.setAttribute('aria-hidden', 'true');
-
-      // Description paragraph
-      const pDesc = document.createElement('p');
-      pDesc.textContent = mod.description[lang];
-      content.appendChild(pDesc);
-
-      // Source link
-      const sourceLink = document.createElement('a');
-      sourceLink.href = mod.source;
-      sourceLink.target = '_blank';
-      sourceLink.rel = 'noopener noreferrer';
-      sourceLink.className = 'source-link';
-      sourceLink.textContent = 'Learn more here';
-      content.appendChild(sourceLink);
-
-      // Quiz Section
-      const quizSection = document.createElement('section');
-      quizSection.className = 'quiz-section';
-      quizSection.setAttribute('aria-label', `Quiz for ${mod.title}`);
-
-      const quizQ = document.createElement('p');
-      quizQ.textContent = mod.quiz.question;
-      quizSection.appendChild(quizQ);
-
-      const quizOptions = document.createElement('ul');
-      quizOptions.className = 'quiz-options';
-
-      mod.quiz.options.forEach((opt, idx) => {
-        const li = document.createElement('li');
-
-        const label = document.createElement('label');
-        label.htmlFor = `quiz-${mod.id}-${idx}`;
-
-        const input = document.createElement('input');
-        input.type = 'radio';
-        input.name = `quiz-${mod.id}`;
-        input.id = `quiz-${mod.id}-${idx}`;
-        input.value = idx;
-        label.appendChild(input);
-
-        label.appendChild(document.createTextNode(opt));
-        li.appendChild(label);
-        quizOptions.appendChild(li);
-      });
-
-      quizSection.appendChild(quizOptions);
-
-      const submitBtn = document.createElement('button');
-      submitBtn.type = 'button';
-      submitBtn.className = 'submit-btn';
-      submitBtn.textContent = 'Submit';
-      submitBtn.disabled = true;
-      quizSection.appendChild(submitBtn);
-
-      const resultText = document.createElement('p');
-      resultText.className = 'quiz-result';
-      quizSection.appendChild(resultText);
-
-      content.appendChild(quizSection);
-      card.appendChild(content);
-
-      // Add event listeners
-
-      // Toggle expand/collapse content
-      header.addEventListener('click', () => {
-        const expanded = header.getAttribute('aria-expanded') === 'true';
-        header.setAttribute('aria-expanded', String(!expanded));
-        content.classList.toggle('expanded');
-        icon.textContent = expanded ? '+' : '−';
-        content.setAttribute('aria-hidden', String(expanded));
-      });
-      header.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          header.click();
-        }
-      });
-
-      // Enable submit button only if an option selected
-      quizOptions.addEventListener('change', () => {
-        submitBtn.disabled = false;
-        resultText.textContent = '';
-        resultText.className = 'quiz-result';
-      });
-
-      // Submit quiz
-      submitBtn.addEventListener('click', () => {
-        const selected = quizSection.querySelector('input[type="radio"]:checked');
-        if (!selected) return;
-        const selectedIndex = Number(selected.value);
-        if (selectedIndex === mod.quiz.answerIndex) {
-          resultText.textContent = 'Correct! 🎉';
-          resultText.className = 'quiz-result correct';
-        } else {
-          resultText.textContent = `Incorrect. Correct answer: "${mod.quiz.options[mod.quiz.answerIndex]}".`;
-          resultText.className = 'quiz-result incorrect';
-        }
-        submitBtn.disabled = true;
-      });
-
-      main.appendChild(card);
-    });
-
-    // Show first module by default
-    if (modules.length > 0) showModule(modules[0].id);
-  }
-
-  // Dark Mode toggle with localStorage
-  function initDarkMode() {
-    const savedMode = localStorage.getItem('dm-dark-mode');
-    if (savedMode === 'true') document.body.classList.add('dark');
-
-    darkToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      const isDark = document.body.classList.contains('dark');
-      localStorage.setItem('dm-dark-mode', isDark);
-      darkToggle.textContent = isDark ? 'Light Mode' : 'Dark Mode';
-    });
-
-    // Initialize button label
-    darkToggle.textContent = document.body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
-  }
-
-  // Simple Chatbot logic (basic, expand as needed)
-  function initChatbot() {
-    chatbotInput.addEventListener('input', () => {
-      chatbotSendBtn.disabled = chatbotInput.value.trim().length === 0;
-    });
-
-    chatbotForm.addEventListener('submit', e => {
-      e.preventDefault();
-      const userText = chatbotInput.value.trim();
-      if (!userText) return;
-      appendChatMessage(userText, 'user');
-      chatbotInput.value = '';
-      chatbotSendBtn.disabled = true;
-
-      // Bot reply with a simple smart response (simulate AI)
-      setTimeout(() => {
-        const botReply = generateBotReply(userText);
-        appendChatMessage(botReply, 'bot');
-      }, 1200);
-    });
-
-    function appendChatMessage(text, sender) {
-      const msg = document.createElement('div');
-      msg.className = `chat-message ${sender}`;
-      msg.textContent = text;
-      chatbotMessages.appendChild(msg);
-      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-    }
-
-    function generateBotReply(input) {
-      const lower = input.toLowerCase();
-
-      if (lower.includes('seo')) {
-        return 'SEO stands for Search Engine Optimization — it helps your website rank higher on Google.';
-      }
-      if (lower.includes('social media')) {
-        return 'Social Media Marketing uses platforms like Facebook and Instagram to engage audiences.';
-      }
-      if (lower.includes('google ads')) {
-        return 'Google Ads is paid advertising on Google — you can target specific customers quickly.';
-      }
-      if (lower.includes('email')) {
-        return 'Email Marketing involves sending targeted emails to nurture and convert leads.';
-      }
-      if (lower.includes('affiliate')) {
-        return 'Affiliate Marketing means promoting others’ products and earning commissions.';
-      }
-      if (lower.includes('analytics')) {
-        return 'Web Analytics tracks your website visitors and measures marketing performance.';
-      }
-      if (lower.includes('content')) {
-        return 'Content Marketing is creating valuable content to attract and engage customers.';
-      }
-
-      // Default fallback response
-      return "Sorry, I don't have an answer for that right now. Try asking about SEO, Social Media, Google Ads, or other digital marketing topics!";
-    }
-  }
-
-  // Initialize everything
-  function init() {
-    buildNavigation();
-    buildModules();
-    initDarkMode();
-    initChatbot();
-  }
-
-  // Run init on DOMContentLoaded
-  document.addEventListener('DOMContentLoaded', init);
-})();
+function aiReply(text) {
+  const t = text.toLowerCase();
+  if (t.includes('seo')) return 'SEO improves your visibility and ranking.';
+  if (t.includes('social')) return 'Use Social Media to build brand and engage audience.';
+  if (t.includes('google ads') || t.includes('ads')) return 'Google Ads lets you run paid campaigns.';
+  if (t.includes('email')) return 'Email marketing helps nurture leads.';
+  if (t.includes('analytics')) return 'Analytics tracks your website performance.';
+  return "Sorry, I don't know that yet!";
+}
