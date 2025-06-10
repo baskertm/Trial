@@ -3,34 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Digital Marketing Learning Hub</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <meta name="description" content="Digital Marketing Study Hub—learn SEO, Social Media Marketing, Google Ads & more, with quizzes, video, AI support" />
+  <title>Digital Marketing Study Hub</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Digital Marketing Learning Hub</h1>
-    <button id="darkModeToggle" aria-label="Toggle dark mode">Dark Mode</button>
+  <header class="hero">
+    <h1>Digital Marketing Study Hub</h1>
+    <p>Master SEO, Social Media, Google Ads & more—with quizzes, videos, AI Tutor</p>
+    <button class="cta">Get Started</button>
+    <button id="dark-toggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
   </header>
 
-  <nav aria-label="Primary navigation"></nav>
+  <nav class="top-nav">
+    <a href="#seo">SEO</a>
+    <a href="#social">Social Media</a>
+    <a href="#google-ads">Google Ads</a>
+    <a href="#email">Email Marketing</a>
+    <a href="#analytics">Analytics</a>
+  </nav>
 
-  <main></main>
+  <main>
+    <!-- Module template, duplicate for each topic -->
+    <section id="seo" class="module-card">
+      <div class="module-header">
+        <h2>🔍 SEO / தேடுபொறி மேம்பாடு</h2>
+        <button class="expand-btn"><i class="fas fa-chevron-down"></i></button>
+      </div>
+      <div class="module-body">
+        <p><strong>English:</strong> SEO helps your site rank higher on search engines to increase organic traffic.</p>
+        <p><strong>தமிழ்:</strong> SEO உங்கள் வலைப்பக்கம் கூகுள் போன்ற தேடுபொறிகளில் மேலாண்மை பெற உதவுகிறது.</p>
+        <a href="https://moz.com/learn/seo/what-is-seo" target="_blank">Source &raquo;</a>
+        <div class="video"><iframe src="https://www.youtube.com/embed/2z0beAbMdLs" allowfullscreen></iframe></div>
+        <div class="quiz">
+          <p><strong>Quiz:</strong> What is the primary goal of SEO?</p>
+          <div><label><input type="radio" name="seo-quiz"> Increase organic traffic</label></div>
+          <div><label><input type="radio" name="seo-quiz"> Improve email open rates</label></div>
+          <button class="submit-quiz">Submit</button>
+          <p class="quiz-result"></p>
+        </div>
+        <a href="https://chat.openai.com" target="_blank" class="ai-link">🤖 Ask AI Tutor</a>
+      </div>
+    </section>
+    <!-- Add more modules similarly -->
+  </main>
 
-  <section id="chatbot" aria-label="Chatbot assistant">
-    <div id="chatbot-messages" aria-live="polite"></div>
-    <form id="chatbot-form" autocomplete="off" aria-label="Chatbot input form">
-      <input
-        type="text"
-        id="chatbot-input"
-        placeholder="Ask me about Digital Marketing..."
-        aria-label="Chatbot input"
-        required
-        autocomplete="off"
-      />
-      <button type="submit" id="chatbot-send-btn" disabled>Send</button>
+  <div id="chat-float" title="Chat Assistant"><i class="fas fa-comments"></i></div>
+  <div id="chat-panel">
+    <header><span>AI Tutor</span><button id="chat-close"><i class="fas fa-times"></i></button></header>
+    <div id="chat-log"></div>
+    <form id="chat-form">
+      <input type="text" placeholder="Ask me anything..." required>
+      <button type="submit"><i class="fas fa-paper-plane"></i></button>
     </form>
-  </section>
+  </div>
 
   <script src="script.js"></script>
 </body>
