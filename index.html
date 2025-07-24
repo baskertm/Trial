@@ -3,18 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Baskar</title>
+  <title>Baskar's welcome </title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Great+Vibes&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700&display=swap');
 
     body {
       margin: 0;
       padding: 0;
       height: 100vh;
       overflow: hidden;
-      font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(black, #020202), url('https://images.unsplash.com/photo-1475221730526-389a46fbae4f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
-      background-size: cover;
+      font-family: 'Playfair Display', serif;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -22,9 +20,60 @@
       color: #ffffff;
     }
 
+    .glass-background, .glass-layer, .extra-glass-layer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
+      backdrop-filter: blur(10px);
+      z-index: 1;
+      animation: glassMove 30s linear infinite;
+    }
+
+    .glass-layer {
+      animation-delay: 5s;
+      opacity: 0.4;
+    }
+
+    .glass-layer:nth-child(3) {
+      animation-delay: 10s;
+      opacity: 0.3;
+    }
+
+    .extra-glass-layer:nth-of-type(4) { animation-delay: 15s; opacity: 0.2; }
+    .extra-glass-layer:nth-of-type(5) { animation-delay: 20s; opacity: 0.15; }
+    .extra-glass-layer:nth-of-type(6) { animation-delay: 25s; opacity: 0.1; }
+    .extra-glass-layer:nth-of-type(7) { animation-delay: 30s; opacity: 0.08; }
+    .extra-glass-layer:nth-of-type(8) { animation-delay: 35s; opacity: 0.07; }
+    .extra-glass-layer:nth-of-type(9) { animation-delay: 40s; opacity: 0.06; }
+    .extra-glass-layer:nth-of-type(10) { animation-delay: 45s; opacity: 0.05; }
+    .extra-glass-layer:nth-of-type(11) { animation-delay: 50s; opacity: 0.04; }
+    .extra-glass-layer:nth-of-type(12) { animation-delay: 55s; opacity: 0.035; }
+    .extra-glass-layer:nth-of-type(13) { animation-delay: 60s; opacity: 0.03; }
+
+    @keyframes glassMove {
+      0% {
+        transform: scale(1.05) rotate(0deg);
+      }
+      100% {
+        transform: scale(1.05) rotate(360deg);
+      }
+    }
+
+    .background {
+      background: linear-gradient(black, #020202), url('https://images.unsplash.com/photo-1611573056322-d4fdd3e046b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
     .center-text {
       text-align: center;
-      z-index: 1;
+      z-index: 2;
       backdrop-filter: brightness(120%) contrast(110%);
       padding: 2rem;
       border-radius: 20px;
@@ -32,16 +81,16 @@
 
     .center-text h1 {
       font-family: 'Great Vibes', cursive;
-      font-size: 5rem;
+      font-size: 6rem;
       color: #ffffff;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+      text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.4), 0 0 20px rgba(255, 255, 255, 0.7);
     }
 
     .loading {
       font-size: 1.2rem;
       margin-top: 20px;
       color: #dddddd;
-      animation: blink 1.2s infinite;
+      animation: none;
     }
 
     @keyframes blink {
@@ -51,9 +100,22 @@
   </style>
 </head>
 <body>
+  <div class="background"></div>
+  <div class="glass-background"></div>
+  <div class="glass-layer"></div>
+  <div class="glass-layer"></div>
+  <div class="extra-glass-layer"></div>
+  <div class="extra-glass-layer"></div>
+  <div class="extra-glass-layer"></div>
+  <div class="extra-glass-layer"></div>
+  <div class="extra-glass-layer"></div>
+  <div class="extra-glass-layer"></div>
+  <div class="extra-glass-layer"></div>
+  <div class="extra-glass-layer"></div>
+  <div class="extra-glass-layer"></div>
   <div class="center-text">
     <h1>Baskar</h1>
-    <div class="loading">Please wait...</div>
+    <div class="Made with 🤍 basker_tm"></div>
   </div>
 </body>
 </html>
