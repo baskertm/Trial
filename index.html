@@ -1,40 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Baskar</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Great+Vibes&display=swap');
+
     body {
-      font-family: Arial, sans-serif;
-      background: #f7f7f7;
-      margin: 20px;
-      color: #333;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(black, #020202), url('https://images.unsplash.com/photo-1475221730526-389a46fbae4f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      color: #ffffff;
     }
-    .container {
-      max-width: 800px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+    .center-text {
+      text-align: center;
+      z-index: 1;
+      backdrop-filter: brightness(120%) contrast(110%);
+      padding: 2rem;
+      border-radius: 20px;
     }
-    select, button {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      font-size: 16px;
+
+    .center-text h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 5rem;
+      color: #ffffff;
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
     }
-    .output {
+
+    .loading {
+      font-size: 1.2rem;
       margin-top: 20px;
-      padding: 15px;
-      background: #eef;
-      border-left: 4px solid #36f;
-      border-radius: 5px;
+      color: #dddddd;
+      animation: blink 1.2s infinite;
     }
-    .output p {
-      margin: 5px 0;
+
+    @keyframes blink {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
     }
-</script>
+  </style>
+</head>
+<body>
+  <div class="center-text">
+    <h1>Baskar</h1>
+    <div class="loading">Please wait...</div>
+  </div>
 </body>
 </html>
