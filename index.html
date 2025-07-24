@@ -1,116 +1,199 @@
 <!DOCTYPE html>
-<html lang="ta">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Linux Command Explorer (English + Tamil)</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linux VM Command Explorer</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f8f8f8; margin: 20px; }
-    select, button { padding: 8px; margin: 10px 0; font-size: 1rem; }
-    .card { background: #fff; border-radius: 10px; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); max-width: 600px; margin: auto; }
-    .result { background: #e8f5e9; padding: 15px; border-radius: 10px; margin-top: 15px; }
-    h2 { text-align: center; color: #333; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      margin: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    .output {
+      margin-top: 20px;
+      padding: 15px;
+      background: #eef;
+      border-left: 4px solid #36f;
+      border-radius: 5px;
+    }
+    .output p {
+      margin: 5px 0;
+    }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h2>Linux Command Explorer (AWS VM Friendly)</h2>
+<div class="container">
+  <h2>Linux VM Command Explorer (EC2 Friendly)</h2>
+  <label for="command">Choose a Command:</label>
+  <select id="command" onchange="populateOptions()">
+    <option value="">-- Select Command --</option>
+    <option value="ls">ls</option>
+    <option value="cd">cd</option>
+    <option value="mkdir">mkdir</option>
+    <option value="touch">touch</option>
+    <option value="rm">rm</option>
+    <option value="chmod">chmod</option>
+    <option value="chown">chown</option>
+    <option value="sudo">sudo</option>
+    <option value="systemctl">systemctl</option>
+    <option value="top">top</option>
+    <option value="ps">ps</option>
+  </select>
 
-    <label for="command">Choose a Command:</label><br>
-    <select id="command">
-      <option value="ls">ls - List Directory</option>
-      <option value="pwd">pwd - Print Working Directory</option>
-      <option value="cd">cd - Change Directory</option>
-      <option value="mkdir">mkdir - Make Directory</option>
-      <option value="rm">rm - Remove File/Folder</option>
-    </select>
+  <label for="option">Choose an Option:</label>
+  <select id="option">
+    <option value="">-- Select Option --</option>
+  </select>
 
-    <label for="option">Choose an Option:</label><br>
-    <select id="option">
-      <option value="">-- Select an Option --</option>
-    </select>
+  <button onclick="showExplanation()">Show Explanation</button>
 
-    <button onclick="showResult()">Show Explanation</button>
+  <div id="result" class="output"></div>
+</div>
 
-    <div class="result" id="output"></div>
-  </div>
-
-  <script>
-    const commandOptions = {
-      ls: {
-        "-l": {
-          en: "Lists files in long format (with permissions)",
-          ta: "கோப்புகளை விரிவாக பட்டியலிடும் (அனுமதிகளுடன்)",
-          example: "ls -l"
-        },
-        "-a": {
-          en: "Includes hidden files in list",
-          ta: "மறைக்கப்பட்ட கோப்புகளையும் பட்டியலிடும்",
-          example: "ls -a"
-        }
-      },
-      pwd: {
-        "": {
-          en: "Displays the current directory path",
-          ta: "தற்போதைய கோப்பக பாதையை காண்பிக்கும்",
-          example: "pwd"
-        }
-      },
-      cd: {
-        "..": {
-          en: "Go back to previous directory",
-          ta: "முந்தைய கோப்பகத்துக்கு செல்லும்",
-          example: "cd .."
-        },
-        "/": {
-          en: "Go to root directory",
-          ta: "ரூட் கோப்பகத்துக்கு செல்லும்",
-          example: "cd /"
-        }
-      },
-      mkdir: {
-        "folder": {
-          en: "Creates a new directory",
-          ta: "புதிய கோப்பகத்தை உருவாக்கும்",
-          example: "mkdir myfolder"
-        }
-      },
-      rm: {
-        "-r": {
-          en: "Removes folder recursively",
-          ta: "கோப்பகத்தையும் அதன் உள்ளடக்கத்தையும் அகற்றும்",
-          example: "rm -r foldername"
-        },
-        "-f": {
-          en: "Forcefully removes file/folder",
-          ta: "கட்டாயமாக கோப்புகளை நீக்கும்",
-          example: "rm -f filename"
-        }
-      }
-    };
-
-    const commandSelect = document.getElementById("command");
-    const optionSelect = document.getElementById("option");
-
-    commandSelect.addEventListener("change", () => {
-      optionSelect.innerHTML = "";
-      const selected = commandSelect.value;
-      const options = commandOptions[selected];
-      for (const opt in options) {
-        const display = opt || "No option";
-        optionSelect.innerHTML += `<option value="${opt}">${display}</option>`;
-      }
-    });
-
-    function showResult() {
-      const cmd = commandSelect.value;
-      const opt = optionSelect.value;
-      const data = commandOptions[cmd][opt];
-      document.getElementById("output").innerHTML = `
-        <strong>Command:</strong> <code>${data.example}</code><br>
-        <strong>English:</strong> ${data.en}<br>
-        <strong>தமிழ்:</strong> ${data.ta}
-      `;
+<script>
+const data = {
+  ls: {
+    '-l': {
+      en: 'Long listing format with permissions, ownership, size.',
+      ta: 'அனுமதி, உரிமையாளர், கோப்பு அளவு போன்ற விரிவாக காண்பிக்கிறது.',
+      ex: 'ls -l'
+    },
+    '-a': {
+      en: 'Shows hidden files (starting with .)',
+      ta: 'மறைந்துள்ள கோப்புகளையும் (.) உடன் தொடங்கும்) காட்டுகிறது.',
+      ex: 'ls -a'
     }
-  </script>
+  },
+  cd: {
+    '..': {
+      en: 'Moves up one directory level.',
+      ta: 'ஒரு அடைவை மேல் நிலைக்கு நகர்த்துகிறது.',
+      ex: 'cd ..'
+    },
+    '/': {
+      en: 'Takes you to root directory.',
+      ta: 'மூல அடைவுக்கு செல்கிறது.',
+      ex: 'cd /'
+    }
+  },
+  mkdir: {
+    'foldername': {
+      en: 'Creates a new folder.',
+      ta: 'புதிய அடைவை உருவாக்குகிறது.',
+      ex: 'mkdir mydir'
+    }
+  },
+  touch: {
+    'filename': {
+      en: 'Creates an empty file.',
+      ta: 'காலி கோப்பை உருவாக்குகிறது.',
+      ex: 'touch hello.txt'
+    }
+  },
+  rm: {
+    '-r': {
+      en: 'Removes folder and its contents recursively.',
+      ta: 'அடைவுகளையும் உள்ளடக்கங்களையும் நீக்குகிறது.',
+      ex: 'rm -r myfolder'
+    },
+    '-f': {
+      en: 'Force delete files without prompt.',
+      ta: 'விருப்பமின்றி கோப்புகளை நீக்குகிறது.',
+      ex: 'rm -f file.txt'
+    }
+  },
+  chmod: {
+    '755': {
+      en: 'Gives full rights to owner, read/execute to others.',
+      ta: 'உரிமையாளருக்கு முழு அனுமதி, மற்றவர்களுக்கு வாசிக்க/இயக்க அனுமதி.',
+      ex: 'chmod 755 script.sh'
+    }
+  },
+  chown: {
+    'ubuntu:ubuntu': {
+      en: 'Changes ownership of a file/folder.',
+      ta: 'கோப்பின் உரிமையினை மாற்றுகிறது.',
+      ex: 'chown ubuntu:ubuntu file.txt'
+    }
+  },
+  sudo: {
+    'any command': {
+      en: 'Executes a command with superuser privileges.',
+      ta: 'மிகுந்த அனுமதியுடன் கட்டளையை இயக்குகிறது.',
+      ex: 'sudo apt update'
+    }
+  },
+  systemctl: {
+    'start': {
+      en: 'Starts a service.',
+      ta: 'சேவையை தொடங்குகிறது.',
+      ex: 'sudo systemctl start apache2'
+    },
+    'status': {
+      en: 'Checks status of a service.',
+      ta: 'சேவையின் நிலையை காண்பிக்கிறது.',
+      ex: 'sudo systemctl status apache2'
+    }
+  },
+  top: {
+    '': {
+      en: 'Displays live system processes and memory usage.',
+      ta: 'நிகழ் செயல்கள் மற்றும் நினைவக பயன்பாட்டை காண்பிக்கிறது.',
+      ex: 'top'
+    }
+  },
+  ps: {
+    'aux': {
+      en: 'Shows all processes with user, memory, etc.',
+      ta: 'அனைத்து செயல்களையும் பயனர் மற்றும் நினைவக தகவல்களுடன் காண்பிக்கிறது.',
+      ex: 'ps aux'
+    }
+  }
+};
+
+function populateOptions() {
+  const cmd = document.getElementById('command').value;
+  const opt = document.getElementById('option');
+  opt.innerHTML = '<option value="">-- Select Option --</option>';
+  if (data[cmd]) {
+    for (const o in data[cmd]) {
+      const el = document.createElement('option');
+      el.value = o;
+      el.text = o;
+      opt.appendChild(el);
+    }
+  }
+}
+
+function showExplanation() {
+  const cmd = document.getElementById('command').value;
+  const opt = document.getElementById('option').value;
+  const res = document.getElementById('result');
+  if (data[cmd] && data[cmd][opt]) {
+    const info = data[cmd][opt];
+    res.innerHTML = `<p><strong>Explanation (EN):</strong> ${info.en}</p>
+                     <p><strong>விளக்கம் (TA):</strong> ${info.ta}</p>
+                     <p><strong>Example:</strong> <code>${info.ex}</code></p>`;
+  } else {
+    res.innerHTML = '<p>Please choose a valid command and option.</p>';
+  }
+}
+</script>
 </body>
 </html>
