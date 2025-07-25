@@ -56,9 +56,119 @@
             height: 20px;
             border-radius: 3px;
         }
+        .upcoming-section {
+  padding: 50px 20px;
+  background: linear-gradient(to bottom, #000000, #1a1a1a);
+  text-align: center;
+  color: white;
+}
+
+.upcoming-title {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: #00ff99;
+  text-shadow: 0 0 10px #00ffcc;
+}
+
+.upcoming-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.upcoming-card {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border: 2px solid transparent;
+  transition: border 0.4s, transform 0.3s;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 255, 140, 0.3);
+  cursor: pointer;
+}
+
+.upcoming-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(45deg, #00ff99, #00ccff, #ff00ff, #00ff99);
+  background-size: 400% 400%;
+  animation: glowingBorder 6s linear infinite;
+  z-index: -1;
+}
+
+@keyframes glowingBorder {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.upcoming-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+  transition: transform 0.3s ease;
+}
+
+.upcoming-card:hover img {
+  transform: scale(1.05);
+}
+
+.popup-text {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: #00ff99;
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.4s ease;
+  font-weight: bold;
+}
+
+.upcoming-card:hover .popup-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
     </style>
 </head>
 <body>
+    <section class="upcoming-section">
+  <h2 class="upcoming-title">🚀 Upcoming Projects & Services</h2>
+
+  <div class="upcoming-container">
+    <div class="upcoming-card">
+      <img src="project1.jpg" alt="Project 1" />
+      <div class="popup-text">New AI Tool Launching Soon!</div>
+    </div>
+
+    <div class="upcoming-card">
+      <img src="project2.jpg" alt="Project 2" />
+      <div class="popup-text">Premium Support Service Coming!</div>
+    </div>
+
+    <div class="upcoming-card">
+      <img src="project3.jpg" alt="Project 3" />
+      <div class="popup-text">Kids Learning Platform - Beta</div>
+    </div>
+  </div>
+</section>
+
     <div class="lidar-container">
         <div class="lidar-title">LiDAR Point Cloud with Annotations</div>
         <div class="lidar-canvas-container">
