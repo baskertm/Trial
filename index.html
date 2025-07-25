@@ -1,122 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Baskar's welcome </title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700&display=swap');
-
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      overflow: hidden;
-      font-family: 'Playfair Display', serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      color: #ffffff;
-    }
-
-    .glass-background, .glass-layer, .extra-glass-layer {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
-      backdrop-filter: blur(10px);
-      z-index: 1;
-      animation: glassMove 30s linear infinite;
-    }
-
-    .glass-layer {
-      animation-delay: 5s;
-      opacity: 0.4;
-    }
-
-    .glass-layer:nth-child(3) {
-      animation-delay: 10s;
-      opacity: 0.3;
-    }
-
-    .extra-glass-layer:nth-of-type(4) { animation-delay: 15s; opacity: 0.2; }
-    .extra-glass-layer:nth-of-type(5) { animation-delay: 20s; opacity: 0.15; }
-    .extra-glass-layer:nth-of-type(6) { animation-delay: 25s; opacity: 0.1; }
-    .extra-glass-layer:nth-of-type(7) { animation-delay: 30s; opacity: 0.08; }
-    .extra-glass-layer:nth-of-type(8) { animation-delay: 35s; opacity: 0.07; }
-    .extra-glass-layer:nth-of-type(9) { animation-delay: 40s; opacity: 0.06; }
-    .extra-glass-layer:nth-of-type(10) { animation-delay: 45s; opacity: 0.05; }
-    .extra-glass-layer:nth-of-type(11) { animation-delay: 50s; opacity: 0.04; }
-    .extra-glass-layer:nth-of-type(12) { animation-delay: 55s; opacity: 0.035; }
-    .extra-glass-layer:nth-of-type(13) { animation-delay: 60s; opacity: 0.03; }
-
-    @keyframes glassMove {
-      0% {
-        transform: scale(1.05) rotate(0deg);
-      }
-      100% {
-        transform: scale(1.05) rotate(360deg);
-      }
-    }
-
-    .background {
-      background: linear-gradient(black, #020202), url('https://images.unsplash.com/photo-1611573056322-d4fdd3e046b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
-      background-size: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-    }
-
-    .center-text {
-      text-align: center;
-      z-index: 2;
-      backdrop-filter: brightness(120%) contrast(110%);
-      padding: 2rem;
-      border-radius: 20px;
-    }
-
-    .center-text h1 {
-      font-family: 'Great Vibes', cursive;
-      font-size: 6rem;
-      color: #ffffff;
-      text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.4), 0 0 20px rgba(255, 255, 255, 0.7);
-    }
-
-    .class {
-      font-size: 1.2rem;
-      margin-top: 20px;
-      color: #dddddd;
-      animation: none;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 0.2; }
-      50% { opacity: 1; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiDAR Annotation Visualization</title>
+    <style>
+        .lidar-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #f8f9fa;
+        }
+        
+        .lidar-title {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .lidar-canvas-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+    </style>
 </head>
 <body>
-  <div class="background"></div>
-  <div class="glass-background"></div>
-  <div class="glass-layer"></div>
-  <div class="glass-layer"></div>
-  <div class="extra-glass-layer"></div>
-  <div class="extra-glass-layer"></div>
-  <div class="extra-glass-layer"></div>
-  <div class="extra-glass-layer"></div>
-  <div class="extra-glass-layer"></div>
-  <div class="extra-glass-layer"></div>
-  <div class="extra-glass-layer"></div>
-  <div class="extra-glass-layer"></div>
-  <div class="extra-glass-layer"></div>
-  <div class="center-text">
-    <h1>Baskar</h1>
-    <div class="check out my other page that you may like"></div>
-    <div class="Made with 🤍 basker_tm"></div>
-  </div>
+    <div class="lidar-container">
+        <div class="lidar-title">LiDAR Point Cloud with Annotations</div>
+        <div class="lidar-canvas-container">
+            <canvas id="lidarCanvas"></canvas>
+        </div>
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #ff4444;"></div>
+                <span>Vehicle</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #4488ff;"></div>
+                <span>Pedestrian</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #44cc44;"></div>
+                <span>Cyclist</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #cccccc;"></div>
+                <span>Background</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('lidarCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas dimensions to match container
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+            
+            // Coordinate system parameters
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const scale = 6; // pixels per meter
+            
+            // Clear canvas
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw grid
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            
+            // Vertical grid lines
+            for (let x = 0; x < canvas.width; x += scale * 10) {
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+            }
+            
+            // Horizontal grid lines
+            for (let y = 0; y < canvas.height; y += scale * 10) {
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+            }
+            
+            ctx.stroke();
+            
+            // Draw axes
+            ctx.strokeStyle = '#888888';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(centerX, 0);
+            ctx.lineTo(centerX, canvas.height);
+            ctx.moveTo(0, centerY);
+            ctx.lineTo(canvas.width, centerY);
+            ctx.stroke();
+            
+            // Draw axis labels
+            ctx.fillStyle = '#555555';
+            ctx.font = '12px Arial';
+            ctx.fillText('X (m)', canvas.width - 30, centerY - 10);
+            ctx.fillText('Y (m)', centerX + 10, 20);
+            
+            // Draw background points (environment)
+            ctx.fillStyle = '#cccccc';
+            for (let i = 0; i < 1500; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                ctx.beginPath();
+                ctx.arc(x, y, 1, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            // Define objects with annotations
+            const objects = [
+                { type: 'Vehicle', center: [15, 10], size: [8, 4], color: '#ff4444' },
+                { type: 'Pedestrian', center: [-10, -5], size: [1, 2], color: '#4488ff' },
+                { type: 'Cyclist', center: [5, -15], size: [2, 3], color: '#44cc44' },
+                { type: 'Vehicle', center: [-20, 20], size: [6, 3], color: '#ff4444' }
+            ];
+            
+            // Draw objects and annotations
+            objects.forEach(obj => {
+                const [worldX, worldY] = obj.center;
+                const [width, height] = obj.size;
+                
+                // Convert world coordinates to canvas coordinates
+                const canvasX = centerX + worldX * scale;
+                const canvasY = centerY - worldY * scale; // Flip Y axis
+                const canvasWidth = width * scale;
+                const canvasHeight = height * scale;
+                
+                // Draw object points
+                ctx.fillStyle = obj.color;
+                const pointCount = Math.floor(width * height * 80);
+                for (let i = 0; i < pointCount; i++) {
+                    const pointX = canvasX + (Math.random() - 0.5) * canvasWidth;
+                    const pointY = canvasY + (Math.random() - 0.5) * canvasHeight;
+                    ctx.beginPath();
+                    ctx.arc(pointX, pointY, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                
+                // Draw bounding box
+                ctx.strokeStyle = obj.color;
+                ctx.lineWidth = 2;
+                ctx.strokeRect(
+                    canvasX - canvasWidth/2,
+                    canvasY - canvasHeight/2,
+                    canvasWidth,
+                    canvasHeight
+                );
+                
+                // Draw label
+                ctx.fillStyle = obj.color;
+                ctx.font = 'bold 14px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(
+                    obj.type,
+                    canvasX,
+                    canvasY - canvasHeight/2 - 10
+                );
+            });
+            
+            // Draw ego vehicle
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 3]);
+            ctx.strokeRect(
+                centerX - 4 * scale/2,
+                centerY - 2 * scale/2,
+                4 * scale,
+                2 * scale
+            );
+            ctx.setLineDash([]);
+            
+            // Ego vehicle label
+            ctx.fillStyle = '#000000';
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Ego Vehicle', centerX, centerY + 2 * scale + 20);
+        });
+    </script>
 </body>
 </html>
