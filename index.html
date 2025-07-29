@@ -4,358 +4,409 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Baskar's Portfolio</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-/* ========== BASE STYLES ========== */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: radial-gradient(ellipse at bottom, #0b0b1f 90%, #729f5e 100%);
-  color: #fff;
-  overflow-x: hidden;
-}
-html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(ellipse at bottom, #0b0b1f 90%, #729f5e 100%);
+      color: #fff;
+      overflow-x: hidden;
+    }
 
-canvas {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  z-index: -1;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-header {
-  background: transparent;
-  text-align: center;
-  color: #00ff88;
-  padding: 100px 20px 80px;
-  position: relative;
-  box-shadow: 0 0 30px #00ffaa;
-  overflow: hidden;
-}
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+    }
 
-header h1 {
-  font-size: 3rem;
-  margin-bottom: 10px;
-  text-shadow: 0 0 10px #00ff88;
-}
-header p { font-size: 1.3rem; }
+    header {
+      background: transparent;
+      text-align: center;
+      color: #00ff88;
+      padding: 100px 20px 80px;
+      position: relative;
+      box-shadow: 0 0 30px #00ffaa;
+      overflow: hidden;
+    }
 
-.btn, .resume-button {
-  display: inline-block;
-  margin: 20px;
-  padding: 12px 20px;
-  background: #00ff88;
-  color: #000;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 0 12px #00ffaa;
-  transition: background 0.3s ease;
-}
-.btn:hover, .resume-button:hover { background: #00cc88; }
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px #00ff88;
+    }
 
-section { padding: 40px 20px; max-width: 1000px; margin: auto; }
+    header p {
+      font-size: 1.3rem;
+    }
 
-.projects {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-.projects img {
-  width: 200px;
-  border-radius: 12px;
-  box-shadow: 0 0 20px #00ff88;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-.projects img:hover { transform: scale(1.1); box-shadow: 0 0 30px #00ffaa; }
+    .btn,
+    .resume-button {
+      display: inline-block;
+      margin: 20px;
+      padding: 12px 20px;
+      background-color: #00ff88;
+      color: #000;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 12px #00ffaa;
+      transition: background-color 0.3s ease;
+    }
 
-/* ========== UPCOMING SECTION ========== */
-.upcoming-section {
-  padding: 50px 20px;
-  background: transparent;
-  text-align: center;
-  color: white;
-}
-.upcoming-title {
-  font-size: 2.5rem;
-  margin-bottom: 40px;
-  color: #00ff99;
-  text-shadow: 0 0 10px #00ffcc;
-}
+    .btn:hover,
+    .resume-button:hover {
+      background-color: #00cc88;
+    }
 
-.carousel-wrapper {
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 20px;
-}
-.upcoming-container {
-  display: flex;
-  gap: 30px;
-  width: max-content;
-  scroll-snap-align: center;
-  animation: autoScroll 30s linear infinite;
-}
-@keyframes autoScroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
+    section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
 
-.upcoming-card {
-  position: relative;
-  flex: 0 0 auto;
-  width: 280px; height: 280px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 255, 140, 0.3);
-  scroll-snap-align: start;
-  cursor: pointer;
-}
-.upcoming-card img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  border-radius: 18px;
-  transition: transform 0.3s ease;
-}
-.upcoming-card:hover img { transform: scale(1.05); }
+    /* Lazy load with blur */
+    img.lazy {
+      filter: blur(15px);
+      opacity: 0;
+      transition: filter 0.6s ease, opacity 0.6s ease;
+    }
 
-.popup-text {
-  position: absolute;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
-  color: #00ff99;
-  width: 100%;
-  padding: 10px;
-  font-size: 1rem;
-  opacity: 0;
-  transform: translateY(100%);
-  transition: all 0.4s ease;
-  font-weight: bold;
-}
-.upcoming-card:hover .popup-text { opacity: 1; transform: translateY(0); }
+    img.lazy.loaded {
+      filter: blur(0);
+      opacity: 1;
+    }
 
-.coming-soon-badge {
-  position: absolute;
-  top: 10px; left: 10px;
-  background: rgba(0, 255, 0, 0.8);
-  color: black;
-  font-weight: bold;
-  font-size: 0.85rem;
-  padding: 4px 10px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px #00ff99;
-  z-index: 2;
-}
+    /* Projects */
+    .projects {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
 
-.view-all-btn {
-  margin-top: 30px;
-  padding: 12px 25px;
-  background: #00ff99;
-  color: #000;
-  border: none;
-  border-radius: 30px;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  box-shadow: 0 0 10px #00ff99;
-  transition: 0.3s;
-}
-.view-all-btn:hover { background: #00cc88; box-shadow: 0 0 20px #00ff99; }
+    .projects img {
+      width: 200px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #00ff88;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
 
-/* ========== MODAL ========== */
-.gallery-modal {
-  display: none;
-  position: fixed; inset: 0;
-  background: rgba(0, 0, 0, 0.95);
-  z-index: 9999;
-  align-items: center; justify-content: center;
-  padding: 40px; flex-wrap: wrap;
-}
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px; max-width: 1200px;
-}
-.gallery-grid img { width: 100%; border-radius: 12px; }
+    .projects img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px #00ffaa;
+    }
 
-/* ========== FLOATING SOCIAL BAR ========== */
-.floating-social-bar {
-  position: fixed; top: 40%; left: 0;
-  transform: translateY(-50%);
-  display: flex; flex-direction: column;
-  gap: 15px; background: rgba(0, 0, 0, 0.4);
-  padding: 10px 5px;
-  border-top-right-radius: 10px; border-bottom-right-radius: 10px;
-}
-.floating-social-bar a { color: white; font-size: 20px; text-align: center; }
-.floating-social-bar a:hover { color: #0ff; transform: scale(1.2); }
+    /* Upcoming Section */
+    .upcoming-section {
+      padding: 50px 20px;
+      text-align: center;
+      color: white;
+    }
 
-footer {
-  text-align: center;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.05);
-  color: #aaa;
-}
+    .upcoming-title {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color: #00ff99;
+      text-shadow: 0 0 10px #00ffcc;
+    }
 
-/* ========== SIDE NAV ========== */
-.side-nav {
-  position: fixed; top: 10%; right: 0;
-  transform: translateY(-50%);
-}
-.side-btn {
-  background: rgba(0, 255, 100, 0.7);
-  border-radius: 12px 0 0 12px;
-  width: 50px; height: 50px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-}
-.side-btn:hover { background: #000; }
+    .carousel-wrapper {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 20px;
+    }
 
-#side-toggle { display: none; }
-.side-menu {
-  position: absolute; right: 10px; top: 250%;
-  transform: translateY(-50%) scale(0);
-  display: flex; flex-direction: column; gap: 15px;
-  background: rgba(0, 0, 0, 0.35);
-  border-radius: 12px;
-  pointer-events: none; opacity: 0;
-  transition: transform 0.4s ease;
-}
-#side-toggle:checked ~ .side-menu {
-  transform: translateY(-50%) scale(1);
-  pointer-events: auto; opacity: 1;
-}
-.side-menu a {
-  color: #42151e;
-  font-size: 13px;
-  background: #AEF6C6;
-  border-radius: 50%;
-  width: 44px; height: 44px;
-  display: flex; align-items: center; justify-content: center;
-}
-.side-menu a:hover { transform: scale(1.2); background: #79AC8A; }
+    .upcoming-container {
+      display: flex;
+      gap: 30px;
+      width: max-content;
+      animation: autoScroll 30s linear infinite;
+    }
+
+    @keyframes autoScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .upcoming-card {
+      position: relative;
+      flex: 0 0 auto;
+      width: 280px;
+      height: 280px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 255, 140, 0.3);
+      cursor: pointer;
+      scroll-snap-align: start;
+    }
+
+    .upcoming-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .upcoming-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .popup-text {
+      position: absolute;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      color: #00ff99;
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      opacity: 0;
+      transform: translateY(100%);
+      transition: all 0.4s ease;
+      font-weight: bold;
+    }
+
+    .upcoming-card:hover .popup-text {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .coming-soon-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0, 255, 0, 0.8);
+      color: black;
+      font-weight: bold;
+      font-size: 0.85rem;
+      padding: 4px 10px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #00ff99;
+      z-index: 2;
+    }
+
+    .view-all-btn {
+      margin-top: 30px;
+      padding: 12px 25px;
+      background: #00ff99;
+      color: #000;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ff99;
+      transition: 0.3s;
+    }
+
+    .view-all-btn:hover {
+      background: #00cc88;
+      box-shadow: 0 0 20px #00ff99;
+    }
+
+    /* Gallery Modal */
+    .gallery-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      flex-wrap: wrap;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+    }
+
+    form {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px #00ff88;
+    }
+
+    input, textarea {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #111;
+      color: #00ff88;
+    }
+
+    button {
+      background: #00ff88;
+      color: #000;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 0 10px #00ff88;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #aaa;
+    }
+
+    .floating-social-bar {
+      position: fixed;
+      top: 40%;
+      left: 0;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 10px 5px;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      z-index: 9999;
+    }
+
+    .floating-social-bar a {
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .floating-social-bar a:hover {
+      color: #0ff;
+      transform: scale(1.2);
+    }
   </style>
 </head>
 
 <body>
-<canvas id="stars"></canvas>
+  <canvas id="stars"></canvas>
+  <header>
+    <canvas id="dnaCanvas"></canvas>
+    <h1>Baskar</h1>
+    <p>Designer | Annotator | Customer support | AWS</p>
+    <a href="#Upcomings" class="btn">Upcomings</a>
+    <a class="resume-button" href="https://baskertm.github.io/re">Download My Resume</a>
+    <a href="#contact-me" class="btn">Contact Me</a>
+  </header>
 
-<header>
-  <canvas id="dnaCanvas"></canvas>
-  <h1>Baskar</h1>
-  <p>Designer | Annotator | Customer support | AWS</p>
-  <a href="#upcoming-section" class="btn">Upcomings</a>
-  <a class="resume-button" href="https://baskertm.github.io/re" download>Download My Resume</a>
-  <a href="#contact-me" class="btn">Contact Me</a>
-</header>
+  <section>
+    <h2>My Projects</h2>
+    <div class="projects">
+      <img data-src="lidar.png" class="lazy" alt="Project 1" />
+      <img data-src="logo2.png" class="lazy" alt="Project 2" />
+      <img data-src="logo3.png" class="lazy" alt="Project 3" />
+      <img data-src="logo4.png" class="lazy" alt="Project 4" />
+      <img data-src="logo5.png" class="lazy" alt="Project 5" />
+    </div>
+  </section>
 
-<section>
-  <h2>My Projects</h2>
-  <div class="projects">
-    <img src="lidar.png" alt="Project 1" />
-    <img src="logo2.png" alt="Project 2" />
-    <img src="logo3.png" alt="Project 3" />
-    <img src="logo4.png" alt="Project 4" />
-    <img src="logo5.png" alt="Project 5" />
-    <img src="logo1.png" alt="Project 6" />
-  </div>
-</section>
+  <section class="upcoming-section" id="Upcomings">
+    <h2 class="upcoming-title">Upcomings</h2>
+    <div class="carousel-wrapper">
+      <div class="upcoming-container">
+        <div class="upcoming-card">
+          <span class="coming-soon-badge">Throwback</span>
+          <img data-src="logo5.png" class="lazy" alt="Project 1" />
+          <div class="popup-text">My Tm project's first logo!</div>
+        </div>
 
-<section class="upcoming-section" id="upcoming-section">
-  <h2 class="upcoming-title">Upcomings</h2>
-  <div class="carousel-wrapper">
-    <div class="upcoming-container">
-      <div class="upcoming-card">
-        <span class="coming-soon-badge">Throwback</span>
-        <img src="logo5.png" alt="Project 1" />
-        <div class="popup-text">My Tm project's first logo!</div>
-      </div>
-      <div class="upcoming-card">
-        <span class="coming-soon-badge">Throwback</span>
-        <img src="logo3.png" alt="Project 2" />
-        <div class="popup-text">My Tm project's current logo!</div>
-      </div>
-      <div class="upcoming-card">
-        <span class="coming-soon-badge">About to begin</span>
-        <img src="Cloud Practitioner.png" alt="Project 3" />
-        <div class="popup-text">Cloud Practitioner</div>
+        <div class="upcoming-card">
+          <span class="coming-soon-badge">Throwback</span>
+          <img data-src="logo3.png" class="lazy" alt="Project 2" />
+          <div class="popup-text">My Tm project's current logo!</div>
+        </div>
+
+        <div class="upcoming-card">
+          <span class="coming-soon-badge">About to begin</span>
+          <img data-src="Cloud Practitioner.png" class="lazy" alt="Project 3" />
+          <div class="popup-text">Cloud Practitioner</div>
+        </div>
       </div>
     </div>
+    <button class="view-all-btn" onclick="document.getElementById('galleryModal').style.display='flex'">View All</button>
+  </section>
+
+  <div class="gallery-modal" id="galleryModal" onclick="this.style.display='none'">
+    <div class="gallery-grid">
+      <img data-src="Cloud Practitioner.png" class="lazy" alt="Gallery 1" />
+    </div>
   </div>
-  <button class="view-all-btn" onclick="document.getElementById('galleryModal').style.display='flex'">View All</button>
-</section>
 
-<!-- Gallery Modal -->
-<div class="gallery-modal" id="galleryModal" onclick="this.style.display='none'">
-  <div class="gallery-grid">
-    <img src="Cloud Practitioner.png" alt="Gallery 1" />
-  </div>
-</div>
+  <section id="contact-me">
+    <h2>Contact Me</h2>
+    <form action="https://formspree.io/f/mldbrlwq" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="_replyto" placeholder="Your Email" required />
+      <input type="tel" name="phone" placeholder="Phone Number" required />
+      <textarea name="message" rows="4" placeholder="Your Message"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
 
-<section id="contact-me">
-  <h2>Contact Me</h2>
-  <form action="https://formspree.io/f/mldbrlwq" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required />
-    <input type="email" name="_replyto" placeholder="Your Email" required />
-    <input type="tel" name="phone" placeholder="Phone Number" required />
-    <textarea name="message" rows="4" placeholder="Your Message"></textarea>
-    <button type="submit">Send Message</button>
-  </form>
-</section>
+  <footer>
+    &copy; 2025 with 🤍 Baskar_tm
+    <div class="floating-social-bar">
+      <a href="https://linkedin.com/in/baskartm" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://x.com/basker_tm" target="_blank">
+        <svg width="24" height="24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M21 3L12.7 10.9L21.6 21H17L11 13.5L4.9 21H3L11.8 11L3.3 3H8.1L13.7 9.8L19.5 3H21Z"/></svg>
+      </a>
+      <a href="tel:+919080917791"><i class="fas fa-phone"></i></a>
+    </div>
+  </footer>
 
-<footer>
-  &copy; 2025 with 🤍 Baskar_tm
-  <div class="floating-social-bar">
-    <a href="https://linkedin.com/in/baskartm" target="_blank"><i class="fab fa-linkedin"></i></a>
-    <a href="https://x.com/basker_tm" target="_blank">
-      <svg width="24" height="24" fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M21 3L12.7 10.9L21.6 21H17L11 13.5L4.9 21H3L11.8 11L3.3 3H8.1L13.7 9.8L19.5 3H21Z"/>
-      </svg>
-    </a>
-    <a href="tel:+919080917791"><i class="fas fa-phone"></i></a>
-  </div>
-</footer>
+  <!-- Lazy load script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const lazyImages = document.querySelectorAll("img.lazy");
+      const lazyLoad = (target) => {
+        const obs = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.src = img.dataset.src;
+              img.onload = () => img.classList.add("loaded");
+              observer.unobserve(img);
+            }
+          });
+        });
+        obs.observe(target);
+      };
+      lazyImages.forEach(lazyLoad);
+    });
+  </script>
 
-<!-- Side Nav -->
-<div class="side-nav">
-  <input type="checkbox" id="side-toggle" />
-  <label for="side-toggle" class="side-btn"><i class="fas fa-bars"></i></label>
-  <div class="side-menu">
-    <a href="http://baskertm.github.io/ta">தமிழ்</a>
-    <a href="https://baskertm.github.io/re">CV</a>
-  </div>
-</div>
-
-<!-- JS Effects -->
-<script>
-  /* Stars Animation */
-  const starsCanvas = document.getElementById('stars');
-  const starsCtx = starsCanvas.getContext('2d');
-  let stars = [];
-  function resizeCanvas() { starsCanvas.width = innerWidth; starsCanvas.height = innerHeight; }
-  function createStars() {
-    stars = [];
-    for (let i = 0; i < 150; i++) {
-      stars.push({x: Math.random() * starsCanvas.width, y: Math.random() * starsCanvas.height, r: Math.random() * 1.5, a: Math.random(), d: Math.random() * 0.02});
-    }
-  }
-  function drawStars() {
-    starsCtx.clearRect(0, 0, starsCanvas.width, starsCanvas.height);
-    for (let s of stars) {
-      starsCtx.beginPath();
-      starsCtx.arc(s.x, s.y, s.r, 0, 2 * Math.PI);
-      starsCtx.fillStyle = `rgba(255,255,255,${s.a})`;
-      starsCtx.fill();
-      s.a += s.d;
-      if (s.a <= 0 || s.a >= 1) s.d *= -1;
-    }
-    requestAnimationFrame(drawStars);
-  }
-  window.addEventListener('resize', () => { resizeCanvas(); createStars(); });
-  resizeCanvas(); createStars(); drawStars();
-</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </body>
 </html>
